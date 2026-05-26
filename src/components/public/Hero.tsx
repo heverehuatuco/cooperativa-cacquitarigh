@@ -1,146 +1,174 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export default function Hero() {
-  const [heroImageUrl, setHeroImageUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [cardImages, setCardImages] = useState({
+    img1: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=400",
+    img2: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=600",
+    img3: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&q=80&w=400"
+  });
 
   useEffect(() => {
-    const fetchHeroImage = async () => {
+    const fetchImages = async () => {
       try {
         const docRef = doc(db, "settings", "company_info");
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists() && docSnap.data().heroImageUrl) {
-          setHeroImageUrl(docSnap.data().heroImageUrl);
-        } else {
-          setHeroImageUrl("/images/hero_background.png");
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setCardImages(prev => ({
+            img1: data.heroCardImage1 || prev.img1,
+            img2: data.heroCardImage2 || prev.img2,
+            img3: data.heroCardImage3 || prev.img3
+          }));
         }
       } catch (err) {
-        console.error("Error al cargar imagen del hero:", err);
-        setHeroImageUrl("/images/hero_background.png");
-      } finally {
-        setIsLoading(false);
+        console.error("Error al cargar imágenes del hero:", err);
       }
     };
-    fetchHeroImage();
+    fetchImages();
   }, []);
 
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(email) {
+      alert(`¡Gracias por suscribirte con: ${email}! Pronto recibirás nuestras novedades.`);
+      setEmail("");
+    }
+  };
+
   return (
-    <section
-      id="inicio"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#faf7f2] via-white to-[#e6cec8]/20 pt-28 pb-0 px-3 sm:px-10 flex flex-col items-center"
-    >
-      {/* Decorative Blur Blobs to add soft color dynamics */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-20 left-1/4 w-72 h-72 rounded-full bg-secondary-brand/5 blur-[80px]" />
-        <div className="absolute bottom-20 right-1/4 w-96 h-96 rounded-full bg-primary-brand/5 blur-[100px]" />
-      </div>
+    <section className="relative w-full min-h-screen overflow-hidden bg-primary-brand pt-32 pb-20 flex flex-col items-center">
+      
+      {/* Topographic Background SVG (Inline for simplicity) */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='topo' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 100 Q 25 50 50 100 T 100 100 M0 50 Q 25 0 50 50 T 100 50' fill='none' stroke='%23ffffff' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23topo)'/%3E%3C/svg%3E")`, backgroundSize: '400px 400px' }}></div>
 
-      {/* Main Content Area */}
-      <main className="relative z-10 flex flex-grow flex-col items-center max-w-7xl mx-auto w-full">
-        {/* Top badge-button */}
-        <motion.button
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          onClick={() => {
-            window.location.href = "/nosotros";
-          }}
-          className="mt-12 mb-6 flex items-center space-x-2 border border-secondary-brand/60 text-secondary-brand text-xs font-semibold rounded-full px-4 pr-1.5 py-1.5 hover:bg-secondary-brand/5 transition duration-300 cursor-pointer shadow-xs"
-          type="button"
-        >
-          <span>Conoce nuestra historia y labor en el campo</span>
-          <span className="flex items-center justify-center w-6 h-6 p-1 rounded-full bg-secondary-brand">
-            <svg
-              width="14"
-              height="11"
-              viewBox="0 0 16 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 6.5h14M9.5 1 15 6.5 9.5 12"
-                stroke="#fff"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </motion.button>
-
-        {/* Heading */}
-        <motion.h1
+      {/* Main Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center mt-10">
+        
+        {/* Headlines */}
+        <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-center text-stone-900 font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-3xl leading-tight tracking-tight"
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white text-center max-w-4xl leading-tight tracking-tight drop-shadow-sm"
         >
-          Líderes en el cultivo de café y cacao{" "}
-          <span className="text-secondary-brand">de especialidad</span>
+          Café y Cacao de Especialidad <br className="hidden md:block"/> Directo a tu Mesa
         </motion.h1>
 
-        {/* Description */}
-        <motion.p
+        <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-4 text-center text-stone-600 max-w-xl text-sm sm:text-base leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-6 text-center text-white/90 text-sm md:text-base lg:text-lg max-w-2xl font-medium"
         >
-          Cosechamos y acopiamos el esfuerzo de nuestros productores en la Microcuenca San Jerónimo Matzuriniari, llevando el sabor más puro a tu mesa.
+          Cultivamos con pasión, procesamos con altos estándares y llevamos el sabor más puro del VRAEM para que lo disfrutes en cada taza.
         </motion.p>
 
-        {/* CTA Button */}
-        <motion.button
+        {/* Search / Subscribe Input Form */}
+        <motion.form 
+          onSubmit={handleSubscribe}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          onClick={() => {
-            window.location.href = "/productos";
-          }}
-          className="mt-8 bg-primary-brand hover:bg-primary-brand-light text-white px-6 pr-2.5 py-2.5 rounded-full text-sm font-medium flex items-center space-x-2 transition shadow-md hover:shadow-lg cursor-pointer"
-          type="button"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-10 bg-white p-1.5 rounded-full flex flex-col sm:flex-row w-full max-w-md shadow-xl"
         >
-          <span>Ver Productos</span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <input 
+            type="email" 
+            placeholder="Introduce tu correo electrónico" 
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="flex-grow bg-transparent px-5 py-3 outline-none text-stone-700 text-sm placeholder-stone-400 font-medium"
+          />
+          <button 
+            type="submit"
+            className="bg-primary-brand hover:brightness-110 transition-all text-white font-bold text-sm px-8 py-3 rounded-full mt-2 sm:mt-0 shadow-md whitespace-nowrap"
           >
-            <path
-              d="M4.821 11.999h13.43m0 0-6.714-6.715m6.715 6.715-6.715 6.715"
-              stroke="#fff"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </motion.button>
+            Unirse
+          </button>
+        </motion.form>
 
-        {/* Main Cover Image at the bottom */}
-        <div className="w-full max-w-5xl mt-16 overflow-hidden rounded-[50px] rounded-b-none border border-b-0 border-stone-200/60 shadow-lg bg-stone-100 min-h-[18rem] sm:min-h-[24rem] md:min-h-[28rem] flex items-center justify-center">
-          {isLoading ? (
-            <div className="animate-pulse flex space-x-4">
-              <div className="h-4 w-24 bg-stone-200 rounded"></div>
+        {/* Floating Cards Display */}
+        <div className="mt-20 md:mt-32 relative w-full max-w-5xl h-[500px] flex justify-center items-center perspective-1000">
+          
+          {/* Card 1 (Left, Tilted Left) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 100, rotate: -20 }}
+            animate={{ opacity: 1, y: 20, rotate: -12 }}
+            transition={{ type: "spring", stiffness: 80, delay: 0.6 }}
+            className="absolute z-10 w-48 sm:w-64 md:w-72 bg-white p-3 md:p-4 rounded-2xl shadow-2xl border border-stone-100 hover:z-40 transition-transform hover:scale-105 left-2 sm:left-10 md:left-12 lg:left-8 top-12 sm:top-8"
+          >
+            <div className="flex items-center gap-2 mb-2 px-1">
+              <div className="w-6 h-6 rounded-full bg-stone-200 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=100" alt="Avatar" className="w-full h-full object-cover"/>
+              </div>
+              <span className="text-xs font-semibold text-stone-700">cacquitari_cacao</span>
             </div>
-          ) : (
-            <motion.img
-              initial={{ opacity: 0, scale: 1.05, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 100, damping: 20 }}
-              className="h-72 sm:h-96 md:h-[28rem] w-full object-cover select-none"
-              src={heroImageUrl}
-              alt="APASAJEM Cultivo"
-            />
-          )}
+            <div className="w-full aspect-square rounded-xl overflow-hidden mb-3">
+              <img src={cardImages.img1} alt="Cacao" className="w-full h-full object-cover"/>
+            </div>
+            <div className="flex items-center gap-2 px-1 mb-1">
+              <span className="w-5 h-5 flex items-center justify-center rounded-full bg-red-100 text-red-500 text-[10px]">❤️</span>
+              <span className="text-[10px] font-medium text-stone-500">Apasíonate por el Cacao</span>
+            </div>
+          </motion.div>
+
+          {/* Card 2 (Center, Straight, Elevated) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: -40, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 80, delay: 0.8 }}
+            className="absolute z-30 w-56 sm:w-72 md:w-80 bg-white p-3 md:p-4 rounded-2xl shadow-2xl border border-stone-100 hover:scale-105 transition-transform left-1/2 -translate-x-1/2 top-0"
+          >
+            <div className="flex items-center justify-between mb-2 px-1">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-stone-200 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=100" alt="Avatar" className="w-full h-full object-cover"/>
+                </div>
+                <span className="text-xs font-semibold text-stone-700">cacquitari_cafe</span>
+              </div>
+              <span className="text-stone-400 tracking-widest text-[10px]">•••</span>
+            </div>
+            <div className="w-full aspect-square rounded-xl overflow-hidden mb-3 bg-stone-100">
+              <img src={cardImages.img2} alt="Coffee" className="w-full h-full object-cover"/>
+            </div>
+            <div className="flex items-center gap-3 px-1">
+              <span className="text-stone-600">♡</span>
+              <span className="text-stone-600">💬</span>
+              <span className="text-stone-600">✈️</span>
+            </div>
+          </motion.div>
+
+          {/* Card 3 (Right, Tilted Right) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 100, rotate: 20 }}
+            animate={{ opacity: 1, y: 30, rotate: 12 }}
+            transition={{ type: "spring", stiffness: 80, delay: 0.7 }}
+            className="absolute z-20 w-48 sm:w-64 md:w-72 bg-white p-3 md:p-4 rounded-2xl shadow-2xl border border-stone-100 hover:z-40 transition-transform hover:scale-105 right-2 sm:right-10 md:right-12 lg:right-8 top-16 sm:top-12"
+          >
+            <div className="flex items-center justify-between mb-2 px-1">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-stone-200 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=100" alt="Avatar" className="w-full h-full object-cover"/>
+                </div>
+                <span className="text-xs font-semibold text-stone-700">cacquitari_vida</span>
+              </div>
+            </div>
+            <div className="w-full aspect-square rounded-xl overflow-hidden mb-3">
+              <img src={cardImages.img3} alt="Life" className="w-full h-full object-cover"/>
+            </div>
+            <div className="px-1 text-[10px] text-stone-500 font-medium leading-snug">
+              Desarrollando la comunidad a través de la producción sostenible y comercio justo.
+            </div>
+          </motion.div>
+
         </div>
-      </main>
+      </div>
     </section>
   );
 }

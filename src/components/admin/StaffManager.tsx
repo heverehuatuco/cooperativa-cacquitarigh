@@ -194,7 +194,7 @@ export default function StaffManager() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="mrojas@apasajem.org"
+                placeholder="mrojas@cacquitari.org"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
               />
             </div>

@@ -18,19 +18,19 @@ interface NewsArticle {
 const MOCK_NEWS: NewsArticle[] = [
   {
     id: "news-1",
-    title: "Gran éxito en la última campaña de acopio de Cacao",
-    excerpt: "Nuestros productores asociados logran perfiles organolépticos sobresalientes en la última cosecha del valle.",
-    content: "La ASOCIACIÓN DE PRODUCTORES AGRARIOS DE LA MICROCUENCA SAN JERONIMO MATZURINIARI (APASAJEM) culminó con gran éxito la campaña de acopio de cacao fino de aroma correspondiente a este periodo. Gracias al estricto seguimiento técnico brindado a las fincas asociadas, se ha logrado un grano con un porcentaje de fermentación óptimo de más del 85%, lo que garantiza notas frutales y florales muy cotizadas en los mercados especiales.\n\nEste logro representa una mejora directa en la retribución económica de los asociados, reafirmando el compromiso de APASAJEM de consolidar un modelo agrícola sustentable e inclusivo.",
-    imageUrl: "/images/gallery_cacao_process.png",
-    date: "20 Mayo, 2026",
+    title: "Gran acopio de Cacao Fino de Aroma",
+    excerpt: "Nuestros socios superaron las metas de acopio con una calidad excepcional.",
+    content: "La COOPERATIVA AGRARIA CAFETALERA QUITARI LTDA culminó con gran éxito la campaña de acopio de cacao fino de aroma correspondiente a este periodo. Gracias al estricto seguimiento técnico brindado a las fincas asociadas, se ha logrado un grano con un porcentaje de fermentación óptimo de más del 85%, lo que garantiza notas frutales y florales muy cotizadas en los mercados especiales.\n\nEste logro representa una mejora directa en la retribución económica de los asociados, reafirmando el compromiso de Cacquitari de consolidar un modelo agrícola sustentable e inclusivo.",
+    imageUrl: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=600",
+    date: "12 de Octubre, 2024",
   },
   {
     id: "news-2",
-    title: "Taller práctico sobre Fertilización Orgánica del Café",
-    excerpt: "Productores de la microcuenca participan en taller intensivo para mejorar la productividad del suelo.",
-    content: "Con el objetivo de seguir promoviendo una caficultura sostenible y de bajo impacto ambiental, APASAJEM llevó a cabo el Taller Práctico de Manejo y Elaboración de Abonos Orgánicos. La capacitación contó con la participación de más de 45 caficultores de la microcuenca San Jerónimo.\n\nDurante la jornada se enseñó a formular compostajes a partir de pulpa de café y recursos locales, reduciendo los costos de fertilización química y mejorando la estructura microbiológica del suelo. Estas acciones garantizan la salud de las fincas a largo plazo y la consistencia en el rendimiento por hectárea.",
-    imageUrl: "/images/gallery_coffee_roast.png",
-    date: "12 Mayo, 2026",
+    title: "Capacitación en Abonos Orgánicos",
+    excerpt: "Apostando por la agricultura sostenible con biofertilizantes.",
+    content: "Con el objetivo de seguir promoviendo una caficultura sostenible y de bajo impacto ambiental, Cacquitari llevó a cabo el Taller Práctico de Manejo y Elaboración de Abonos Orgánicos. La capacitación contó con la participación de más de 45 caficultores de Pangoa.\n\nDurante la jornada se enseñó a formular compostajes a partir de pulpa de café y recursos locales, reduciendo los costos de fertilización química y mejorando la estructura microbiológica del suelo. Estas acciones garantizan la salud de las fincas a largo plazo y la consistencia en el rendimiento por hectárea.",
+    imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=600",
+    date: "05 de Noviembre, 2024",
   },
 ];
 

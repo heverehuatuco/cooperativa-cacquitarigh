@@ -116,7 +116,7 @@ export default function LoginPage() {
         {/* Brand header */}
         <div className="text-center space-y-2">
           <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-            APASAJEM
+            CACQUITARI
           </span>
           <h1 className="text-lg font-bold text-white uppercase tracking-wider">
             Acceso Administrativo
@@ -179,7 +179,7 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={authLoading}
                 className="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm disabled:opacity-75"
-                placeholder="nombre@apasajem.org"
+                placeholder="nombre@cacquitari.org"
               />
             </div>
           </div>

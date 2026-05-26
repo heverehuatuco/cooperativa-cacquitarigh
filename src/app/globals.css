@@ -6,12 +6,14 @@
 }
 
 @theme {
-  --color-primary-brand: oklch(21.4% 0.009 43.1);
-  --color-primary-brand-light: oklch(31.4% 0.009 43.1);
-  --color-secondary-brand: #2b9348;
-  --color-secondary-brand-light: #33a551;
-  --color-tertiary-brand: #d5b9b2;
-  --color-tertiary-brand-light: #e6cec8;
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --color-primary-brand: oklch(37.8% 0.077 168.94);
+  --color-primary-brand-light: oklch(47.8% 0.077 168.94);
+  --color-secondary-brand: oklch(62.7% 0.194 149.214);
+  --color-secondary-brand-light: oklch(72.7% 0.194 149.214);
+  --color-tertiary-brand: oklch(26.8% 0.011 36.5);
+  --color-tertiary-brand-light: oklch(36.8% 0.011 36.5);
   --color-primary-brown: #3e2723;
   --color-primary-brown-light: #5d4037;
   --color-warm-cream: #faf7f2;

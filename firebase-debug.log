@@ -457,3 +457,107 @@ Before we get started, keep in mind:
 [debug] [2026-05-26T20:16:38.724Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem 200
 [debug] [2026-05-26T20:16:38.725Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem {"name":"projects/asociacion-apasajem/sites/asociacion-apasajem","defaultUrl":"https://asociacion-apasajem.web.app","appId":"1:157709524403:web:48a0e1bcc1e380ab08ffc6","type":"DEFAULT_SITE"}
 [debug] [2026-05-26T20:16:40.178Z] Error: EPERM: operation not permitted, symlink 'C:\Users\M4gistral\Documents\proyectos sistemas web\apasajem\node_modules\firebase-admin' -> 'C:\Users\M4gistral\Documents\proyectos sistemas web\apasajem\.firebase\asociacion-apasajem\functions\.next\node_modules\firebase-admin-a14c8a5423a75469'
+[debug] [2026-05-26T20:18:05.838Z] ----------------------------------------------------------------------
+[debug] [2026-05-26T20:18:05.841Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\M4gistral\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2026-05-26T20:18:05.841Z] CLI Version:   15.18.0
+[debug] [2026-05-26T20:18:05.841Z] Platform:      win32
+[debug] [2026-05-26T20:18:05.841Z] Node Version:  v24.16.0
+[debug] [2026-05-26T20:18:05.841Z] Time:          Tue May 26 2026 15:18:05 GMT-0500 (hora estándar de Perú)
+[debug] [2026-05-26T20:18:05.841Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-05-26T20:18:07.314Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-05-26T20:18:07.314Z] > authorizing via signed-in user (heverehuatuco@gmail.com)
+[debug] [2026-05-26T20:18:07.314Z] [iam] checking project asociacion-apasajem for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-05-26T20:18:07.316Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:07.316Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:07.317Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/asociacion-apasajem:testIamPermissions [none]
+[debug] [2026-05-26T20:18:07.317Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/asociacion-apasajem:testIamPermissions  x-goog-user-project=asociacion-apasajem
+[debug] [2026-05-26T20:18:07.317Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/asociacion-apasajem:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-05-26T20:18:07.721Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/asociacion-apasajem:testIamPermissions 200
+[debug] [2026-05-26T20:18:07.721Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/asociacion-apasajem:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-05-26T20:18:07.721Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:07.721Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:07.722Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/asociacion-apasajem [none]
+[debug] [2026-05-26T20:18:08.153Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/asociacion-apasajem 200
+[debug] [2026-05-26T20:18:08.154Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/asociacion-apasajem {"projectId":"asociacion-apasajem","projectNumber":"157709524403","displayName":"asociacion-apasajem","name":"projects/asociacion-apasajem","resources":{"hostingSite":"asociacion-apasajem"},"state":"ACTIVE","etag":"1_0ef1bac0-c34f-44ce-9000-706c00509e8c"}
+[debug] [2026-05-26T20:18:10.360Z] defaultcredentials: writing to file C:\Users\M4gistral\AppData\Roaming\firebase\heverehuatuco_gmail_com_application_default_credentials.json
+[debug] [2026-05-26T20:18:10.361Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:10.362Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:10.362Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites pageToken=&pageSize=10
+[debug] [2026-05-26T20:18:12.333Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites 200
+[debug] [2026-05-26T20:18:12.334Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites {"sites":[{"name":"projects/asociacion-apasajem/sites/asociacion-apasajem","defaultUrl":"https://asociacion-apasajem.web.app","appId":"1:157709524403:web:48a0e1bcc1e380ab08ffc6","type":"DEFAULT_SITE"}]}
+[debug] [2026-05-26T20:18:12.334Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:12.334Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:12.334Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:157709524403:web:48a0e1bcc1e380ab08ffc6/config [none]
+[debug] [2026-05-26T20:18:13.706Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:157709524403:web:48a0e1bcc1e380ab08ffc6/config 200
+[debug] [2026-05-26T20:18:13.706Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:157709524403:web:48a0e1bcc1e380ab08ffc6/config {"projectId":"asociacion-apasajem","appId":"1:157709524403:web:48a0e1bcc1e380ab08ffc6","storageBucket":"asociacion-apasajem.firebasestorage.app","apiKey":"AIzaSyBfULGTM66DvhqzRKgt1ZDeg3fm64ihCl0","authDomain":"asociacion-apasajem.firebaseapp.com","messagingSenderId":"157709524403","measurementId":"G-FPRH631CBR","projectNumber":"157709524403","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 16.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-05-26T20:18:18.934Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:18.935Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:18.935Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem [none]
+[debug] [2026-05-26T20:18:20.234Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem 200
+[debug] [2026-05-26T20:18:20.234Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem {"name":"projects/asociacion-apasajem/sites/asociacion-apasajem","defaultUrl":"https://asociacion-apasajem.web.app","appId":"1:157709524403:web:48a0e1bcc1e380ab08ffc6","type":"DEFAULT_SITE"}
+[info] ▲ Next.js 16.2.6 (Turbopack)
+
+[info] - Environments: .env.local, .env.production
+
+
+[info]   Creating an optimized production build ...
+
+[info] ✓ Compiled successfully in 4.9s
+
+[info]   Running TypeScript ...
+
+[info]   Finished TypeScript in 4.9s ...
+
+[info]   Collecting page data using 11 workers ...
+
+[info]   Generating static pages using 11 workers (0/10) ...
+
+[info]   Generating static pages using 11 workers (2/10) 
+
+[info]   Generating static pages using 11 workers (4/10) 
+
+[info]   Generating static pages using 11 workers (7/10) 
+
+[info] ✓ Generating static pages using 11 workers (10/10) in 1196ms
+
+[info]   Finalizing page optimization ...
+
+[info] 
+
+[info] Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin
+├ ƒ /api/admin/create-user
+├ ○ /contacto
+├ ○ /login
+├ ○ /nosotros
+└ ○ /productos
+
+
+[info] 
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /api/admin/create-user/route
+[info] 
+[debug] [2026-05-26T20:18:40.979Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:40.979Z] Checked if tokens are valid: true, expires at: 1779830161544
+[debug] [2026-05-26T20:18:40.980Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem [none]
+[debug] [2026-05-26T20:18:42.286Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem 200
+[debug] [2026-05-26T20:18:42.286Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/asociacion-apasajem/sites/asociacion-apasajem {"name":"projects/asociacion-apasajem/sites/asociacion-apasajem","defaultUrl":"https://asociacion-apasajem.web.app","appId":"1:157709524403:web:48a0e1bcc1e380ab08ffc6","type":"DEFAULT_SITE"}
+[debug] [2026-05-26T20:18:43.768Z] Error: EPERM: operation not permitted, symlink 'C:\Users\M4gistral\Documents\proyectos sistemas web\apasajem\node_modules\firebase-admin' -> 'C:\Users\M4gistral\Documents\proyectos sistemas web\apasajem\.firebase\asociacion-apasajem\functions\.next\node_modules\firebase-admin-a14c8a5423a75469'

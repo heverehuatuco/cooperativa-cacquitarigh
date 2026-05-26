@@ -89,37 +89,37 @@ export default function CertificationsSection() {
       </div>
 
       <div 
-        className="overflow-hidden w-full relative max-w-7xl mx-auto min-h-[20rem]" 
-        onMouseEnter={() => setStopScroll(true)} 
-        onMouseLeave={() => setStopScroll(false)}
+        className="overflow-hidden w-full relative max-w-6xl mx-auto select-none" 
       >
           {loading ? (
-            <div className="flex justify-center items-center h-[20rem]">
+            <div className="flex justify-center items-center h-64">
               <span className="text-stone-400">Cargando certificaciones...</span>
             </div>
           ) : cardData.length === 0 ? (
-            <div className="flex justify-center items-center h-[20rem]">
+            <div className="flex justify-center items-center h-64">
               <span className="text-stone-400">No hay certificaciones publicadas.</span>
             </div>
           ) : (
             <>
-              {/* Los degradados laterales usan el mismo color de fondo de la página (stone-50) para un efecto de desvanecimiento perfecto */}
-              <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-stone-50 to-transparent" />
+              {/* Degradado izquierdo */}
+              <div className="absolute left-0 top-0 h-full w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-r from-stone-50 to-transparent" />
               
-              <div className="marquee-inner flex w-fit" style={{ animationPlayState: stopScroll ? "paused" : "running", animationDuration: cardData.length * 2500 + "ms" }}>
-                  <div className="flex">
+              <div className="marquee-inner flex will-change-transform min-w-[200%] w-fit" style={{ animationDuration: "15s" }}>
+                  <div className="flex items-center">
                       {[...cardData, ...cardData].map((card, index) => (
-                          <div key={index} className="w-64 sm:w-72 mx-4 h-[20rem] rounded-2xl overflow-hidden relative group hover:scale-95 transition-all duration-500 shadow-sm border border-stone-200 cursor-pointer bg-white">
-                              <img src={card.image} alt={card.title} className="w-full h-full object-contain p-8 transition-transform duration-700 group-hover:scale-110" />
-                              <div className="flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 absolute bottom-0 backdrop-blur-sm left-0 w-full h-full bg-stone-900/60">
-                                  <p className="text-white text-xl font-bold text-center tracking-wide drop-shadow-md">{card.title}</p>
-                              </div>
-                          </div>
+                          <img 
+                            key={index}
+                            src={card.image} 
+                            alt={card.title} 
+                            draggable="false"
+                            className="w-40 sm:w-48 lg:w-56 h-20 sm:h-24 object-contain mx-6 sm:mx-10 opacity-80 hover:opacity-100 transition-opacity cursor-pointer filter grayscale hover:grayscale-0" 
+                          />
                       ))}
                   </div>
               </div>
               
-              <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-stone-50 to-transparent" />
+              {/* Degradado derecho */}
+              <div className="absolute right-0 top-0 h-full w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-l from-stone-50 to-transparent" />
             </>
           )}
       </div>

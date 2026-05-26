@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="lg:hidden bg-stone-900 text-white px-4 py-3 flex items-center justify-between border-b border-stone-800">
         <div className="flex items-center space-x-2">
           <Shield className="text-tertiary-brand" size={20} />
-          <span className="font-bold text-sm tracking-wider">APASAJEM ADMIN</span>
+          <span className="font-bold text-sm tracking-wider">CACQUITARI ADMIN</span>
         </div>
         <button
           onClick={handleLogout}

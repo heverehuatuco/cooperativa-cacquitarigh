@@ -18,6 +18,12 @@ interface CompanyInfo {
   youtube: string;
   heroImageUrl?: string;
   heroStoragePath?: string;
+  heroCardImage1?: string;
+  heroCardStoragePath1?: string;
+  heroCardImage2?: string;
+  heroCardStoragePath2?: string;
+  heroCardImage3?: string;
+  heroCardStoragePath3?: string;
   logoUrl?: string;
   logoStoragePath?: string;
   aboutImageUrl1?: string;
@@ -71,6 +77,12 @@ export default function SettingsManager() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [heroFile, setHeroFile] = useState<File | null>(null);
+  const [heroCardFile1, setHeroCardFile1] = useState<File | null>(null);
+  const [heroCardFile2, setHeroCardFile2] = useState<File | null>(null);
+  const [heroCardFile3, setHeroCardFile3] = useState<File | null>(null);
+  const heroCardInputRef1 = React.useRef<HTMLInputElement>(null);
+  const heroCardInputRef2 = React.useRef<HTMLInputElement>(null);
+  const heroCardInputRef3 = React.useRef<HTMLInputElement>(null);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [aboutFile1, setAboutFile1] = useState<File | null>(null);
   const [aboutFile2, setAboutFile2] = useState<File | null>(null);
@@ -121,6 +133,10 @@ export default function SettingsManager() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleHeroCardChange1 = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroCardFile1(e.target.files[0]); };
+  const handleHeroCardChange2 = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroCardFile2(e.target.files[0]); };
+  const handleHeroCardChange3 = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroCardFile3(e.target.files[0]); };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -211,6 +227,12 @@ export default function SettingsManager() {
       const docRef = doc(db, "settings", "company_info");
           let currentHeroUrl = formData.heroImageUrl || "";
       let currentHeroPath = formData.heroStoragePath || "";
+      let currentHeroCardUrl1 = formData.heroCardImage1 || "";
+      let currentHeroCardPath1 = formData.heroCardStoragePath1 || "";
+      let currentHeroCardUrl2 = formData.heroCardImage2 || "";
+      let currentHeroCardPath2 = formData.heroCardStoragePath2 || "";
+      let currentHeroCardUrl3 = formData.heroCardImage3 || "";
+      let currentHeroCardPath3 = formData.heroCardStoragePath3 || "";
       let currentLogoUrl = formData.logoUrl || "";
       let currentLogoPath = formData.logoStoragePath || "";
       let currentAboutUrl1 = formData.aboutImageUrl1 || "";
@@ -237,6 +259,44 @@ export default function SettingsManager() {
       let currentCertPath5 = formData.certStoragePath5 || "";
       let currentCertUrl6 = formData.certImage6 || "";
       let currentCertPath6 = formData.certStoragePath6 || "";
+
+
+      if (heroCardFile1) {
+        const path = `settings/heroCard1_${Date.now()}_${heroCardFile1.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, heroCardFile1);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentHeroCardUrl1 = await getDownloadURL(task.snapshot.ref);
+            currentHeroCardPath1 = path;
+            resolve();
+          });
+        });
+      }
+      if (heroCardFile2) {
+        const path = `settings/heroCard2_${Date.now()}_${heroCardFile2.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, heroCardFile2);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentHeroCardUrl2 = await getDownloadURL(task.snapshot.ref);
+            currentHeroCardPath2 = path;
+            resolve();
+          });
+        });
+      }
+      if (heroCardFile3) {
+        const path = `settings/heroCard3_${Date.now()}_${heroCardFile3.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, heroCardFile3);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentHeroCardUrl3 = await getDownloadURL(task.snapshot.ref);
+            currentHeroCardPath3 = path;
+            resolve();
+          });
+        });
+      }
 
       if (heroFile) {
         const storagePath = `settings/hero_${Date.now()}_${heroFile.name}`;
@@ -455,6 +515,12 @@ export default function SettingsManager() {
         youtube: (formData.youtube || "").trim(),
         heroImageUrl: currentHeroUrl,
         heroStoragePath: currentHeroPath,
+        heroCardImage1: currentHeroCardUrl1,
+        heroCardStoragePath1: currentHeroCardPath1,
+        heroCardImage2: currentHeroCardUrl2,
+        heroCardStoragePath2: currentHeroCardPath2,
+        heroCardImage3: currentHeroCardUrl3,
+        heroCardStoragePath3: currentHeroCardPath3,
         logoUrl: currentLogoUrl,
         logoStoragePath: currentLogoPath,
         aboutImageUrl1: currentAboutUrl1,
@@ -493,6 +559,12 @@ export default function SettingsManager() {
       await setDoc(docRef, newData);
       setFormData(newData as CompanyInfo);
       setHeroFile(null);
+      setHeroCardFile1(null);
+      setHeroCardFile2(null);
+      setHeroCardFile3(null);
+      if (heroCardInputRef1.current) heroCardInputRef1.current.value = "";
+      if (heroCardInputRef2.current) heroCardInputRef2.current.value = "";
+      if (heroCardInputRef3.current) heroCardInputRef3.current.value = "";
       setLogoFile(null);
       setAboutFile1(null);
       setAboutFile2(null);
@@ -598,6 +670,58 @@ export default function SettingsManager() {
                 <span className="text-xs text-stone-500 truncate max-w-xs">
                   {logoFile ? logoFile.name : formData.logoUrl ? "Mantener actual" : "Solo texto (APASAJEM)"}
                 </span>
+              </div>
+            </div>
+
+
+            {/* Hero Card Image 1 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 1 (Izquierda)</label>
+              {formData.heroCardImage1 && !heroCardFile1 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.heroCardImage1} alt="Hero Card 1" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={heroCardInputRef1} onChange={handleHeroCardChange1} className="hidden" id="herocard-image-upload-1" />
+                <label htmlFor="herocard-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 1</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile1 ? heroCardFile1.name : formData.heroCardImage1 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Hero Card Image 2 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 2 (Centro)</label>
+              {formData.heroCardImage2 && !heroCardFile2 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.heroCardImage2} alt="Hero Card 2" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={heroCardInputRef2} onChange={handleHeroCardChange2} className="hidden" id="herocard-image-upload-2" />
+                <label htmlFor="herocard-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 2</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile2 ? heroCardFile2.name : formData.heroCardImage2 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Hero Card Image 3 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 3 (Derecha)</label>
+              {formData.heroCardImage3 && !heroCardFile3 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.heroCardImage3} alt="Hero Card 3" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={heroCardInputRef3} onChange={handleHeroCardChange3} className="hidden" id="herocard-image-upload-3" />
+                <label htmlFor="herocard-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 3</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile3 ? heroCardFile3.name : formData.heroCardImage3 ? "Mantener actual" : "Ninguna seleccionada"}</span>
               </div>
             </div>
 

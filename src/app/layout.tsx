@@ -1,33 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "APASAJEM | Café y Cacao de Alta Calidad",
+  title: "Cooperativa Cacquitari",
   description:
-    "Asociación de Productores Agrarios de la Microcuenca San Jerónimo Matzuriniari. Acopio, procesamiento y comercialización de café y cacao especial de alta calidad.",
+    "Cooperativa Agraria Cacquitari. Productos agrícolas de excelencia y comercio justo.",
   keywords: [
-    "APASAJEM",
+    "Cacquitari",
+    "cooperativa",
     "café",
     "cacao",
-    "acopio de café",
-    "cacao orgánico",
-    "San Jerónimo Matzuriniari",
-    "asociación agraria",
+    "productos agrarios",
+    "comercio justo",
     "agricultura sostenible",
   ],
-  authors: [{ name: "APASAJEM" }],
+  authors: [{ name: "Cooperativa Cacquitari" }],
 };
 
 export default function RootLayout({
@@ -38,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${outfit.variable} ${robotoMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900 font-sans">
         <AuthProvider>{children}</AuthProvider>
