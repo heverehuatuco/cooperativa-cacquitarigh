@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafaf9; /* stone-50 */
+  --foreground: #1c1917; /* stone-900 */
+}
+
+@theme {
+  --color-primary-brand: oklch(21.4% 0.009 43.1);
+  --color-primary-brand-light: oklch(31.4% 0.009 43.1);
+  --color-secondary-brand: #2b9348;
+  --color-secondary-brand-light: #33a551;
+  --color-tertiary-brand: #d5b9b2;
+  --color-tertiary-brand-light: #e6cec8;
+  --color-primary-brown: #3e2723;
+  --color-primary-brown-light: #5d4037;
+  --color-warm-cream: #faf7f2;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Utilidades personalizadas para efectos visuales premium */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-panel-dark {
+  background: rgba(28, 25, 23, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Ocultar barra de desplazamiento en algunos contenedores si es necesario */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

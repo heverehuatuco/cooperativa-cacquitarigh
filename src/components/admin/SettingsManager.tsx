@@ -1,0 +1,1087 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { db, storage } from "@/lib/firebase";
+import { Settings, Save, Loader2, CheckCircle2, AlertCircle, Upload, Image as ImageIcon } from "lucide-react";
+
+interface CompanyInfo {
+  whatsapp: string;
+  whatsapp2: string;
+  email: string;
+  email2: string;
+  address: string;
+  address2: string;
+  tiktok: string;
+  facebook: string;
+  youtube: string;
+  heroImageUrl?: string;
+  heroStoragePath?: string;
+  logoUrl?: string;
+  logoStoragePath?: string;
+  aboutImageUrl1?: string;
+  aboutStoragePath1?: string;
+  aboutImageUrl2?: string;
+  aboutStoragePath2?: string;
+  productGalleryImage1?: string;
+  productGalleryStoragePath1?: string;
+  productGalleryImage2?: string;
+  productGalleryStoragePath2?: string;
+  productGalleryImage3?: string;
+  productGalleryStoragePath3?: string;
+  productGalleryImage4?: string;
+  productGalleryStoragePath4?: string;
+  certImage1?: string;
+  certStoragePath1?: string;
+  certTitle1?: string;
+  certImage2?: string;
+  certStoragePath2?: string;
+  certTitle2?: string;
+  certImage3?: string;
+  certStoragePath3?: string;
+  certTitle3?: string;
+  certImage4?: string;
+  certStoragePath4?: string;
+  certTitle4?: string;
+  certImage5?: string;
+  certStoragePath5?: string;
+  certTitle5?: string;
+  certImage6?: string;
+  certStoragePath6?: string;
+  certTitle6?: string;
+}
+
+const DEFAULT_INFO: CompanyInfo = {
+  whatsapp: "51915233460",
+  whatsapp2: "",
+  email: "contacto@apasajem.org",
+  email2: "",
+  address: "San Jerónimo, Matzuriniari, Satipo, Junín, Perú",
+  address2: "",
+  tiktok: "https://www.tiktok.com",
+  facebook: "https://www.facebook.com",
+  youtube: "https://www.youtube.com",
+};
+
+export default function SettingsManager() {
+  const [formData, setFormData] = useState<CompanyInfo>(DEFAULT_INFO);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [heroFile, setHeroFile] = useState<File | null>(null);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [aboutFile1, setAboutFile1] = useState<File | null>(null);
+  const [aboutFile2, setAboutFile2] = useState<File | null>(null);
+  const [prodGalFile1, setProdGalFile1] = useState<File | null>(null);
+  const [prodGalFile2, setProdGalFile2] = useState<File | null>(null);
+  const [prodGalFile3, setProdGalFile3] = useState<File | null>(null);
+  const [prodGalFile4, setProdGalFile4] = useState<File | null>(null);
+  const [certFile1, setCertFile1] = useState<File | null>(null);
+  const [certFile2, setCertFile2] = useState<File | null>(null);
+  const [certFile3, setCertFile3] = useState<File | null>(null);
+  const [certFile4, setCertFile4] = useState<File | null>(null);
+  const [certFile5, setCertFile5] = useState<File | null>(null);
+  const [certFile6, setCertFile6] = useState<File | null>(null);
+  const [progress, setProgress] = useState<number | null>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const logoInputRef = React.useRef<HTMLInputElement>(null);
+  const aboutInputRef1 = React.useRef<HTMLInputElement>(null);
+  const aboutInputRef2 = React.useRef<HTMLInputElement>(null);
+  const prodGalInputRef1 = React.useRef<HTMLInputElement>(null);
+  const prodGalInputRef2 = React.useRef<HTMLInputElement>(null);
+  const prodGalInputRef3 = React.useRef<HTMLInputElement>(null);
+  const prodGalInputRef4 = React.useRef<HTMLInputElement>(null);
+  const certInputRef1 = React.useRef<HTMLInputElement>(null);
+  const certInputRef2 = React.useRef<HTMLInputElement>(null);
+  const certInputRef3 = React.useRef<HTMLInputElement>(null);
+  const certInputRef4 = React.useRef<HTMLInputElement>(null);
+  const certInputRef5 = React.useRef<HTMLInputElement>(null);
+  const certInputRef6 = React.useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      setLoading(true);
+      try {
+        const docRef = doc(db, "settings", "company_info");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setFormData({ ...DEFAULT_INFO, ...docSnap.data() });
+        }
+      } catch (err) {
+        console.error("Error al cargar configuraciones:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSettings();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setHeroFile(e.target.files[0]);
+    }
+  };
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setLogoFile(e.target.files[0]);
+    }
+  };
+
+  const handleAboutChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setAboutFile1(e.target.files[0]);
+    }
+  };
+
+  const handleAboutChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setAboutFile2(e.target.files[0]);
+    }
+  };
+
+  const handleProdGalChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setProdGalFile1(e.target.files[0]);
+    }
+  };
+
+  const handleProdGalChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setProdGalFile2(e.target.files[0]);
+    }
+  };
+
+  const handleProdGalChange3 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setProdGalFile3(e.target.files[0]);
+    }
+  };
+
+  const handleProdGalChange4 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setProdGalFile4(e.target.files[0]);
+    }
+  };
+
+  const handleCertChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCertFile1(e.target.files[0]);
+    }
+  };
+  const handleCertChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCertFile2(e.target.files[0]);
+    }
+  };
+  const handleCertChange3 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCertFile3(e.target.files[0]);
+    }
+  };
+  const handleCertChange4 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCertFile4(e.target.files[0]);
+    }
+  };
+  const handleCertChange5 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCertFile5(e.target.files[0]);
+    }
+  };
+  const handleCertChange6 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCertFile6(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSuccess(false);
+    setError("");
+
+    try {
+      const docRef = doc(db, "settings", "company_info");
+          let currentHeroUrl = formData.heroImageUrl || "";
+      let currentHeroPath = formData.heroStoragePath || "";
+      let currentLogoUrl = formData.logoUrl || "";
+      let currentLogoPath = formData.logoStoragePath || "";
+      let currentAboutUrl1 = formData.aboutImageUrl1 || "";
+      let currentAboutPath1 = formData.aboutStoragePath1 || "";
+      let currentAboutUrl2 = formData.aboutImageUrl2 || "";
+      let currentAboutPath2 = formData.aboutStoragePath2 || "";
+      let currentProdGalUrl1 = formData.productGalleryImage1 || "";
+      let currentProdGalPath1 = formData.productGalleryStoragePath1 || "";
+      let currentProdGalUrl2 = formData.productGalleryImage2 || "";
+      let currentProdGalPath2 = formData.productGalleryStoragePath2 || "";
+      let currentProdGalUrl3 = formData.productGalleryImage3 || "";
+      let currentProdGalPath3 = formData.productGalleryStoragePath3 || "";
+      let currentProdGalUrl4 = formData.productGalleryImage4 || "";
+      let currentProdGalPath4 = formData.productGalleryStoragePath4 || "";
+      let currentCertUrl1 = formData.certImage1 || "";
+      let currentCertPath1 = formData.certStoragePath1 || "";
+      let currentCertUrl2 = formData.certImage2 || "";
+      let currentCertPath2 = formData.certStoragePath2 || "";
+      let currentCertUrl3 = formData.certImage3 || "";
+      let currentCertPath3 = formData.certStoragePath3 || "";
+      let currentCertUrl4 = formData.certImage4 || "";
+      let currentCertPath4 = formData.certStoragePath4 || "";
+      let currentCertUrl5 = formData.certImage5 || "";
+      let currentCertPath5 = formData.certStoragePath5 || "";
+      let currentCertUrl6 = formData.certImage6 || "";
+      let currentCertPath6 = formData.certStoragePath6 || "";
+
+      if (heroFile) {
+        const storagePath = `settings/hero_${Date.now()}_${heroFile.name}`;
+        const storageRef = ref(storage, storagePath);
+        const uploadTask = uploadBytesResumable(storageRef, heroFile);
+
+        await new Promise<void>((resolve, reject) => {
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const prog = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              setProgress(Math.round(prog));
+            },
+            (err) => reject(err),
+            async () => {
+              currentHeroUrl = await getDownloadURL(uploadTask.snapshot.ref);
+              currentHeroPath = storagePath;
+              setProgress(null);
+              resolve();
+            }
+          );
+        });
+      }
+
+      if (logoFile) {
+        const logoPath = `settings/logo_${Date.now()}_${logoFile.name}`;
+        const logoRef = ref(storage, logoPath);
+        const logoUploadTask = uploadBytesResumable(logoRef, logoFile);
+
+        await new Promise<void>((resolve, reject) => {
+          logoUploadTask.on(
+            "state_changed",
+            null,
+            (err) => reject(err),
+            async () => {
+              currentLogoUrl = await getDownloadURL(logoUploadTask.snapshot.ref);
+              currentLogoPath = logoPath;
+              resolve();
+            }
+          );
+        });
+      }
+
+      if (aboutFile1) {
+        const aboutPath1 = `settings/about1_${Date.now()}_${aboutFile1.name}`;
+        const aboutRef1 = ref(storage, aboutPath1);
+        const aboutUploadTask1 = uploadBytesResumable(aboutRef1, aboutFile1);
+
+        await new Promise<void>((resolve, reject) => {
+          aboutUploadTask1.on(
+            "state_changed",
+            null,
+            (err) => reject(err),
+            async () => {
+              currentAboutUrl1 = await getDownloadURL(aboutUploadTask1.snapshot.ref);
+              currentAboutPath1 = aboutPath1;
+              resolve();
+            }
+          );
+        });
+      }
+
+      if (aboutFile2) {
+        const aboutPath2 = `settings/about2_${Date.now()}_${aboutFile2.name}`;
+        const aboutRef2 = ref(storage, aboutPath2);
+        const aboutUploadTask2 = uploadBytesResumable(aboutRef2, aboutFile2);
+
+        await new Promise<void>((resolve, reject) => {
+          aboutUploadTask2.on(
+            "state_changed",
+            null,
+            (err) => reject(err),
+            async () => {
+              currentAboutUrl2 = await getDownloadURL(aboutUploadTask2.snapshot.ref);
+              currentAboutPath2 = aboutPath2;
+              resolve();
+            }
+          );
+        });
+      }
+
+      if (prodGalFile1) {
+        const path = `settings/prodGal1_${Date.now()}_${prodGalFile1.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, prodGalFile1);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentProdGalUrl1 = await getDownloadURL(task.snapshot.ref);
+            currentProdGalPath1 = path;
+            resolve();
+          });
+        });
+      }
+
+      if (prodGalFile2) {
+        const path = `settings/prodGal2_${Date.now()}_${prodGalFile2.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, prodGalFile2);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentProdGalUrl2 = await getDownloadURL(task.snapshot.ref);
+            currentProdGalPath2 = path;
+            resolve();
+          });
+        });
+      }
+
+      if (prodGalFile3) {
+        const path = `settings/prodGal3_${Date.now()}_${prodGalFile3.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, prodGalFile3);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentProdGalUrl3 = await getDownloadURL(task.snapshot.ref);
+            currentProdGalPath3 = path;
+            resolve();
+          });
+        });
+      }
+
+      if (prodGalFile4) {
+        const path = `settings/prodGal4_${Date.now()}_${prodGalFile4.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, prodGalFile4);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentProdGalUrl4 = await getDownloadURL(task.snapshot.ref);
+            currentProdGalPath4 = path;
+            resolve();
+          });
+        });
+      }
+
+      if (certFile1) {
+        const path = `settings/cert1_${Date.now()}_${certFile1.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, certFile1);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentCertUrl1 = await getDownloadURL(task.snapshot.ref);
+            currentCertPath1 = path;
+            resolve();
+          });
+        });
+      }
+      if (certFile2) {
+        const path = `settings/cert2_${Date.now()}_${certFile2.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, certFile2);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentCertUrl2 = await getDownloadURL(task.snapshot.ref);
+            currentCertPath2 = path;
+            resolve();
+          });
+        });
+      }
+      if (certFile3) {
+        const path = `settings/cert3_${Date.now()}_${certFile3.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, certFile3);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentCertUrl3 = await getDownloadURL(task.snapshot.ref);
+            currentCertPath3 = path;
+            resolve();
+          });
+        });
+      }
+      if (certFile4) {
+        const path = `settings/cert4_${Date.now()}_${certFile4.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, certFile4);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentCertUrl4 = await getDownloadURL(task.snapshot.ref);
+            currentCertPath4 = path;
+            resolve();
+          });
+        });
+      }
+      if (certFile5) {
+        const path = `settings/cert5_${Date.now()}_${certFile5.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, certFile5);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentCertUrl5 = await getDownloadURL(task.snapshot.ref);
+            currentCertPath5 = path;
+            resolve();
+          });
+        });
+      }
+      if (certFile6) {
+        const path = `settings/cert6_${Date.now()}_${certFile6.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, certFile6);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentCertUrl6 = await getDownloadURL(task.snapshot.ref);
+            currentCertPath6 = path;
+            resolve();
+          });
+        });
+      }
+
+      const newData = {
+        whatsapp: (formData.whatsapp || "").replace(/\D/g, "").trim(),
+        whatsapp2: (formData.whatsapp2 || "").replace(/\D/g, "").trim(),
+        email: (formData.email || "").trim(),
+        email2: (formData.email2 || "").trim(),
+        address: (formData.address || "").trim(),
+        address2: (formData.address2 || "").trim(),
+        tiktok: (formData.tiktok || "").trim(),
+        facebook: (formData.facebook || "").trim(),
+        youtube: (formData.youtube || "").trim(),
+        heroImageUrl: currentHeroUrl,
+        heroStoragePath: currentHeroPath,
+        logoUrl: currentLogoUrl,
+        logoStoragePath: currentLogoPath,
+        aboutImageUrl1: currentAboutUrl1,
+        aboutStoragePath1: currentAboutPath1,
+        aboutImageUrl2: currentAboutUrl2,
+        aboutStoragePath2: currentAboutPath2,
+        productGalleryImage1: currentProdGalUrl1,
+        productGalleryStoragePath1: currentProdGalPath1,
+        productGalleryImage2: currentProdGalUrl2,
+        productGalleryStoragePath2: currentProdGalPath2,
+        productGalleryImage3: currentProdGalUrl3,
+        productGalleryStoragePath3: currentProdGalPath3,
+        productGalleryImage4: currentProdGalUrl4,
+        productGalleryStoragePath4: currentProdGalPath4,
+        certImage1: currentCertUrl1,
+        certStoragePath1: currentCertPath1,
+        certTitle1: formData.certTitle1 || "",
+        certImage2: currentCertUrl2,
+        certStoragePath2: currentCertPath2,
+        certTitle2: formData.certTitle2 || "",
+        certImage3: currentCertUrl3,
+        certStoragePath3: currentCertPath3,
+        certTitle3: formData.certTitle3 || "",
+        certImage4: currentCertUrl4,
+        certStoragePath4: currentCertPath4,
+        certTitle4: formData.certTitle4 || "",
+        certImage5: currentCertUrl5,
+        certStoragePath5: currentCertPath5,
+        certTitle5: formData.certTitle5 || "",
+        certImage6: currentCertUrl6,
+        certStoragePath6: currentCertPath6,
+        certTitle6: formData.certTitle6 || "",
+        updatedAt: new Date(),
+      };
+
+      await setDoc(docRef, newData);
+      setFormData(newData as CompanyInfo);
+      setHeroFile(null);
+      setLogoFile(null);
+      setAboutFile1(null);
+      setAboutFile2(null);
+      setProdGalFile1(null);
+      setProdGalFile2(null);
+      setProdGalFile3(null);
+      setProdGalFile4(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      if (logoInputRef.current) logoInputRef.current.value = "";
+      if (aboutInputRef1.current) aboutInputRef1.current.value = "";
+      if (aboutInputRef2.current) aboutInputRef2.current.value = "";
+      if (prodGalInputRef1.current) prodGalInputRef1.current.value = "";
+      if (prodGalInputRef2.current) prodGalInputRef2.current.value = "";
+      if (prodGalInputRef3.current) prodGalInputRef3.current.value = "";
+      if (prodGalInputRef4.current) prodGalInputRef4.current.value = "";
+      setCertFile1(null);
+      setCertFile2(null);
+      setCertFile3(null);
+      setCertFile4(null);
+      setCertFile5(null);
+      setCertFile6(null);
+      if (certInputRef1.current) certInputRef1.current.value = "";
+      if (certInputRef2.current) certInputRef2.current.value = "";
+      if (certInputRef3.current) certInputRef3.current.value = "";
+      if (certInputRef4.current) certInputRef4.current.value = "";
+      if (certInputRef5.current) certInputRef5.current.value = "";
+      if (certInputRef6.current) certInputRef6.current.value = "";
+      setSuccess(true);
+    } catch (err: any) {
+      console.error("Error al guardar configuraciones:", err);
+      setError("No se pudieron guardar los cambios en la base de datos.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-20 bg-white rounded-3xl border border-stone-200">
+        <Loader2 className="animate-spin text-primary-brand mr-2" size={24} />
+        <span className="text-stone-500 text-sm">Cargando datos de la empresa...</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-3xl border border-stone-200/80 shadow-xs p-6 space-y-6 max-w-3xl">
+      <div className="flex items-center justify-between border-b border-stone-100 pb-4">
+        <div className="flex items-center space-x-2.5">
+          <Settings className="text-primary-brand" size={22} />
+          <h2 className="text-xl font-bold text-stone-850">Información de la Empresa</h2>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {success && (
+          <div className="p-4 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-200 flex items-center space-x-2 text-sm">
+            <CheckCircle2 className="text-emerald-500 shrink-0" size={18} />
+            <span>Configuración actualizada con éxito. Los cambios se reflejarán en la web pública.</span>
+          </div>
+        )}
+
+        {error && (
+          <div className="p-4 bg-red-50 text-red-800 rounded-xl border border-red-200 flex items-center space-x-2 text-sm">
+            <AlertCircle className="text-red-500 shrink-0" size={18} />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {/* Images group */}
+        <div className="space-y-6">
+          <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2">
+            Imágenes del Sitio
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Logo */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">
+                Logotipo Principal
+              </label>
+              {formData.logoUrl && !logoFile && (
+                <div className="mb-3 h-20 w-auto inline-flex bg-stone-100 rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.logoUrl} alt="Logo actual" className="h-full w-auto object-contain p-2" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={logoInputRef}
+                  onChange={handleLogoChange}
+                  className="hidden"
+                  id="logo-image-upload"
+                />
+                <label
+                  htmlFor="logo-image-upload"
+                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto"
+                >
+                  <Upload size={14} />
+                  <span>Subir Logotipo</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">
+                  {logoFile ? logoFile.name : formData.logoUrl ? "Mantener actual" : "Solo texto (APASAJEM)"}
+                </span>
+              </div>
+            </div>
+
+            {/* Hero Image */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">
+                Fondo de la Página de Inicio
+              </label>
+              {formData.heroImageUrl && !heroFile && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.heroImageUrl} alt="Hero actual" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden"
+                  id="hero-image-upload"
+                />
+                <label
+                  htmlFor="hero-image-upload"
+                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto"
+                >
+                  <Upload size={14} />
+                  <span>Cambiar Fondo</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">
+                  {heroFile ? heroFile.name : formData.heroImageUrl ? "Mantener actual" : "Usar imagen por defecto"}
+                </span>
+              </div>
+            </div>
+
+            {/* About Us Image 1 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">
+                Imagen de Quiénes Somos (Fondo)
+              </label>
+              {formData.aboutImageUrl1 && !aboutFile1 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.aboutImageUrl1} alt="Nosotros actual 1" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={aboutInputRef1}
+                  onChange={handleAboutChange1}
+                  className="hidden"
+                  id="about-image-upload-1"
+                />
+                <label
+                  htmlFor="about-image-upload-1"
+                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto"
+                >
+                  <Upload size={14} />
+                  <span>Cambiar Imagen Fondo</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">
+                  {aboutFile1 ? aboutFile1.name : formData.aboutImageUrl1 ? "Mantener actual" : "Usar imagen por defecto"}
+                </span>
+              </div>
+            </div>
+
+            {/* About Us Image 2 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">
+                Imagen de Quiénes Somos (Frente)
+              </label>
+              {formData.aboutImageUrl2 && !aboutFile2 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.aboutImageUrl2} alt="Nosotros actual 2" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={aboutInputRef2}
+                  onChange={handleAboutChange2}
+                  className="hidden"
+                  id="about-image-upload-2"
+                />
+                <label
+                  htmlFor="about-image-upload-2"
+                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto"
+                >
+                  <Upload size={14} />
+                  <span>Cambiar Imagen Frente</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">
+                  {aboutFile2 ? aboutFile2.name : formData.aboutImageUrl2 ? "Mantener actual" : "Usar imagen por defecto"}
+                </span>
+              </div>
+              
+              {progress !== null && (
+                <div className="space-y-1.5 pt-2 max-w-sm">
+                  <div className="flex justify-between text-xs font-bold text-stone-600">
+                    <span>Subiendo nueva imagen...</span>
+                    <span>{progress}%</span>
+                  </div>
+                  <div className="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-emerald-500 transition-all duration-300"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Product Gallery group */}
+        <div className="space-y-6">
+          <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2">
+            Galería de Productos
+          </h3>
+          <p className="text-xs text-stone-500">Sube 4 imágenes para la cuadrícula de la sección Productos. (1: Vertical Grande, 2 y 3: Cuadradas, 4: Horizontal Ancha).</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Product Gallery Image 1 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 1 (Izquierda Vertical)</label>
+              {formData.productGalleryImage1 && !prodGalFile1 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.productGalleryImage1} alt="Producto 1" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={prodGalInputRef1} onChange={handleProdGalChange1} className="hidden" id="prodgal-image-upload-1" />
+                <label htmlFor="prodgal-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 1</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{prodGalFile1 ? prodGalFile1.name : formData.productGalleryImage1 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Product Gallery Image 2 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 2 (Derecha Superior Izquierda)</label>
+              {formData.productGalleryImage2 && !prodGalFile2 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.productGalleryImage2} alt="Producto 2" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={prodGalInputRef2} onChange={handleProdGalChange2} className="hidden" id="prodgal-image-upload-2" />
+                <label htmlFor="prodgal-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 2</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{prodGalFile2 ? prodGalFile2.name : formData.productGalleryImage2 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Product Gallery Image 3 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 3 (Derecha Superior Derecha)</label>
+              {formData.productGalleryImage3 && !prodGalFile3 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.productGalleryImage3} alt="Producto 3" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={prodGalInputRef3} onChange={handleProdGalChange3} className="hidden" id="prodgal-image-upload-3" />
+                <label htmlFor="prodgal-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 3</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{prodGalFile3 ? prodGalFile3.name : formData.productGalleryImage3 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Product Gallery Image 4 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 4 (Derecha Inferior Ancha)</label>
+              {formData.productGalleryImage4 && !prodGalFile4 && (
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.productGalleryImage4} alt="Producto 4" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={prodGalInputRef4} onChange={handleProdGalChange4} className="hidden" id="prodgal-image-upload-4" />
+                <label htmlFor="prodgal-image-upload-4" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 4</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{prodGalFile4 ? prodGalFile4.name : formData.productGalleryImage4 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Certifications group */}
+        <div className="space-y-6">
+          <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2">
+            Certificaciones
+          </h3>
+          <p className="text-xs text-stone-500">Sube hasta 4 imágenes de certificaciones y sus títulos para el carrusel animado.</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Cert 1 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 1</label>
+              <div className="space-y-1">
+                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
+                <input type="text" name="certTitle1" value={formData.certTitle1 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Unlock Your Creative Flow" />
+              </div>
+              {formData.certImage1 && !certFile1 && (
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.certImage1} alt="Certificación 1" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2 mt-2">
+                <input type="file" accept="image/*" ref={certInputRef1} onChange={handleCertChange1} className="hidden" id="cert-image-upload-1" />
+                <label htmlFor="cert-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 1</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile1 ? certFile1.name : formData.certImage1 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Cert 2 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 2</label>
+              <div className="space-y-1">
+                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
+                <input type="text" name="certTitle2" value={formData.certTitle2 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Design Your Digital Future" />
+              </div>
+              {formData.certImage2 && !certFile2 && (
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.certImage2} alt="Certificación 2" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2 mt-2">
+                <input type="file" accept="image/*" ref={certInputRef2} onChange={handleCertChange2} className="hidden" id="cert-image-upload-2" />
+                <label htmlFor="cert-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 2</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile2 ? certFile2.name : formData.certImage2 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Cert 3 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 3</label>
+              <div className="space-y-1">
+                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
+                <input type="text" name="certTitle3" value={formData.certTitle3 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Build with Passion" />
+              </div>
+              {formData.certImage3 && !certFile3 && (
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.certImage3} alt="Certificación 3" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2 mt-2">
+                <input type="file" accept="image/*" ref={certInputRef3} onChange={handleCertChange3} className="hidden" id="cert-image-upload-3" />
+                <label htmlFor="cert-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 3</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile3 ? certFile3.name : formData.certImage3 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Cert 4 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 4</label>
+              <div className="space-y-1">
+                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
+                <input type="text" name="certTitle4" value={formData.certTitle4 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Think Big" />
+              </div>
+              {formData.certImage4 && !certFile4 && (
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.certImage4} alt="Certificación 4" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2 mt-2">
+                <input type="file" accept="image/*" ref={certInputRef4} onChange={handleCertChange4} className="hidden" id="cert-image-upload-4" />
+                <label htmlFor="cert-image-upload-4" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 4</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile4 ? certFile4.name : formData.certImage4 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Cert 5 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 5</label>
+              <div className="space-y-1">
+                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
+                <input type="text" name="certTitle5" value={formData.certTitle5 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Nueva Certificación" />
+              </div>
+              {formData.certImage5 && !certFile5 && (
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.certImage5} alt="Certificación 5" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2 mt-2">
+                <input type="file" accept="image/*" ref={certInputRef5} onChange={handleCertChange5} className="hidden" id="cert-image-upload-5" />
+                <label htmlFor="cert-image-upload-5" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 5</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile5 ? certFile5.name : formData.certImage5 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+
+            {/* Cert 6 */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 6</label>
+              <div className="space-y-1">
+                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
+                <input type="text" name="certTitle6" value={formData.certTitle6 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Sostenibilidad" />
+              </div>
+              {formData.certImage6 && !certFile6 && (
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
+                  <img src={formData.certImage6} alt="Certificación 6" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2 mt-2">
+                <input type="file" accept="image/*" ref={certInputRef6} onChange={handleCertChange6} className="hidden" id="cert-image-upload-6" />
+                <label htmlFor="cert-image-upload-6" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <Upload size={14} /><span>Cambiar Imagen 6</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile6 ? certFile6.name : formData.certImage6 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact info group */}
+        <div className="space-y-4">
+          <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2">
+            Datos de Contacto
+          </h3>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">WhatsApp Principal (Solo dígitos)</label>
+              <input
+                type="text"
+                name="whatsapp"
+                value={formData.whatsapp}
+                onChange={handleChange}
+                placeholder="Ej: 51915233460"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+              <span className="text-[10px] text-stone-500 block">
+                Incluye el código de país. Ej: 51 para Perú seguido del número.
+              </span>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">WhatsApp Secundario (Solo dígitos)</label>
+              <input
+                type="text"
+                name="whatsapp2"
+                value={formData.whatsapp2 || ""}
+                onChange={handleChange}
+                placeholder="Ej: 51987654321"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+              <span className="text-[10px] text-stone-500 block">
+                Opcional.
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Correo Principal</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="contacto@empresa.com"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Correo Secundario</label>
+              <input
+                type="email"
+                name="email2"
+                value={formData.email2 || ""}
+                onChange={handleChange}
+                placeholder="Opcional"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Dirección Principal</label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Ej: Av. Principal 123, Satipo"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Dirección Secundaria</label>
+              <input
+                type="text"
+                name="address2"
+                value={formData.address2 || ""}
+                onChange={handleChange}
+                placeholder="Opcional"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Social networks group */}
+        <div className="space-y-4 pt-2">
+          <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2">
+            Redes Sociales
+          </h3>
+
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Enlace de Facebook</label>
+              <input
+                type="url"
+                name="facebook"
+                value={formData.facebook}
+                onChange={handleChange}
+                placeholder="https://facebook.com/pagina-oficial"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Enlace de TikTok</label>
+              <input
+                type="url"
+                name="tiktok"
+                value={formData.tiktok}
+                onChange={handleChange}
+                placeholder="https://tiktok.com/@usuario"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-stone-700 uppercase">Enlace de YouTube</label>
+              <input
+                type="url"
+                name="youtube"
+                value={formData.youtube}
+                onChange={handleChange}
+                placeholder="https://youtube.com/channel/..."
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={submitting}
+          className="inline-flex justify-center items-center space-x-2 bg-primary-brand hover:bg-primary-brand-light text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer text-xs"
+        >
+          {submitting ? (
+            <>
+              <Loader2 className="animate-spin" size={14} />
+              <span>Guardando Cambios...</span>
+            </>
+          ) : (
+            <>
+              <Save size={14} />
+              <span>Guardar Configuración</span>
+            </>
+          )}
+        </button>
+      </form>
+    </div>
+  );
+}
