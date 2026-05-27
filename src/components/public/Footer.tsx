@@ -16,6 +16,12 @@ interface CompanyInfo {
   facebook: string;
   youtube: string;
   logoUrl?: string;
+  certImage1?: string;
+  certImage2?: string;
+  certImage3?: string;
+  certImage4?: string;
+  certImage5?: string;
+  certImage6?: string;
 }
 
 const DEFAULT_INFO: CompanyInfo = {
@@ -53,24 +59,36 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
         
         {/* Logo and Copyright */}
-        <div className="flex flex-col items-center md:items-start space-y-3">
+        <div className="flex flex-col items-center md:items-start space-y-4">
           {info.logoUrl ? (
-            <div className="bg-white/95 p-2 rounded-xl shadow-sm inline-block">
-              <img src={info.logoUrl} alt="Cacquitari Logo" className="h-12 w-auto object-contain" />
+            <div className="inline-block">
+              <img src={info.logoUrl} alt="Cacquitari Logo" className="h-16 md:h-24 w-auto object-contain" />
             </div>
           ) : (
             <span className="text-2xl font-bold tracking-widest text-white drop-shadow-md">
               CACQUITARI
             </span>
           )}
+
           <p className="text-xs text-white/80 font-medium">
             &copy; {new Date().getFullYear()} CACQUITARI. Todos los derechos reservados.
           </p>
         </div>
 
-        {/* Admin Link or empty space */}
-        <div className="flex flex-col items-center md:items-end space-y-4">
-          {/* Reservado para enlaces extra si es necesario */}
+        {/* Certifications (Right Side) */}
+        <div className="flex flex-col items-center md:items-end space-y-3">
+          <h4 className="text-sm md:text-base font-semibold text-amber-500 tracking-wide">
+            Certificaciones Internacionales
+          </h4>
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 md:gap-6">
+             {[info.certImage1, info.certImage2, info.certImage3, info.certImage4, info.certImage5, info.certImage6]
+              .filter(Boolean)
+              .map((certUrl, idx) => (
+                <div key={idx} className="inline-flex items-center justify-center">
+                  <img src={certUrl as string} alt={`Certificación ${idx + 1}`} className="h-16 md:h-20 w-auto object-contain" />
+                </div>
+              ))}
+          </div>
         </div>
 
       </div>

@@ -15,9 +15,9 @@ export default function Navbar() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
 
   const navLinks = [
+    { name: "Inicio", href: "/" },
     { name: "Nosotros", href: "/nosotros" },
     { name: "Productos", href: "/productos" },
-    { name: "Galería", href: "/#galeria" },
     { name: "Contacto", href: "/contacto" },
   ];
 
@@ -62,11 +62,11 @@ export default function Navbar() {
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
         {logoUrl ? (
-          <div className="bg-white/95 p-1.5 rounded-lg shadow-sm inline-block">
+          <div className="inline-block">
             <img
               src={logoUrl}
               alt="Cacquitari Logo"
-              className="h-8 w-auto object-contain"
+              className="h-12 md:h-16 w-auto object-contain"
             />
           </div>
         ) : (

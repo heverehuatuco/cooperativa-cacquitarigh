@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { motion } from "framer-motion";
-import { Loader2, Coffee, Sparkles, Package } from "lucide-react";
+import { Loader2, Coffee, Bean, Package } from "lucide-react";
 
 interface GalleryImages {
   img1: string;
@@ -44,7 +44,12 @@ export default function ProductsSection() {
   const products = [
     {
       category: "CAFÉ",
-      icon: <Coffee className="text-primary-brand" />,
+      icon: <Coffee size={28} className="text-white drop-shadow-md" />,
+      headerBg: "bg-gradient-to-br from-emerald-400 to-green-600",
+      cardBorder: "border-green-100",
+      hoverShadow: "hover:shadow-green-200/60 hover:border-green-400",
+      iconBg: "bg-white/20 backdrop-blur-sm border-white/30",
+      titleColor: "text-white drop-shadow-sm",
       items: [
         { name: "Café Quitari Gourmet", desc: "Cultivado en las laderas de los bosques de Pangoa, notas frutales y chocolate." },
         { name: "Café Quitari Organic", desc: "Sin químicos, certificación orgánica, opción saludable." },
@@ -55,7 +60,12 @@ export default function ProductsSection() {
     },
     {
       category: "CACAO",
-      icon: <Sparkles className="text-secondary-brand" />,
+      icon: <Bean size={28} className="text-white drop-shadow-md" />,
+      headerBg: "bg-gradient-to-br from-amber-400 to-orange-500",
+      cardBorder: "border-orange-100",
+      hoverShadow: "hover:shadow-orange-200/60 hover:border-orange-400",
+      iconBg: "bg-white/20 backdrop-blur-sm border-white/30",
+      titleColor: "text-white drop-shadow-sm",
       items: [
         { name: "Cacao Quitari Fino", desc: "Cultivado en regiones cálidas de Pangoa, notas frutales y especias." },
         { name: "Cacao Quitari con Leche", desc: "Mezclado con leche, sabor suave y cremoso." },
@@ -64,7 +74,12 @@ export default function ProductsSection() {
     },
     {
       category: "DERIVADOS & CHOCHOKI",
-      icon: <Package className="text-tertiary-brand" />,
+      icon: <Package size={28} className="text-white drop-shadow-md" />,
+      headerBg: "bg-gradient-to-br from-purple-400 to-indigo-500",
+      cardBorder: "border-purple-100",
+      hoverShadow: "hover:shadow-purple-200/60 hover:border-purple-400",
+      iconBg: "bg-white/20 backdrop-blur-sm border-white/30",
+      titleColor: "text-white drop-shadow-sm",
       items: [
         { name: "Chocolate Quitari", desc: "Elaborado con cacao de alta calidad, perfecto para regalos." },
         { name: "Chocolate Memoris Hut", desc: "En memoria de Ucharima Taipe Hector." },
@@ -80,38 +95,49 @@ export default function ProductsSection() {
         
         {/* Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
+          className="text-center max-w-3xl mx-auto mb-16 mt-6 flex flex-col items-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block py-1.5 px-4 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-xs font-bold uppercase tracking-widest mb-4">
-            Nuestros Productos
+          <span className="inline-block py-1.5 px-5 rounded-full bg-primary-brand/10 text-primary-brand text-xs font-extrabold uppercase tracking-widest mb-4">
+            Lo que ofrecemos
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl font-black text-stone-900 tracking-tight">
             Productos Quitari
           </h2>
-          <p className="text-stone-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Nuestra cooperativa ofrece una amplia selección de productos premium derivados del esfuerzo en el campo. Contamos con presentaciones en:
-            <br/><span className="font-semibold text-stone-700">Bolsas: 250g, 500g, 1kg | Tabletas: 100g, 200g, 500g | Frascos: 200g, 500g</span>
-          </p>
         </motion.div>
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 max-w-6xl mx-auto">
           {products.map((cat, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
-              <div className="bg-stone-50 p-6 flex items-center gap-4 border-b border-stone-200">
-                <div className="p-3 bg-white rounded-xl shadow-sm border border-stone-100">{cat.icon}</div>
-                <h3 className="font-bold text-xl text-stone-800">{cat.category}</h3>
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: i * 0.1, duration: 0.5 }} 
+              className={`group bg-white rounded-[2rem] shadow-sm border-2 ${cat.cardBorder} overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${cat.hoverShadow}`}
+            >
+              <div className={`${cat.headerBg} p-6 sm:p-8 flex flex-col items-center text-center gap-4 transition-colors duration-300 relative overflow-hidden`}>
+                {/* Decorative background element */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div className={`p-4 rounded-2xl shadow-inner border transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 ${cat.iconBg}`}>
+                  {cat.icon}
+                </div>
+                <h3 className={`font-black text-2xl tracking-tight ${cat.titleColor}`}>{cat.category}</h3>
               </div>
-              <div className="p-6">
+              <div className="p-7 sm:p-8">
                 <ul className="space-y-6">
                   {cat.items.map((item, idx) => (
-                    <li key={idx}>
-                      <h4 className="font-bold text-stone-900 text-sm mb-1">{item.name}</h4>
-                      <p className="text-xs text-stone-600 leading-relaxed">{item.desc}</p>
+                    <li key={idx} className="group/item">
+                      <h4 className="font-bold text-stone-900 text-[16px] mb-1.5 group-hover/item:text-primary-brand transition-colors duration-200 flex items-center gap-2.5">
+                        <span className="w-2 h-2 rounded-full bg-stone-200 group-hover/item:bg-primary-brand transition-colors duration-200 group-hover/item:scale-125"></span>
+                        {item.name}
+                      </h4>
+                      <p className="text-[14px] text-stone-500 leading-relaxed pl-4">{item.desc}</p>
                     </li>
                   ))}
                 </ul>

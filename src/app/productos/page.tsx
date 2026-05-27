@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "@/components/public/Navbar";
 import ProductsSection from "@/components/public/ProductsSection";
-import CertificationsSection from "@/components/public/CertificationsSection";
 import Footer from "@/components/public/Footer";
 import WhatsAppButton from "@/components/public/WhatsAppButton";
 
@@ -19,9 +18,6 @@ export default function ProductosPage() {
         <div className="relative z-10">
           {/* Sección de Productos */}
           <ProductsSection />
-          
-          {/* Sección de Certificaciones (Carrusel) */}
-          <CertificationsSection />
         </div>
       </main>
 
