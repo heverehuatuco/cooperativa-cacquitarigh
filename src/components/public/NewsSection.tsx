@@ -156,7 +156,7 @@ export default function NewsSection() {
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 slidesPerView={1}
                 spaceBetween={20}
-                loop={true}
+                loop={articles.length > 2}
                 pagination={{ clickable: true }}
                 breakpoints={{
                   568: { slidesPerView: 2, spaceBetween: 28 },
