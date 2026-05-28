@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { motion } from "framer-motion";
 import { Loader2, Coffee, Bean, Package } from "lucide-react";
+import Image from "next/image";
 
 interface GalleryImages {
   img1: string;
@@ -25,10 +26,10 @@ export default function ProductsSection() {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setImages({
-            img1: data.productGalleryImage1 || "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=800",
-            img2: data.productGalleryImage2 || "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&q=80&w=400",
-            img3: data.productGalleryImage3 || "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=400",
-            img4: data.productGalleryImage4 || "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+            img1: data.productGalleryImage1 || "",
+            img2: data.productGalleryImage2 || "",
+            img3: data.productGalleryImage3 || "",
+            img4: data.productGalleryImage4 || "",
           });
         }
       } catch (error) {
@@ -146,58 +147,60 @@ export default function ProductsSection() {
           ))}
         </div>
 
-        {/* Bento Gallery Grid */}
-        <div className="text-center mb-10">
-          <h3 className="text-2xl md:text-3xl font-bold text-stone-900 tracking-tight">Galería de Productos</h3>
+        {/* Modern E-commerce Gallery Grid */}
+        <div className="text-center mb-12">
+          <h3 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight">
+            Galería de Productos
+          </h3>
         </div>
+        
         {loading ? (
           <div className="flex justify-center items-center py-20">
-            <Loader2 className="animate-spin text-primary-brand mr-2" size={32} />
-            <span className="text-stone-500">Cargando galería...</span>
+            <Loader2 className="animate-spin text-secondary-brand mr-2" size={32} />
+            <span className="text-stone-500">Cargando productos...</span>
           </div>
         ) : (
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4">
-            <motion.div 
-              className="md:col-span-6 h-64 md:h-[500px] rounded-xl overflow-hidden shadow-sm"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <img src={images?.img1} alt="Galería 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-            </motion.div>
-            
-            <div className="md:col-span-6 grid grid-cols-2 gap-4">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 px-4 sm:px-6">
+            {[
+              { id: 1, img: images?.img1, title: "Café Tostado Molido Quitari", desc: "Presentación Premium" },
+              { id: 2, img: images?.img2, title: "Café Especial Taqui", desc: "Granos Seleccionados" },
+              { id: 3, img: images?.img3, title: "Pack Degustación", desc: "Tsinane & Paradise" },
+              { id: 4, img: images?.img4, title: "Granos de Café Oro", desc: "Tostado Artesanal" },
+            ].map((item) => (
               <motion.div 
-                className="col-span-1 h-32 md:h-[242px] rounded-xl overflow-hidden shadow-sm"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                key={item.id}
+                className="group cursor-pointer flex flex-col"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: item.id * 0.1 }}
               >
-                <img src={images?.img2} alt="Galería 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                {/* Image Card */}
+                <div className="w-full aspect-[4/5] bg-[#f7f6f2] rounded-2xl overflow-hidden relative mb-4 flex items-center justify-center p-6 transition-colors group-hover:bg-[#f0efea]">
+                  {item.img ? (
+                    <Image 
+                      src={item.img} 
+                      alt={item.title} 
+                      fill 
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" 
+                      className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-stone-200 animate-pulse rounded-xl"></div>
+                  )}
+                </div>
+                
+                {/* Product Info */}
+                <div className="flex flex-col space-y-1 px-1">
+                  <h4 className="text-[15px] font-semibold text-stone-800 tracking-tight group-hover:text-secondary-brand transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm text-stone-500">
+                    {item.desc}
+                  </p>
+                </div>
               </motion.div>
-
-              <motion.div 
-                className="col-span-1 h-32 md:h-[242px] rounded-xl overflow-hidden shadow-sm"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <img src={images?.img3} alt="Galería 3" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </motion.div>
-
-              <motion.div 
-                className="col-span-2 h-40 md:h-[242px] rounded-xl overflow-hidden shadow-sm"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <img src={images?.img4} alt="Galería 4" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </motion.div>
-            </div>
+            ))}
           </div>
         )}
       </div>

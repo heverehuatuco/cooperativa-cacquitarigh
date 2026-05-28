@@ -6,6 +6,7 @@ import { db } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface GalleryItem {
   id: string;
@@ -21,28 +22,28 @@ const MOCK_GALLERY: GalleryItem[] = [
     title: "Fincas de la Microcuenca",
     description: "Vista de los campos de cultivo en San Jerónimo Matzuriniari, donde nuestros productores siembran con amor.",
     category: "instalaciones",
-    imageUrl: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&q=80&w=800",
+    imageUrl: "",
   },
   {
     id: "gal-2",
     title: "Control de Calidad del Café",
     description: "Sesión de catación profesional evaluando la fragancia, acidez y balance de nuestros cafés especiales.",
     category: "cafe",
-    imageUrl: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=800",
+    imageUrl: "",
   },
   {
     id: "gal-3",
     title: "Procesamiento de Cacao Fino",
     description: "Clasificación meticulosa de granos durante la fermentación para asegurar el perfil de sabor de exportación.",
     category: "cacao",
-    imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+    imageUrl: "",
   },
   {
     id: "gal-4",
     title: "Cosecha Sostenible",
     description: "Trabajamos respetando el medio ambiente en cada etapa de la producción.",
     category: "cacao",
-    imageUrl: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=800",
+    imageUrl: "",
   }
 ];
 
@@ -95,20 +96,23 @@ export default function GallerySection() {
         
         {/* Header matching the new reference image */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-10 flex flex-col items-center"
+          className="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-stone-800 tracking-tight mb-4">
+          <span className="inline-block py-1.5 px-4 rounded-full bg-secondary-brand/10 border border-secondary-brand/20 text-secondary-brand text-xs font-bold uppercase tracking-widest mb-4">
+            Nuestro Entorno
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-stone-900 tracking-tight mb-4">
             Galería de Fotos
           </h2>
-          <p className="text-stone-500 text-base mb-6">
+          <p className="text-stone-500 text-base mb-8 max-w-2xl">
             Un recorrido visual por nuestras fincas, procesos de fermentado, secado y el esfuerzo diario de la cooperativa.
           </p>
-          <button className="bg-primary-brand hover:brightness-110 transition-all text-white text-sm font-semibold px-6 py-2.5 rounded-md flex items-center gap-2">
-            Ver Todo <ArrowRight size={16} />
+          <button className="bg-secondary-brand hover:bg-secondary-brand-light transition-all text-white text-sm font-bold px-8 py-3 rounded-full flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+            Ver Galería Completa <ArrowRight size={18} />
           </button>
         </motion.div>
 
@@ -123,69 +127,100 @@ export default function GallerySection() {
             No hay imágenes en la galería aún.
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="flex flex-col gap-6">
             
-            {/* Left Column: Stacked Thumbnails */}
-            <div className="col-span-1 md:col-span-3 flex flex-row md:flex-col gap-4 overflow-x-auto md:overflow-visible snap-x pb-2 md:pb-0">
-              {items.slice(0, 3).map((item, idx) => (
+            {/* Cinematic Main Featured Image */}
+            <div className="relative w-full rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/7] shadow-2xl group bg-stone-900">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={featuredIndex}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  {items[featuredIndex].imageUrl ? (
+                    <Image 
+                      src={items[featuredIndex].imageUrl} 
+                      alt={items[featuredIndex].title}
+                      fill
+                      sizes="100vw"
+                      className="object-cover"
+                      priority
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-stone-800 flex items-center justify-center text-stone-500">Sin Imagen</div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+              
+              {/* Glassmorphism Overlay at Bottom */}
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 bg-gradient-to-t from-stone-950/90 via-stone-900/40 to-transparent z-10 flex flex-col justify-end">
+                <motion.div
+                  key={`info-${featuredIndex}`}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
+                >
+                  <span className="inline-block px-3 py-1 mb-3 rounded-md bg-secondary-brand/20 backdrop-blur-md border border-secondary-brand/30 text-secondary-brand-light text-xs font-bold uppercase tracking-wider">
+                    {items[featuredIndex].category || "Galería"}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-2 drop-shadow-md">
+                    {items[featuredIndex].title}
+                  </h3>
+                  {items[featuredIndex].description && (
+                    <p className="text-stone-300 text-sm md:text-base max-w-2xl line-clamp-2 md:line-clamp-none">
+                      {items[featuredIndex].description}
+                    </p>
+                  )}
+                </motion.div>
+              </div>
+
+              {/* Elegant Navigation Controls */}
+              <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between z-20 pointer-events-none">
+                <button 
+                  onClick={handlePrev}
+                  className="pointer-events-auto w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95"
+                  aria-label="Anterior"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button 
+                  onClick={handleNext}
+                  className="pointer-events-auto w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95"
+                  aria-label="Siguiente"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar">
+              {items.map((item, idx) => (
                 <div 
                   key={item.id}
                   onClick={() => setFeaturedIndex(idx)}
-                  className={`flex-1 min-w-[140px] md:min-w-0 min-h-[100px] md:min-h-0 rounded-xl overflow-hidden cursor-pointer relative group transition-all duration-300 ${idx === featuredIndex ? 'ring-2 ring-primary-brand shadow-md scale-[1.02]' : 'opacity-80 hover:opacity-100 hover:scale-[1.01]'}`}
+                  className={`relative shrink-0 snap-start w-32 md:w-48 aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
+                    idx === featuredIndex 
+                      ? 'ring-4 ring-secondary-brand ring-offset-2 scale-100 opacity-100 shadow-md' 
+                      : 'opacity-50 hover:opacity-100 hover:scale-[1.02] scale-95 grayscale-[30%]'
+                  }`}
                 >
-                  <img 
-                    src={item.imageUrl} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover absolute inset-0 transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {/* Subtle overlay */}
-                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
+                  {item.imageUrl ? (
+                    <Image 
+                      src={item.imageUrl} 
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 128px, 192px"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-stone-200"></div>
+                  )}
                 </div>
               ))}
-            </div>
-
-            {/* Right Column: Featured Large Image */}
-            <div className="col-span-1 md:col-span-9 relative rounded-xl overflow-hidden aspect-[4/3] md:aspect-[16/10] lg:aspect-[21/9] group bg-stone-100">
-              <AnimatePresence mode="wait">
-                <motion.img 
-                  key={featuredIndex}
-                  src={items[featuredIndex].imageUrl} 
-                  alt={items[featuredIndex].title}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full h-full object-cover absolute inset-0"
-                />
-              </AnimatePresence>
-              
-              {/* Controls */}
-              <button 
-                onClick={handlePrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white text-stone-800 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 z-10"
-                aria-label="Anterior"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button 
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white text-stone-800 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 z-10"
-                aria-label="Siguiente"
-              >
-                <ChevronRight size={20} />
-              </button>
-
-              {/* Optional Title Overlay */}
-              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/60 to-transparent z-10">
-                <motion.h3 
-                  key={`title-${featuredIndex}`}
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="text-white font-semibold text-lg md:text-xl shadow-sm"
-                >
-                  {items[featuredIndex].title}
-                </motion.h3>
-              </div>
             </div>
 
           </div>

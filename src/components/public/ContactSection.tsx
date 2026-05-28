@@ -5,6 +5,7 @@ import { doc, getDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Phone, Mail, MapPin, Send, Loader2, CheckCircle2, AlertCircle, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface CompanyInfo {
   whatsapp: string;
@@ -110,8 +111,8 @@ export default function ContactSection() {
             className="lg:pr-10"
           >
             {/* Badge */}
-            <div className="inline-block px-4 py-1.5 rounded-full bg-[#8B5CF6]/10 mb-6">
-              <span className="text-[#8B5CF6] font-semibold text-[13px]">Canales de Atención</span>
+            <div className="inline-block px-4 py-1.5 rounded-full bg-secondary-brand/10 mb-6">
+              <span className="text-secondary-brand font-semibold text-[13px]">Canales de Atención</span>
             </div>
             
             {/* Title */}
@@ -125,8 +126,8 @@ export default function ContactSection() {
               {/* Location Block */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" className="w-6 h-6 object-contain" />
+                  <div className="w-10 h-10 rounded-xl bg-secondary-brand/10 flex items-center justify-center relative">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={24} height={24} className="object-contain" />
                   </div>
                 </div>
                 <div>
@@ -140,8 +141,8 @@ export default function ContactSection() {
               {/* Phone Block */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-7 h-7 object-contain" />
+                  <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center relative">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={28} height={28} className="object-contain" />
                   </div>
                 </div>
                 <div>
@@ -156,8 +157,8 @@ export default function ContactSection() {
               {/* Email Block */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" className="w-6 h-6 object-contain" />
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center relative">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width={24} height={24} className="object-contain" />
                   </div>
                 </div>
                 <div>
@@ -200,7 +201,7 @@ export default function ContactSection() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3.5 pr-12 rounded-lg border border-stone-200 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] text-[15px] text-stone-800 bg-white transition-all"
+                      className="w-full px-4 py-3.5 pr-12 rounded-lg border border-stone-200 focus:outline-none focus:border-secondary-brand focus:ring-1 focus:ring-secondary-brand text-[15px] text-stone-800 bg-white transition-all"
                     />
                     <User className="w-5 h-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2" />
                   </div>
@@ -219,7 +220,7 @@ export default function ContactSection() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3.5 pr-12 rounded-lg border border-stone-200 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] text-[15px] text-stone-800 bg-white transition-all"
+                      className="w-full px-4 py-3.5 pr-12 rounded-lg border border-stone-200 focus:outline-none focus:border-secondary-brand focus:ring-1 focus:ring-secondary-brand text-[15px] text-stone-800 bg-white transition-all"
                     />
                     <Mail className="w-5 h-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2" />
                   </div>
@@ -238,7 +239,7 @@ export default function ContactSection() {
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3.5 pr-12 rounded-lg border border-stone-200 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] text-[15px] text-stone-800 bg-white resize-none transition-all"
+                      className="w-full px-4 py-3.5 pr-12 rounded-lg border border-stone-200 focus:outline-none focus:border-secondary-brand focus:ring-1 focus:ring-secondary-brand text-[15px] text-stone-800 bg-white resize-none transition-all"
                     />
                   </div>
                 </div>
@@ -273,7 +274,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full inline-flex justify-center items-center space-x-2 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-medium py-3.5 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer mt-2"
+                  className="w-full inline-flex justify-center items-center space-x-2 bg-secondary-brand hover:bg-secondary-brand-light text-white font-medium py-3.5 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer mt-2"
                 >
                   {submitting ? (
                     <Loader2 className="animate-spin" size={18} />
@@ -284,7 +285,7 @@ export default function ContactSection() {
                 
                 {/* Privacy Policy text */}
                 <p className="text-[12px] text-stone-500 leading-relaxed mt-5">
-                  Entiendo que mis datos serán guardados de forma segura de acuerdo con la <a href="#" className="text-stone-700 underline hover:text-[#8B5CF6] transition-colors">política de privacidad</a>.
+                  Entiendo que mis datos serán guardados de forma segura de acuerdo con la <a href="#" className="text-stone-700 underline hover:text-secondary-brand transition-colors">política de privacidad</a>.
                 </p>
 
               </form>

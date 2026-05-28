@@ -10,7 +10,6 @@ const DEFAULT_INFO = {
   whatsapp: "51915233460",
   facebook: "",
   tiktok: "",
-  youtube: "",
 };
 
 export default function WhatsAppButton() {
@@ -28,7 +27,6 @@ export default function WhatsAppButton() {
             whatsapp: data.whatsapp ? data.whatsapp.replace(/\D/g, "") : DEFAULT_INFO.whatsapp,
             facebook: data.facebook || "",
             tiktok: data.tiktok || "",
-            youtube: data.youtube || "",
           });
         }
       } catch (error) {
@@ -162,22 +160,6 @@ export default function WhatsAppButton() {
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
               <path d="M448 209.91a210.06 210.06 0 01-122.77-39.25V349.38A162.55 162.55 0 11185 188.31V278.2a74.62 74.62 0 1052.23 71.18V0l88 0a121.18 121.18 0 001.86 22.17h0A122.18 122.18 0 00381 102.39a121.43 121.43 0 0067 20.14Z" />
-            </svg>
-          </motion.a>
-        )}
-
-        {info.youtube && (
-          <motion.a
-            href={info.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-[#FF0000] hover:bg-[#E60000] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            aria-label="YouTube"
-          >
-            <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.555A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.108C4.47 20.5 12 20.5 12 20.5s7.53 0 9.388-.555a3.003 3.003 0 0 0 2.11-2.108C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
             </svg>
           </motion.a>
         )}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Users, TrendingUp, ShieldCheck, Sprout, Network, BookOpen, Leaf, Heart, ArrowUpRight, Briefcase, Calculator, Globe, HeartHandshake, Lightbulb, Coffee } from "lucide-react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import Image from "next/image";
 
 export default function AboutUs() {
   const [aboutImageUrl1, setAboutImageUrl1] = useState("");
@@ -110,7 +111,7 @@ export default function AboutUs() {
 
         {/* Historia Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 mt-24 lg:mt-32 flex flex-col items-center">
-          <span className="inline-block py-1.5 px-4 rounded-full bg-primary-brand/10 border border-primary-brand/20 text-primary-brand text-xs font-bold uppercase tracking-widest mb-4">
+          <span className="inline-block py-1.5 px-4 rounded-full bg-secondary-brand/10 border border-secondary-brand/20 text-secondary-brand text-xs font-bold uppercase tracking-widest mb-4">
             Nuestra Historia
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
@@ -135,13 +136,13 @@ export default function AboutUs() {
               
               {/* Main Image */}
               <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-lg border border-stone-100">
-                {aboutImageUrl1 ? <img src={aboutImageUrl1} alt="Nosotros Fondo" className="w-full h-full object-cover" /> : <div className="w-full h-full bg-stone-200 flex items-center justify-center text-stone-500 text-sm">Fondo</div>}
+                {aboutImageUrl1 ? <Image src={aboutImageUrl1} alt="Nosotros Fondo" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /> : <div className="w-full h-full bg-stone-200 flex items-center justify-center text-stone-500 text-sm">Fondo</div>}
               </div>
               
               {/* Floating Profile */}
-              <div className="absolute -bottom-8 -right-4 sm:-right-8 w-48 h-60 sm:w-56 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border-[6px] border-[#fafaf9] z-10 rotate-3 hover:rotate-0 transition-transform duration-500">
-                {aboutImageUrl2 ? <img src={aboutImageUrl2} alt="Gerencia" className="w-full h-full object-cover object-top" /> : <div className="w-full h-full bg-stone-300 flex items-center justify-center text-stone-500 text-sm">Frente</div>}
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-max bg-white/90 backdrop-blur-md py-1.5 px-4 rounded-full shadow-sm text-xs font-bold text-stone-800">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-72 sm:w-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl z-10 transition-transform duration-500 relative">
+                {aboutImageUrl2 ? <Image src={aboutImageUrl2} alt="Gerencia" fill sizes="(max-width: 640px) 224px, 256px" className="object-cover object-top" /> : <div className="w-full h-full bg-stone-300 flex items-center justify-center text-stone-500 text-sm relative z-10">Frente</div>}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-max bg-white/90 backdrop-blur-md py-1.5 px-4 rounded-full shadow-sm text-xs font-bold text-stone-800 z-20">
                   Gerencia General
                 </div>
               </div>
@@ -203,7 +204,7 @@ export default function AboutUs() {
         {/* Análisis FODA */}
         <div className="mb-24 mt-24">
           <div className="text-center mb-12 flex flex-col items-center">
-            <span className="inline-block py-1.5 px-4 rounded-full bg-stone-100 text-stone-600 text-xs font-bold uppercase tracking-widest mb-4">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-secondary-brand/10 border border-secondary-brand/20 text-secondary-brand text-xs font-bold uppercase tracking-widest mb-4">
               Diagnóstico Estratégico
             </span>
             <h3 className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight">Análisis FODA</h3>

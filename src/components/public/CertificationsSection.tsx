@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface CertData {
   title: string;
@@ -107,13 +108,15 @@ export default function CertificationsSection() {
               <div className="marquee-inner flex will-change-transform min-w-[200%] w-fit" style={{ animationDuration: "15s" }}>
                   <div className="flex items-center">
                       {[...cardData, ...cardData].map((card, index) => (
-                          <img 
-                            key={index}
-                            src={card.image} 
-                            alt={card.title} 
-                            draggable="false"
-                            className="w-40 sm:w-48 lg:w-56 h-20 sm:h-24 object-contain mx-6 sm:mx-10 opacity-80 hover:opacity-100 transition-opacity cursor-pointer filter grayscale hover:grayscale-0" 
-                          />
+                          <div key={index} className="relative w-40 sm:w-48 lg:w-56 h-20 sm:h-24 mx-6 sm:mx-10 opacity-80 hover:opacity-100 transition-opacity cursor-pointer filter grayscale hover:grayscale-0">
+                            <Image 
+                              src={card.image} 
+                              alt={card.title} 
+                              fill
+                              sizes="(max-width: 640px) 160px, (max-width: 1024px) 192px, 224px"
+                              className="object-contain" 
+                            />
+                          </div>
                       ))}
                   </div>
               </div>

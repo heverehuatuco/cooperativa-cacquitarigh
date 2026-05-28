@@ -5,6 +5,7 @@ import { collection, getDocs, doc, addDoc, deleteDoc, query, orderBy } from "fir
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
 import { Image, Trash2, Plus, Loader2, Upload, AlertCircle } from "lucide-react";
+import NextImage from "next/image";
 
 interface GalleryItem {
   id: string;
@@ -310,8 +311,8 @@ export default function GalleryManager() {
             >
               {/* Photo */}
               <div className="aspect-4/3 relative bg-stone-200">
-                <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
-                <span className="absolute top-3 left-3 text-[9px] font-bold tracking-widest uppercase bg-stone-900/80 text-tertiary-brand px-2.5 py-1 rounded-full backdrop-blur-xs">
+                <NextImage src={item.imageUrl} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+                <span className="absolute top-3 left-3 text-[9px] font-bold tracking-widest uppercase bg-stone-900/80 text-tertiary-brand px-2.5 py-1 rounded-full backdrop-blur-xs z-10">
                   {item.category === "cafe"
                     ? "Café"
                     : item.category === "cacao"

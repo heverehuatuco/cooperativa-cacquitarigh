@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafaf9; /* stone-50 */
+  --background: oklch(96.2% 0.044 156.743); /* blanco verdoso */
   --foreground: #1c1917; /* stone-900 */
 }
 
@@ -10,8 +10,8 @@
   --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --color-primary-brand: oklch(37.8% 0.077 168.94);
   --color-primary-brand-light: oklch(47.8% 0.077 168.94);
-  --color-secondary-brand: oklch(62.7% 0.194 149.214);
-  --color-secondary-brand-light: oklch(72.7% 0.194 149.214);
+  --color-secondary-brand: oklch(84.1% 0.238 128.85);
+  --color-secondary-brand-light: oklch(90% 0.2 128.85);
   --color-tertiary-brand: oklch(26.8% 0.011 36.5);
   --color-tertiary-brand-light: oklch(36.8% 0.011 36.5);
   --color-primary-brown: #3e2723;

@@ -5,6 +5,7 @@ import { collection, getDocs, doc, addDoc, updateDoc, deleteDoc, query, orderBy 
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
 import { ShoppingBag, Trash2, Edit, Plus, Loader2, Upload, AlertCircle, X, CheckSquare, Square } from "lucide-react";
+import NextImage from "next/image";
 
 interface Product {
   id: string;
@@ -279,8 +280,8 @@ export default function ProductsManager() {
               className="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 first:pt-0 last:pb-0"
             >
               <div className="flex items-center space-x-4 max-w-3xl">
-                <div className="h-16 w-16 bg-stone-100 rounded-xl overflow-hidden shrink-0 border border-stone-200/40">
-                  <img src={prod.imageUrl} alt={prod.name} className="w-full h-full object-cover" />
+                <div className="h-16 w-16 bg-stone-100 rounded-xl overflow-hidden shrink-0 border border-stone-200/40 relative">
+                  <NextImage src={prod.imageUrl} alt={prod.name} fill sizes="64px" className="object-cover" />
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center space-x-2">

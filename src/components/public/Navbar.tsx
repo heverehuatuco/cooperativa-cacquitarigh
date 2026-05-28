@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const { user } = useAuth();
@@ -62,11 +63,14 @@ export default function Navbar() {
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
         {logoUrl ? (
-          <div className="inline-block">
-            <img
+          <div className="relative h-12 md:h-16 w-32 md:w-48">
+            <Image
               src={logoUrl}
               alt="Cacquitari Logo"
-              className="h-12 md:h-16 w-auto object-contain"
+              fill
+              sizes="(max-width: 768px) 128px, 192px"
+              className="object-contain object-left"
+              priority
             />
           </div>
         ) : (
@@ -84,21 +88,26 @@ export default function Navbar() {
 
       {/* Desktop Nav Items */}
       <div className="hidden md:flex items-center gap-8">
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
-          >
-            {link.name}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={`text-base lg:text-lg font-bold transition-colors ${
+                isActive ? "text-secondary-brand" : "text-white/90 hover:text-white hover:text-secondary-brand/80"
+              }`}
+            >
+              {link.name}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Desktop CTA Button */}
       <Link
         href={user ? "/admin" : "/login"}
-        className="hidden md:flex items-center justify-center bg-white text-primary-brand text-sm font-bold px-6 py-2.5 rounded-full hover:bg-stone-50 transition-all shadow-sm"
+        className="hidden md:flex items-center justify-center bg-secondary-brand text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-secondary-brand-light transition-all shadow-sm"
       >
         {user ? "Panel" : "Acceso"}
       </Link>
@@ -116,20 +125,25 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`${isOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-primary-brand border-t border-white/10 flex-col p-5 gap-4 md:hidden z-50`}>
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            onClick={() => setIsOpen(false)}
-            className="block text-center text-white font-medium text-lg"
-          >
-            {link.name}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className={`block text-center font-bold text-xl ${
+                isActive ? "text-secondary-brand" : "text-white hover:text-secondary-brand/80"
+              }`}
+            >
+              {link.name}
+            </Link>
+          );
+        })}
         <Link 
           href={user ? "/admin" : "/login"}
           onClick={() => setIsOpen(false)}
-          className="bg-white text-primary-brand text-center font-bold px-6 py-3 rounded-full mt-4"
+          className="bg-secondary-brand text-white text-center font-bold px-6 py-3 rounded-full mt-4 hover:bg-secondary-brand-light transition-all"
         >
           {user ? "Panel Admin" : "Acceso Admin"}
         </Link>

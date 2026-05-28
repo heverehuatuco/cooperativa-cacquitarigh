@@ -5,6 +5,7 @@ import { collection, getDocs, doc, addDoc, updateDoc, deleteDoc, query, orderBy 
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
 import { FileText, Trash2, Edit, Plus, Loader2, Upload, AlertCircle, X } from "lucide-react";
+import NextImage from "next/image";
 
 interface NewsArticle {
   id: string;
@@ -269,8 +270,8 @@ export default function NewsManager() {
               className="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 first:pt-0 last:pb-0"
             >
               <div className="flex items-center space-x-4 max-w-3xl">
-                <div className="h-16 w-24 bg-stone-100 rounded-xl overflow-hidden shrink-0 border border-stone-200/40">
-                  <img src={art.imageUrl} alt={art.title} className="w-full h-full object-cover" />
+                <div className="h-16 w-24 bg-stone-100 rounded-xl overflow-hidden shrink-0 border border-stone-200/40 relative">
+                  <NextImage src={art.imageUrl} alt={art.title} fill sizes="96px" className="object-cover" />
                 </div>
                 <div className="space-y-1">
                   <h3 className="font-bold text-stone-900 text-sm sm:text-base line-clamp-1">{art.title}</h3>

@@ -5,6 +5,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
 import { Settings, Save, Loader2, CheckCircle2, AlertCircle, Upload, Image as ImageIcon } from "lucide-react";
+import NextImage from "next/image";
 
 interface CompanyInfo {
   whatsapp: string;
@@ -15,7 +16,7 @@ interface CompanyInfo {
   address2: string;
   tiktok: string;
   facebook: string;
-  youtube: string;
+
   heroImageUrl?: string;
   heroStoragePath?: string;
   heroCardImage1?: string;
@@ -67,7 +68,7 @@ const DEFAULT_INFO: CompanyInfo = {
   address2: "",
   tiktok: "https://www.tiktok.com",
   facebook: "https://www.facebook.com",
-  youtube: "https://www.youtube.com",
+
 };
 
 export default function SettingsManager() {
@@ -512,7 +513,7 @@ export default function SettingsManager() {
         address2: (formData.address2 || "").trim(),
         tiktok: (formData.tiktok || "").trim(),
         facebook: (formData.facebook || "").trim(),
-        youtube: (formData.youtube || "").trim(),
+
         heroImageUrl: currentHeroUrl,
         heroStoragePath: currentHeroPath,
         heroCardImage1: currentHeroCardUrl1,
@@ -647,8 +648,8 @@ export default function SettingsManager() {
                 Logotipo Principal
               </label>
               {formData.logoUrl && !logoFile && (
-                <div className="mb-3 h-20 w-auto inline-flex bg-stone-100 rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.logoUrl} alt="Logo actual" className="h-full w-auto object-contain p-2" />
+                <div className="mb-3 h-20 w-auto inline-flex bg-stone-100 rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.logoUrl} alt="Logo actual" fill sizes="150px" className="h-full w-auto object-contain p-2" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -678,8 +679,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 1 (Izquierda)</label>
               {formData.heroCardImage1 && !heroCardFile1 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.heroCardImage1} alt="Hero Card 1" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.heroCardImage1} alt="Hero Card 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -695,8 +696,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 2 (Centro)</label>
               {formData.heroCardImage2 && !heroCardFile2 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.heroCardImage2} alt="Hero Card 2" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.heroCardImage2} alt="Hero Card 2" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -712,8 +713,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 3 (Derecha)</label>
               {formData.heroCardImage3 && !heroCardFile3 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.heroCardImage3} alt="Hero Card 3" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.heroCardImage3} alt="Hero Card 3" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -731,8 +732,8 @@ export default function SettingsManager() {
                 Fondo de la Página de Inicio
               </label>
               {formData.heroImageUrl && !heroFile && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.heroImageUrl} alt="Hero actual" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.heroImageUrl} alt="Hero actual" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -763,8 +764,8 @@ export default function SettingsManager() {
                 Imagen de Quiénes Somos (Fondo)
               </label>
               {formData.aboutImageUrl1 && !aboutFile1 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.aboutImageUrl1} alt="Nosotros actual 1" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.aboutImageUrl1} alt="Nosotros actual 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -795,8 +796,8 @@ export default function SettingsManager() {
                 Imagen de Quiénes Somos (Frente)
               </label>
               {formData.aboutImageUrl2 && !aboutFile2 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.aboutImageUrl2} alt="Nosotros actual 2" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.aboutImageUrl2} alt="Nosotros actual 2" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -850,8 +851,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 1 (Izquierda Vertical)</label>
               {formData.productGalleryImage1 && !prodGalFile1 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.productGalleryImage1} alt="Producto 1" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.productGalleryImage1} alt="Producto 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -867,8 +868,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 2 (Derecha Superior Izquierda)</label>
               {formData.productGalleryImage2 && !prodGalFile2 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.productGalleryImage2} alt="Producto 2" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.productGalleryImage2} alt="Producto 2" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -884,8 +885,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 3 (Derecha Superior Derecha)</label>
               {formData.productGalleryImage3 && !prodGalFile3 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.productGalleryImage3} alt="Producto 3" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.productGalleryImage3} alt="Producto 3" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -901,8 +902,8 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Imagen 4 (Derecha Inferior Ancha)</label>
               {formData.productGalleryImage4 && !prodGalFile4 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.productGalleryImage4} alt="Producto 4" className="w-full h-full object-cover" />
+                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.productGalleryImage4} alt="Producto 4" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
@@ -932,8 +933,8 @@ export default function SettingsManager() {
                 <input type="text" name="certTitle1" value={formData.certTitle1 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Unlock Your Creative Flow" />
               </div>
               {formData.certImage1 && !certFile1 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.certImage1} alt="Certificación 1" className="w-full h-full object-cover" />
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.certImage1} alt="Certificación 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
@@ -953,8 +954,8 @@ export default function SettingsManager() {
                 <input type="text" name="certTitle2" value={formData.certTitle2 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Design Your Digital Future" />
               </div>
               {formData.certImage2 && !certFile2 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.certImage2} alt="Certificación 2" className="w-full h-full object-cover" />
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.certImage2} alt="Certificación 2" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
@@ -974,8 +975,8 @@ export default function SettingsManager() {
                 <input type="text" name="certTitle3" value={formData.certTitle3 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Build with Passion" />
               </div>
               {formData.certImage3 && !certFile3 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.certImage3} alt="Certificación 3" className="w-full h-full object-cover" />
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.certImage3} alt="Certificación 3" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
@@ -995,8 +996,8 @@ export default function SettingsManager() {
                 <input type="text" name="certTitle4" value={formData.certTitle4 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Think Big" />
               </div>
               {formData.certImage4 && !certFile4 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.certImage4} alt="Certificación 4" className="w-full h-full object-cover" />
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.certImage4} alt="Certificación 4" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
@@ -1016,8 +1017,8 @@ export default function SettingsManager() {
                 <input type="text" name="certTitle5" value={formData.certTitle5 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Nueva Certificación" />
               </div>
               {formData.certImage5 && !certFile5 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.certImage5} alt="Certificación 5" className="w-full h-full object-cover" />
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.certImage5} alt="Certificación 5" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
@@ -1037,8 +1038,8 @@ export default function SettingsManager() {
                 <input type="text" name="certTitle6" value={formData.certTitle6 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Sostenibilidad" />
               </div>
               {formData.certImage6 && !certFile6 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200">
-                  <img src={formData.certImage6} alt="Certificación 6" className="w-full h-full object-cover" />
+                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.certImage6} alt="Certificación 6" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
@@ -1174,17 +1175,6 @@ export default function SettingsManager() {
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Enlace de YouTube</label>
-              <input
-                type="url"
-                name="youtube"
-                value={formData.youtube}
-                onChange={handleChange}
-                placeholder="https://youtube.com/channel/..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
-              />
-            </div>
           </div>
         </div>
 
