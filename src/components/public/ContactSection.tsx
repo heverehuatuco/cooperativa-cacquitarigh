@@ -99,9 +99,9 @@ export default function ContactSection() {
   return (
     <section id="contacto" className="relative pt-12 pb-6 lg:pt-16 lg:pb-8 bg-transparent font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-10 items-start">
-          
+
           {/* Left Column - Text & Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -110,11 +110,8 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             className="lg:pr-10"
           >
-            {/* Badge */}
-            <div className="inline-block px-4 py-1.5 rounded-full bg-secondary-brand/10 mb-6">
-              <span className="text-secondary-brand font-semibold text-[13px]">Canales de Atención</span>
-            </div>
-            
+
+
             {/* Title */}
             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-bold text-stone-900 mb-12 leading-[1.15]">
               ¿Necesitas ayuda? <br className="hidden sm:block" />¡Contáctanos!
@@ -122,10 +119,10 @@ export default function ContactSection() {
 
             {/* Vertical Contact Info Blocks */}
             <div className="space-y-10">
-              
+
               {/* Location Block */}
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-xl bg-secondary-brand/10 flex items-center justify-center relative">
                     <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={24} height={24} className="object-contain" />
                   </div>
@@ -139,8 +136,8 @@ export default function ContactSection() {
               </div>
 
               {/* Phone Block */}
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center relative">
                     <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={28} height={28} className="object-contain" />
                   </div>
@@ -148,15 +145,15 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-bold text-stone-900 text-base mb-1">¡No dudes en comunicarte!</h4>
                   <p className="text-sm text-stone-500 leading-relaxed">
-                    WhatsApp: +{info.whatsapp}<br/>
+                    WhatsApp: +{info.whatsapp}<br />
                     {info.whatsapp2 && `Soporte: +${info.whatsapp2}`}
                   </p>
                 </div>
               </div>
 
               {/* Email Block */}
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center relative">
                     <Image src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width={24} height={24} className="object-contain" />
                   </div>
@@ -181,13 +178,13 @@ export default function ContactSection() {
             className="w-full lg:max-w-[500px] lg:ml-auto"
           >
             <div className="bg-white p-8 sm:p-10 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.06)] border border-stone-100">
-              
+
               <div className="mb-8">
                 <h3 className="text-3xl font-bold text-stone-900 mb-2">¡Dinos hola!</h3>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                
+
                 {/* Name */}
                 <div className="space-y-2 relative">
                   <label htmlFor="name" className="text-[13px] font-medium text-stone-600 block">
@@ -282,7 +279,7 @@ export default function ContactSection() {
                     <span className="text-[15px] tracking-wide">Enviar Mensaje</span>
                   )}
                 </button>
-                
+
                 {/* Privacy Policy text */}
                 <p className="text-[12px] text-stone-500 leading-relaxed mt-5">
                   Entiendo que mis datos serán guardados de forma segura de acuerdo con la <a href="#" className="text-stone-700 underline hover:text-secondary-brand transition-colors">política de privacidad</a>.
@@ -291,7 +288,7 @@ export default function ContactSection() {
               </form>
             </div>
           </motion.div>
-          
+
         </div>
       </div>
     </section>

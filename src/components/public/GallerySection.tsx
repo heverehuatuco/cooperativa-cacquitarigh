@@ -93,7 +93,7 @@ export default function GallerySection() {
   return (
     <section id="galeria" className="relative pt-16 pb-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header matching the new reference image */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center"
@@ -102,15 +102,10 @@ export default function GallerySection() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block py-1.5 px-4 rounded-full bg-secondary-brand/10 border border-secondary-brand/20 text-secondary-brand text-xs font-bold uppercase tracking-widest mb-4">
-            Nuestro Entorno
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-stone-900 tracking-tight mb-4">
             Galería de Fotos
           </h2>
-          <p className="text-stone-500 text-base mb-8 max-w-2xl">
-            Un recorrido visual por nuestras fincas, procesos de fermentado, secado y el esfuerzo diario de la cooperativa.
-          </p>
+
           <button className="bg-secondary-brand hover:bg-secondary-brand-light transition-all text-white text-sm font-bold px-8 py-3 rounded-full flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
             Ver Galería Completa <ArrowRight size={18} />
           </button>
@@ -128,7 +123,7 @@ export default function GallerySection() {
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            
+
             {/* Cinematic Main Featured Image */}
             <div className="relative w-full rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/7] shadow-2xl group bg-stone-900">
               <AnimatePresence mode="wait">
@@ -141,8 +136,8 @@ export default function GallerySection() {
                   className="absolute inset-0 w-full h-full"
                 >
                   {items[featuredIndex].imageUrl ? (
-                    <Image 
-                      src={items[featuredIndex].imageUrl} 
+                    <Image
+                      src={items[featuredIndex].imageUrl}
                       alt={items[featuredIndex].title}
                       fill
                       sizes="100vw"
@@ -154,7 +149,7 @@ export default function GallerySection() {
                   )}
                 </motion.div>
               </AnimatePresence>
-              
+
               {/* Glassmorphism Overlay at Bottom */}
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 bg-gradient-to-t from-stone-950/90 via-stone-900/40 to-transparent z-10 flex flex-col justify-end">
                 <motion.div
@@ -179,14 +174,14 @@ export default function GallerySection() {
 
               {/* Elegant Navigation Controls */}
               <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between z-20 pointer-events-none">
-                <button 
+                <button
                   onClick={handlePrev}
                   className="pointer-events-auto w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95"
                   aria-label="Anterior"
                 >
                   <ChevronLeft size={24} />
                 </button>
-                <button 
+                <button
                   onClick={handleNext}
                   className="pointer-events-auto w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95"
                   aria-label="Siguiente"
@@ -199,18 +194,17 @@ export default function GallerySection() {
             {/* Thumbnail Strip */}
             <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar">
               {items.map((item, idx) => (
-                <div 
+                <div
                   key={item.id}
                   onClick={() => setFeaturedIndex(idx)}
-                  className={`relative shrink-0 snap-start w-32 md:w-48 aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
-                    idx === featuredIndex 
-                      ? 'ring-4 ring-secondary-brand ring-offset-2 scale-100 opacity-100 shadow-md' 
-                      : 'opacity-50 hover:opacity-100 hover:scale-[1.02] scale-95 grayscale-[30%]'
-                  }`}
+                  className={`relative shrink-0 snap-start w-32 md:w-48 aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${idx === featuredIndex
+                    ? 'ring-4 ring-secondary-brand ring-offset-2 scale-100 opacity-100 shadow-md'
+                    : 'opacity-50 hover:opacity-100 hover:scale-[1.02] scale-95 grayscale-[30%]'
+                    }`}
                 >
                   {item.imageUrl ? (
-                    <Image 
-                      src={item.imageUrl} 
+                    <Image
+                      src={item.imageUrl}
                       alt={item.title}
                       fill
                       sizes="(max-width: 768px) 128px, 192px"

@@ -14,6 +14,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [isLogoLoading, setIsLogoLoading] = useState(true);
 
   const navLinks = [
     { name: "Inicio", href: "/" },
@@ -32,6 +33,8 @@ export default function Navbar() {
         }
       } catch (err) {
         console.error("Error al cargar logo:", err);
+      } finally {
+        setIsLogoLoading(false);
       }
     };
     fetchLogo();
@@ -62,7 +65,9 @@ export default function Navbar() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
-        {logoUrl ? (
+        {isLogoLoading ? (
+          <div className="h-12 md:h-16 w-32 md:w-48"></div>
+        ) : logoUrl ? (
           <div className="relative h-12 md:h-16 w-32 md:w-48">
             <Image
               src={logoUrl}

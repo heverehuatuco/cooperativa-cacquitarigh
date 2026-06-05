@@ -59,9 +59,9 @@ export default function Footer() {
     <footer className="relative bg-primary-brand text-white border-t border-white/10 overflow-hidden">
       {/* Subtle modern gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 pointer-events-none"></div>
-      
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 flex flex-col md:flex-row items-center md:items-center justify-between gap-8 md:gap-4">
-        
+
         {/* Left Side: Logo & Copyright */}
         <div className="flex flex-col items-center md:items-start space-y-4">
           {info.logoUrl ? (
@@ -81,10 +81,10 @@ export default function Footer() {
         {/* Right Side: Certifications */}
         <div className="flex flex-col items-center md:items-end space-y-4">
           <h4 className="text-xs md:text-sm font-bold text-white tracking-[0.15em] uppercase opacity-90 text-center md:text-right">
-            Certificaciones Internacionales
+            Certificados por:
           </h4>
           <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 md:gap-6">
-             {[info.certImage1, info.certImage2, info.certImage3, info.certImage4, info.certImage5, info.certImage6]
+            {[info.certImage1, info.certImage2, info.certImage3, info.certImage4, info.certImage5, info.certImage6]
               .filter(Boolean)
               .map((certUrl, idx) => (
                 <div key={idx} className="relative h-16 md:h-20 w-16 md:w-20 hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-lg">
