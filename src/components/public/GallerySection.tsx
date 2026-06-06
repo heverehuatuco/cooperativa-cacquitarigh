@@ -91,18 +91,17 @@ export default function GallerySection() {
   };
 
   return (
-    <section id="galeria" className="relative pt-16 pb-24 bg-transparent">
+    <section id="galeria" className="relative pt-2 lg:pt-8 pb-16 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Header matching the new reference image */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center"
+          className="text-center max-w-3xl mx-auto mb-4 lg:mb-10 flex flex-col items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-stone-900 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-stone-900 tracking-tight mb-2 lg:mb-4">
             Galería de Fotos
           </h2>
 

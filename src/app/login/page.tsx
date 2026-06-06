@@ -6,15 +6,15 @@ import { useAuth } from "@/context/AuthContext";
 import { auth } from "@/lib/firebase";
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { Loader2, Lock, ArrowLeft } from "lucide-react";
+import { Loader2, Lock, ArrowLeft, User } from "lucide-react";
 import Link from "next/link";
 
 export default function LoginPage() {
   const { user, role, loading } = useAuth();
   const router = useRouter();
 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,38 +28,30 @@ export default function LoginPage() {
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!password) {
-      setErrorMessage("Por favor ingresa tu contraseña.");
-      return;
-    }
-
-    if (password !== "huatuco123") {
-      setErrorMessage("Contraseña incorrecta.");
+    if (!username || !password) {
+      setErrorMessage("Por favor ingresa tu usuario y contraseña.");
       return;
     }
 
     setAuthLoading(true);
     setErrorMessage("");
     try {
-      // Intentamos iniciar sesión
-      await signInWithEmailAndPassword(auth, "heverehuatuco@gmail.com", password);
+      let emailToLogin = username.trim();
+      const cleanUsername = username.trim().toLowerCase();
+      
+      if (cleanUsername === "heverehuatuco" || cleanUsername === "admin" || cleanUsername === "huatuco") {
+        emailToLogin = "heverehuatuco@gmail.com";
+      } else if (!emailToLogin.includes("@")) {
+        emailToLogin = `${cleanUsername.replace(/\s+/g, '')}@cacquitari.org`;
+      }
+
+      await signInWithEmailAndPassword(auth, emailToLogin, password);
     } catch (error: any) {
       console.error("Error en login:", error);
-      // Si el usuario no existe en Firebase, lo creamos automáticamente
-      if (error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") {
-        try {
-          await createUserWithEmailAndPassword(auth, "heverehuatuco@gmail.com", password);
-        } catch (createError: any) {
-          if (createError.code === "auth/email-already-in-use") {
-            setErrorMessage("La contraseña en Firebase es distinta a huatuco123. Por favor actualízala en Firebase.");
-          } else {
-            setErrorMessage("Error al crear la cuenta en Firebase.");
-          }
-        }
-      } else if (error.code === "auth/wrong-password") {
-        setErrorMessage("Contraseña incorrecta en Firebase.");
+      if (error.code === "auth/user-not-found" || error.code === "auth/invalid-credential" || error.code === "auth/wrong-password") {
+         setErrorMessage("Usuario o contraseña incorrectos.");
       } else {
-        setErrorMessage("Error al iniciar sesión. Verifica tu conexión.");
+         setErrorMessage("Error al iniciar sesión. Verifica tu conexión.");
       }
     } finally {
       setAuthLoading(false);
@@ -107,6 +99,26 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleEmailLogin} className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-bold text-stone-400 uppercase tracking-wider block">
+              Usuario
+            </label>
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-500">
+                <User size={16} />
+              </span>
+              <input
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                disabled={authLoading}
+                className="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-800 bg-stone-950 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm disabled:opacity-75"
+                placeholder="Ingresa tu usuario"
+              />
+            </div>
+          </div>
+
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold text-stone-400 uppercase tracking-wider block">
               Contraseña

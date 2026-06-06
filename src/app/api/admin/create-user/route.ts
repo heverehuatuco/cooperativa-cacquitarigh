@@ -35,34 +35,39 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Leer los datos del nuevo usuario
-    const { email, password, displayName, role = "staff" } = await req.json();
+    const { username, password, role = "staff" } = await req.json();
 
-    if (!email || !password || !displayName) {
+    if (!username || !password) {
       return NextResponse.json(
-        { error: "Faltan datos obligatorios (email, contraseña, nombre)" },
+        { error: "Faltan datos obligatorios (usuario, contraseña)" },
         { status: 400 }
       );
     }
 
+    const cleanUsername = username.trim();
+    // Crear correo interno ficticio basado en el nombre de usuario
+    const email = `${cleanUsername.toLowerCase().replace(/\s+/g, '')}@cacquitari.org`;
+
     // 5. Crear el usuario en Firebase Authentication
     const userRecord = await adminAuth.createUser({
-      email: email.toLowerCase().trim(),
+      email: email,
       password: password,
-      displayName: displayName,
+      displayName: cleanUsername,
     });
 
     // 6. Registrar los detalles del rol en la colección "users" de Firestore
     await adminDb.collection("users").doc(userRecord.uid).set({
       uid: userRecord.uid,
-      email: email.toLowerCase().trim(),
-      name: displayName,
+      email: email,
+      username: cleanUsername,
+      name: cleanUsername,
       role: role,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     return NextResponse.json({
       success: true,
-      message: `Usuario ${displayName} creado con éxito`,
+      message: `Usuario ${cleanUsername} creado con éxito`,
       uid: userRecord.uid,
     });
 

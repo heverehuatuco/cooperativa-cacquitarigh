@@ -85,7 +85,7 @@ export default function NewsSection() {
   }, []);
 
   return (
-    <section id="noticias" className="py-24 relative bg-transparent overflow-hidden">
+    <section id="noticias" className="pt-0 pb-8 relative bg-transparent overflow-hidden">
       <style>{`
         .swiper-button-prev:after,
         .swiper-rtl .swiper-button-next:after {
@@ -104,7 +104,7 @@ export default function NewsSection() {
         }
         .swiper-pagination {
             position: relative;
-            margin-top: 2rem;
+            margin-top: 0.5rem;
         }
         .swiper-pagination-bullet-active {
             background-color: var(--color-secondary-brand) !important;
@@ -112,14 +112,14 @@ export default function NewsSection() {
       `}</style>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center flex-col lg:flex-row lg:justify-between gap-8">
+        <div className="flex justify-center flex-col lg:flex-row lg:justify-between gap-2 lg:gap-8">
           
           <div className="w-full flex justify-between flex-col lg:w-2/5">
             <div className="block lg:text-left text-center">
               <h2 className="text-4xl font-bold text-gray-900 leading-[3.25rem] mb-5">
                 Nuestras últimas <span className="text-secondary-brand">noticias</span>
               </h2>
-              <p className="text-gray-500 mb-10 max-lg:max-w-xl max-lg:mx-auto">
+              <p className="text-gray-500 mb-4 max-lg:max-w-xl max-lg:mx-auto">
                 Bienvenidos a nuestra sección de noticias, donde el conocimiento y la actualidad se encuentran. Explora nuestros logros, comunicados y tendencias en la cooperativa.
               </p>
             </div>

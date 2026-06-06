@@ -20,8 +20,7 @@ export default function StaffManager() {
   const [loading, setLoading] = useState(true);
 
   // Form states
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   // UI state feedback
@@ -55,7 +54,7 @@ export default function StaffManager() {
 
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!displayName || !email || !password) {
+    if (!username || !password) {
       setError("Por favor completa todos los campos.");
       return;
     }
@@ -84,9 +83,8 @@ export default function StaffManager() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          email: email.trim(),
+          username: username.trim(),
           password,
-          displayName: displayName.trim(),
           role: "staff",
         }),
       });
@@ -97,9 +95,8 @@ export default function StaffManager() {
         throw new Error(data.error || "Ocurrió un error al crear la cuenta.");
       }
 
-      setSuccess(`Cuenta creada con éxito para ${displayName}.`);
-      setDisplayName("");
-      setEmail("");
+      setSuccess(`Cuenta creada con éxito para ${username}.`);
+      setUsername("");
       setPassword("");
 
       // Recargar lista de usuarios
@@ -127,7 +124,7 @@ export default function StaffManager() {
       // Dado que AuthContext valida que el usuario exista en la colección "users" para autorizar el acceso,
       // al eliminar el documento de Firestore le quitamos el acceso de forma inmediata.
       await deleteDoc(doc(db, "users", userToDelete.uid));
-      
+
       // Actualizar estado local
       setUsers(users.filter((u) => u.uid !== userToDelete.uid));
     } catch (err) {
@@ -173,35 +170,21 @@ export default function StaffManager() {
 
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-stone-700 uppercase tracking-wider block">
-                Nombre Completo *
+                Usuario *
               </label>
               <input
                 type="text"
                 required
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                placeholder="Ej: María Rojas"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Ej: carlitos"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
               />
             </div>
 
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-stone-700 uppercase tracking-wider block">
-                Correo Electrónico *
-              </label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="mrojas@cacquitari.org"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-[10px] font-bold text-stone-700 uppercase tracking-wider block">
-                Contraseña Temporal *
+                Contraseña *
               </label>
               <input
                 type="password"
@@ -251,8 +234,7 @@ export default function StaffManager() {
               {users.map((u) => (
                 <div key={u.uid} className="py-3 flex items-center justify-between gap-4 first:pt-0 last:pb-0">
                   <div className="space-y-0.5">
-                    <h4 className="font-bold text-stone-900 text-sm leading-tight">{u.name}</h4>
-                    <p className="text-xs text-stone-500">{u.email}</p>
+                    <h4 className="font-bold text-stone-900 text-sm leading-tight">{(u as any).username || u.name}</h4>
                     <span className="text-[9px] font-bold uppercase tracking-wider bg-stone-100 text-stone-500 px-2 py-0.5 rounded">
                       Rol: {u.role}
                     </span>

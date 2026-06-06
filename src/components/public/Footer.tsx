@@ -65,7 +65,7 @@ export default function Footer() {
         {/* Left Side: Logo & Copyright */}
         <div className="flex flex-col items-center md:items-start space-y-4">
           {info.logoUrl ? (
-            <div className="relative h-16 md:h-20 w-40 md:w-56 hover:scale-105 transition-transform duration-500">
+            <div className="relative h-20 md:h-24 w-40 md:w-56 hover:scale-105 transition-transform duration-500">
               <Image src={info.logoUrl} alt="Cacquitari Logo" fill sizes="(max-width: 768px) 160px, 224px" className="object-contain object-center md:object-left" />
             </div>
           ) : (

@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
         hostname: "upload.wikimedia.org",
       },
     ],
+    formats: ["image/avif", "image/webp"],
   },
 };
 

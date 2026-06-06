@@ -72,7 +72,7 @@ export default function Hero() {
             className="absolute z-10 w-48 sm:w-64 md:w-72 bg-white p-3 md:p-4 rounded-2xl shadow-2xl border border-stone-100 hover:z-40 transition-transform hover:scale-105 left-2 sm:left-10 md:left-12 lg:left-8 top-12 sm:top-8"
           >
             <div className="w-full aspect-square rounded-xl overflow-hidden mb-3 relative bg-stone-100">
-              {cardImages.img1 ? <Image src={cardImages.img1} alt="Cacao" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" /> : <div className="w-full h-full animate-pulse bg-stone-200"></div>}
+              {cardImages.img1 ? <Image src={cardImages.img1} alt="Cacao" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" priority /> : <div className="w-full h-full animate-pulse bg-stone-200"></div>}
             </div>
           </motion.div>
 
@@ -96,7 +96,7 @@ export default function Hero() {
             className="absolute z-20 w-48 sm:w-64 md:w-72 bg-white p-3 md:p-4 rounded-2xl shadow-2xl border border-stone-100 hover:z-40 transition-transform hover:scale-105 right-2 sm:right-10 md:right-12 lg:right-8 top-16 sm:top-12"
           >
             <div className="w-full aspect-square rounded-xl overflow-hidden mb-3 relative bg-stone-100">
-              {cardImages.img3 ? <Image src={cardImages.img3} alt="Life" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" /> : <div className="w-full h-full animate-pulse bg-stone-200"></div>}
+              {cardImages.img3 ? <Image src={cardImages.img3} alt="Life" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" priority /> : <div className="w-full h-full animate-pulse bg-stone-200"></div>}
             </div>
           </motion.div>
 

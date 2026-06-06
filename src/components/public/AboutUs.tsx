@@ -77,20 +77,20 @@ export default function AboutUs() {
   ];
 
   return (
-    <section id="nosotros" className="relative pt-8 pb-20 bg-transparent">
+    <section id="nosotros" className="relative pt-2 pb-8 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
 
         {/* Historia Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 mt-24 lg:mt-32 flex flex-col items-center">
+        <div className="text-center max-w-3xl mx-auto mb-8 mt-6 lg:mt-8 flex flex-col items-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
             Cooperativa Agraria Cafetalera Quitari Ltda.
           </h2>
         </div>
 
         {/* History Text & Images Layout */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 mb-20 relative mt-10">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20 mb-20 relative mt-10">
 
           {/* Left: Images */}
           <motion.div
@@ -115,14 +115,14 @@ export default function AboutUs() {
 
           {/* Right: Text */}
           <motion.div
-            className="w-full lg:w-1/2 flex flex-col justify-center mt-10 lg:mt-0"
+            className="w-full lg:w-1/2 flex flex-col justify-center"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
 
-            <div className="space-y-4 text-stone-600 leading-relaxed text-[16px] sm:text-base">
+            <div className="space-y-4 text-stone-600 leading-relaxed text-[16px] sm:text-base text-justify">
               <p>
                 Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín.
                 Liderada por nuestro Gerente General, Samuel Kevin Taype Manrique, la cooperativa nació con una visión clara:
@@ -188,7 +188,7 @@ export default function AboutUs() {
         </div>
 
         {/* Análisis FODA */}
-        <div className="mb-24 mt-24">
+        <div className="mb-8 mt-16">
           <div className="text-center mb-12 flex flex-col items-center">
 
             <h3 className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight">Análisis FODA</h3>

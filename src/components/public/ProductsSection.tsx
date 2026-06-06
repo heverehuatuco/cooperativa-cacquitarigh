@@ -92,12 +92,12 @@ export default function ProductsSection() {
   ];
 
   return (
-    <section id="productos" className="relative pt-8 pb-20 bg-transparent">
+    <section id="productos" className="relative pt-2 lg:pt-8 pb-2 lg:pb-4 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 mt-6 flex flex-col items-center"
+          className="text-center max-w-3xl mx-auto mb-8 lg:mb-16 mt-4 lg:mt-6 flex flex-col items-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -110,7 +110,7 @@ export default function ProductsSection() {
         </motion.div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 lg:mb-16 max-w-6xl mx-auto">
           {products.map((cat, i) => (
             <motion.div
               key={i}
@@ -147,7 +147,7 @@ export default function ProductsSection() {
         </div>
 
         {/* Modern E-commerce Gallery Grid */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 lg:mb-12">
           <h3 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight">
             Galería de Productos
           </h3>

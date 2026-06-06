@@ -64,16 +64,16 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navBgClass}`}>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2 relative h-12 md:h-16 w-32 md:w-48">
         {isLogoLoading ? (
-          <div className="h-12 md:h-16 w-32 md:w-48"></div>
+          <div className="h-full w-full"></div>
         ) : logoUrl ? (
-          <div className="relative h-12 md:h-16 w-32 md:w-48">
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 h-20 md:h-24 w-40 md:w-56">
             <Image
               src={logoUrl}
               alt="Cacquitari Logo"
               fill
-              sizes="(max-width: 768px) 128px, 192px"
+              sizes="(max-width: 768px) 160px, 224px"
               className="object-contain object-left"
               priority
             />
