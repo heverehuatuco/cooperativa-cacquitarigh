@@ -29,7 +29,7 @@ export default function ProductsSection() {
         querySnapshot.forEach((doc) => {
           const data = doc.data() as Product;
           if (data.available) {
-            fetched.push({ id: doc.id, ...data });
+            fetched.push({ ...data, id: doc.id });
           }
         });
         setDbProducts(fetched);

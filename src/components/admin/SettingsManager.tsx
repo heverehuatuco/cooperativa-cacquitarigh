@@ -408,8 +408,6 @@ export default function SettingsManager() {
       if (heroCardInputRef3.current) heroCardInputRef3.current.value = "";
       setLogoFile(null);
       setAboutFile1(null);
-      setAboutFile2(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
       if (logoInputRef.current) logoInputRef.current.value = "";
       if (aboutInputRef1.current) aboutInputRef1.current.value = "";
 
