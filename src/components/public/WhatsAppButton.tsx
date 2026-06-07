@@ -50,7 +50,7 @@ export default function WhatsAppButton() {
             href={info.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
+            className="w-12 h-12 rounded-full border-[3px] border-white bg-[#1877F2] hover:bg-[#166fe5] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Facebook"
@@ -66,7 +66,7 @@ export default function WhatsAppButton() {
             href={info.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-black hover:bg-stone-900 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
+            className="w-12 h-12 rounded-full border-[3px] border-white bg-black hover:bg-stone-900 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="TikTok"
@@ -81,7 +81,7 @@ export default function WhatsAppButton() {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-12 h-12 rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
+          className="w-12 h-12 rounded-full border-[3px] border-white bg-[#25D366] hover:bg-[#1DA851] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Contactar por WhatsApp"
