@@ -56,103 +56,110 @@ export default function Navbar() {
   }, []);
 
   const isHome = pathname === "/";
-  const navBgClass = isScrolled || !isHome 
-    ? "bg-primary-brand/95 backdrop-blur-md shadow-sm" 
+  const navBgClass = isScrolled || !isHome
+    ? "bg-primary-brand/95 backdrop-blur-md shadow-sm"
     : "bg-transparent";
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navBgClass}`}>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 relative h-12 md:h-16 w-32 md:w-48">
-        {isLogoLoading ? (
-          <div className="h-full w-full"></div>
-        ) : logoUrl ? (
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 h-20 md:h-24 w-40 md:w-56">
-            <Image
-              src={logoUrl}
-              alt="Cacquitari Logo"
-              fill
-              sizes="(max-width: 768px) 160px, 224px"
-              className="object-contain object-left"
-              priority
-            />
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="white"/>
-              <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span className="text-xl font-bold text-white tracking-wide">
-              Cacquitari
-            </span>
-          </div>
-        )}
-      </Link>
-
-      {/* Desktop Nav Items */}
-      <div className="hidden md:flex items-center gap-8">
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href;
-          return (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`text-base lg:text-lg font-bold transition-colors ${
-                isActive ? "text-secondary-brand" : "text-white/90 hover:text-white hover:text-secondary-brand/80"
-              }`}
-            >
-              {link.name}
-            </Link>
-          );
-        })}
-      </div>
-
-      {/* Desktop CTA Button */}
-      <Link
-        href={user ? "/admin" : "/login"}
-        className="hidden md:flex items-center justify-center bg-secondary-brand text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-secondary-brand-light transition-all shadow-sm"
-      >
-        {user ? "Panel" : "Acceso"}
-      </Link>
-
-      {/* Mobile Hamburger */}
-      <button 
-        onClick={toggleMenu} 
-        className="md:hidden flex flex-col gap-1.5 cursor-pointer bg-transparent border-0 p-1"
-        aria-label="Abrir menú"
-      >
-        <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-        <span className={`block w-6 h-0.5 bg-white transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
-        <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-      </button>
-
-      {/* Mobile Menu */}
-      <div className={`${isOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-primary-brand border-t border-white/10 flex-col p-5 gap-4 md:hidden z-50`}>
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href;
-          return (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`block text-center font-bold text-xl ${
-                isActive ? "text-secondary-brand" : "text-white hover:text-secondary-brand/80"
-              }`}
-            >
-              {link.name}
-            </Link>
-          );
-        })}
-        <Link 
-          href={user ? "/admin" : "/login"}
-          onClick={() => setIsOpen(false)}
-          className="bg-secondary-brand text-white text-center font-bold px-6 py-3 rounded-full mt-4 hover:bg-secondary-brand-light transition-all"
-        >
-          {user ? "Panel Admin" : "Acceso Admin"}
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 md:gap-4 relative h-14 md:h-20">
+          {isLogoLoading ? (
+            <div className="h-full w-40 animate-pulse bg-white/10 rounded"></div>
+          ) : (
+            <>
+              {logoUrl ? (
+                <div className="relative h-12 md:h-16 w-12 md:w-16 flex-shrink-0">
+                  <Image
+                    src={logoUrl}
+                    alt="Cacquitari Logo"
+                    fill
+                    sizes="(max-width: 768px) 48px, 64px"
+                    className="object-contain object-left"
+                    priority
+                  />
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-10 w-10 md:h-14 md:w-14 bg-white/20 rounded-full flex-shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="white" />
+                    <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              )}
+              <div className="flex flex-col justify-center">
+                <span className="text-xl md:text-2xl font-black text-white tracking-wider leading-none" style={{ fontFamily: 'Arial, sans-serif' }}>
+                  CACQUITARI
+                </span>
+                <span className="text-[10px] md:text-sm font-bold text-white/70 tracking-widest uppercase mt-1">
+                  PANGOA VRAEM
+                </span>
+              </div>
+            </>
+          )}
         </Link>
-      </div>
+
+        {/* Desktop Nav Items */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-base lg:text-lg font-bold transition-colors ${isActive ? "text-secondary-brand" : "text-white/90 hover:text-white hover:text-secondary-brand/80"
+                  }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Desktop CTA Button */}
+        <Link
+          href={user ? "/admin" : "/login"}
+          className="hidden md:flex items-center justify-center bg-secondary-brand text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-secondary-brand-light transition-all shadow-sm"
+        >
+          {user ? "Panel" : "Acceso"}
+        </Link>
+
+        {/* Mobile Hamburger */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden flex flex-col gap-1.5 cursor-pointer bg-transparent border-0 p-1"
+          aria-label="Abrir menú"
+        >
+          <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-white transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+        </button>
+
+        {/* Mobile Menu */}
+        <div className={`${isOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-primary-brand border-t border-white/10 flex-col p-5 gap-4 md:hidden z-50`}>
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`block text-center font-bold text-xl ${isActive ? "text-secondary-brand" : "text-white hover:text-secondary-brand/80"
+                  }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+          <Link
+            href={user ? "/admin" : "/login"}
+            onClick={() => setIsOpen(false)}
+            className="bg-secondary-brand text-white text-center font-bold px-6 py-3 rounded-full mt-4 hover:bg-secondary-brand-light transition-all"
+          >
+            {user ? "Panel Admin" : "Acceso Admin"}
+          </Link>
+        </div>
       </div>
     </nav>
   );

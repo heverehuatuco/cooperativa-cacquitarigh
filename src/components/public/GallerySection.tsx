@@ -78,6 +78,14 @@ export default function GallerySection() {
     fetchGallery();
   }, []);
 
+  useEffect(() => {
+    if (items.length <= 1) return;
+    const timer = setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % items.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [items.length]);
+
   const handleNext = () => {
     if (items.length > 0) {
       setFeaturedIndex((prev) => (prev + 1) % items.length);
@@ -104,10 +112,6 @@ export default function GallerySection() {
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-stone-900 tracking-tight mb-2 lg:mb-4">
             Galería de Fotos
           </h2>
-
-          <button className="bg-secondary-brand hover:bg-secondary-brand-light transition-all text-white text-sm font-bold px-8 py-3 rounded-full flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-            Ver Galería Completa <ArrowRight size={18} />
-          </button>
         </motion.div>
 
         {/* Gallery Content */}
@@ -188,32 +192,6 @@ export default function GallerySection() {
                   <ChevronRight size={24} />
                 </button>
               </div>
-            </div>
-
-            {/* Thumbnail Strip */}
-            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar">
-              {items.map((item, idx) => (
-                <div
-                  key={item.id}
-                  onClick={() => setFeaturedIndex(idx)}
-                  className={`relative shrink-0 snap-start w-32 md:w-48 aspect-video rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${idx === featuredIndex
-                    ? 'ring-4 ring-secondary-brand ring-offset-2 scale-100 opacity-100 shadow-md'
-                    : 'opacity-50 hover:opacity-100 hover:scale-[1.02] scale-95 grayscale-[30%]'
-                    }`}
-                >
-                  {item.imageUrl ? (
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 768px) 128px, 192px"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-stone-200"></div>
-                  )}
-                </div>
-              ))}
             </div>
 
           </div>
