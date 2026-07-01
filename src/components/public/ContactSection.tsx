@@ -122,46 +122,46 @@ export default function ContactSection() {
             <div className="space-y-6 lg:space-y-10">
 
               {/* Location Block */}
-              <div className="group flex items-center gap-5 p-4 rounded-2xl hover:bg-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-transparent hover:border-stone-100 transition-all duration-300">
+              <div className="group flex items-center gap-5 p-5 rounded-3xl bg-blue-50/60 border border-blue-100/80 hover:bg-blue-100/50 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-secondary-brand/10 flex items-center justify-center relative shadow-inner group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={28} height={28} className="object-contain" />
+                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={32} height={32} className="object-contain drop-shadow-sm" />
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-primary-brand transition-colors">¿Listo para visitarnos?</h4>
-                  <p className="text-sm text-stone-500 leading-relaxed">
+                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-blue-600 transition-colors">¿Listo para visitarnos?</h4>
+                  <p className="text-[15px] text-stone-600 leading-relaxed">
                     {info.address}
                   </p>
                 </div>
               </div>
 
               {/* Phone Block */}
-              <div className="group flex items-center gap-5 p-4 rounded-2xl hover:bg-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-transparent hover:border-stone-100 transition-all duration-300">
+              <div className="group flex items-center gap-5 p-5 rounded-3xl bg-green-50/60 border border-green-100/80 hover:bg-green-100/50 hover:shadow-xl hover:shadow-green-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-100/50 flex items-center justify-center relative shadow-inner group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={32} height={32} className="object-contain" />
+                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={36} height={36} className="object-contain drop-shadow-sm" />
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-primary-brand transition-colors">¡No dudes en comunicarte!</h4>
-                  <p className="text-sm text-stone-500 leading-relaxed">
-                    WhatsApp: <span className="font-medium text-stone-700">+{info.whatsapp}</span><br />
-                    {info.whatsapp2 && <span>Soporte: <span className="font-medium text-stone-700">+{info.whatsapp2}</span></span>}
+                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-green-600 transition-colors">¡No dudes en comunicarte!</h4>
+                  <p className="text-[15px] text-stone-600 leading-relaxed">
+                    WhatsApp: <span className="font-semibold text-stone-800">+{info.whatsapp}</span><br />
+                    {info.whatsapp2 && <span>Soporte: <span className="font-semibold text-stone-800">+{info.whatsapp2}</span></span>}
                   </p>
                 </div>
               </div>
 
               {/* Email Block */}
-              <div className="group flex items-center gap-5 p-4 rounded-2xl hover:bg-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-transparent hover:border-stone-100 transition-all duration-300">
+              <div className="group flex items-center gap-5 p-5 rounded-3xl bg-red-50/60 border border-red-100/80 hover:bg-red-100/50 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-50 to-rose-100/50 flex items-center justify-center relative shadow-inner group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width={28} height={28} className="object-contain" />
+                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    <Image src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width={32} height={32} className="object-contain drop-shadow-sm" />
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-primary-brand transition-colors">¿Cómo podemos asistirte?</h4>
-                  <p className="text-sm font-medium text-stone-700 leading-relaxed">
+                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-red-600 transition-colors">¿Cómo podemos asistirte?</h4>
+                  <p className="text-[15px] font-medium text-stone-700 leading-relaxed">
                     {info.email}
                   </p>
                 </div>

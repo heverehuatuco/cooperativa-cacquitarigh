@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { Loader2, Lock, ArrowLeft, User } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
   const { user, role, loading } = useAuth();
@@ -84,11 +85,10 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md bg-stone-900 border border-stone-800 rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 space-y-8">
         {/* Brand header */}
-        <div className="text-center space-y-2">
-          <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-            CACQUITARI
-          </span>
-
+        <div className="flex justify-center items-center">
+          <div className="relative w-32 h-32 hover:scale-105 transition-transform duration-300">
+            <Image src="/logocacquitari.webp" alt="Cacquitari Logo" fill className="object-contain" priority />
+          </div>
         </div>
 
         {/* Error Message banner */}

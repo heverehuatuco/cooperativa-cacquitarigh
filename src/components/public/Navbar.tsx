@@ -6,138 +6,149 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search, ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+interface FloatingItem {
+  id: number;
+  left: string;
+  duration: number;
+  delay: number;
+  size: number;
+  isCoffee: boolean;
+  rotation: number;
+}
 
 export default function Navbar() {
   const { user } = useAuth();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [logoUrl, setLogoUrl] = useState<string | null>(null);
-  const [isLogoLoading, setIsLogoLoading] = useState(true);
+  const [floatingItems, setFloatingItems] = useState<FloatingItem[]>([]);
+
+  useEffect(() => {
+    setFloatingItems(
+      Array.from({ length: 15 }).map((_, i) => ({
+        id: i,
+        left: `${Math.random() * 90 + 5}%`,
+        duration: 10 + Math.random() * 20,
+        delay: Math.random() * 5,
+        size: 30 + Math.random() * 50,
+        isCoffee: Math.random() > 0.5,
+        rotation: Math.random() * 360,
+      }))
+    );
+  }, []);
 
   const navLinks = [
-    { name: "Inicio", href: "/" },
-    { name: "Nosotros", href: "/nosotros" },
+    { name: "Nosotros", href: "/nosotros", hasDropdown: true },
     { name: "Productos", href: "/productos" },
     { name: "Contacto", href: "/contacto" },
   ];
 
-  useEffect(() => {
-    const fetchLogo = async () => {
-      try {
-        const docRef = doc(db, "settings", "company_info");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists() && docSnap.data().logoUrl) {
-          setLogoUrl(docSnap.data().logoUrl);
-        }
-      } catch (err) {
-        console.error("Error al cargar logo:", err);
-      } finally {
-        setIsLogoLoading(false);
-      }
-    };
-    fetchLogo();
-  }, []);
-
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // In this design, Navbar is transparent over the purple hero if on home, 
-  // but if we are on other pages we might need a background. 
-  // We'll apply a solid purple background if not on home, or just keep it transparent 
-  // and assume all pages have the purple top. Let's make it fixed with backdrop blur on scroll.
-  const [isScrolled, setIsScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const isHome = pathname === "/";
-  const navBgClass = isScrolled || !isHome
-    ? "bg-primary-brand/95 backdrop-blur-md shadow-sm"
-    : "bg-transparent";
-
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navBgClass}`}>
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 md:gap-4 relative h-14 md:h-20">
-          {isLogoLoading ? (
-            <div className="h-full w-40 animate-pulse bg-white/10 rounded"></div>
-          ) : (
-            <>
-              {logoUrl ? (
-                <div className="relative h-12 md:h-16 w-12 md:w-16 flex-shrink-0">
-                  <Image
-                    src={logoUrl}
-                    alt="Cacquitari Logo"
-                    fill
-                    sizes="(max-width: 768px) 48px, 64px"
-                    className="object-contain object-left"
-                    priority
-                  />
-                </div>
-              ) : (
-                <div className="flex items-center justify-center h-10 w-10 md:h-14 md:w-14 bg-white/20 rounded-full flex-shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="white" />
-                    <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              )}
-              <div className="flex flex-col justify-center">
-                <span className="text-xl md:text-2xl font-black text-white tracking-wider leading-none" style={{ fontFamily: 'Arial, sans-serif' }}>
-                  CACQUITARI
-                </span>
-                <span className="text-[10px] md:text-sm font-bold text-white/70 tracking-widest uppercase mt-1">
-                  PANGOA VRAEM
-                </span>
+    <div className="fixed top-4 left-0 w-full z-50 px-4 md:px-8 flex justify-center pointer-events-none">
+      <nav className="w-full max-w-7xl bg-white rounded-full px-4 py-2 md:py-2.5 flex items-center justify-between shadow-[0_8px_30px_rgb(0,0,0,0.08)] pointer-events-auto border border-gray-100 relative overflow-hidden">
+        
+        {/* Floating Rain Effect */}
+        {floatingItems.map((item) => (
+          <motion.div
+            key={item.id}
+            className="absolute top-0 z-[1] opacity-30 pointer-events-none"
+            initial={{ y: "-20vh", rotate: item.rotation }}
+            animate={{ y: "50vh", rotate: item.rotation + 180 }}
+            transition={{
+              duration: item.duration,
+              delay: item.delay,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{ left: item.left }}
+          >
+            <div style={{ width: item.size, height: item.size, position: 'relative' }}>
+              <Image 
+                src={item.isCoffee ? "/cafeilustracion.webp" : "/cacaoilustracion.webp"} 
+                alt="" 
+                fill 
+                className="object-contain" 
+              />
+            </div>
+          </motion.div>
+        ))}
+        
+        {/* Logo Section */}
+        <Link href="/" className="relative z-10 flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="relative h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent rounded-full overflow-hidden flex items-center justify-center">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/logocacquitari.webp"
+                  alt="Cacquitari Logo"
+                  fill
+                  sizes="48px"
+                  className="object-contain"
+                  priority
+                />
               </div>
-            </>
-          )}
+            </div>
+            <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>
+              Cacquitari
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop Nav Items */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Links */}
+        <div className="hidden md:flex relative z-10 items-center gap-6 lg:gap-10">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-base lg:text-lg font-bold transition-colors ${isActive ? "text-secondary-brand" : "text-white/90 hover:text-white hover:text-secondary-brand/80"
-                  }`}
+                className={`flex items-center gap-1 text-[13px] lg:text-sm font-bold tracking-wide uppercase transition-colors ${
+                  isActive ? "text-[#1a826e]" : "text-gray-800 hover:text-[#1a826e]"
+                }`}
               >
                 {link.name}
+                {link.hasDropdown && <ChevronDown className="w-4 h-4 ml-0.5 text-gray-500" />}
               </Link>
             );
           })}
         </div>
 
-        {/* Desktop CTA Button */}
-        <Link
-          href={user ? "/admin" : "/login"}
-          className="hidden md:flex items-center justify-center bg-secondary-brand text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-secondary-brand-light transition-all shadow-sm"
-        >
-          {user ? "Panel" : "Acceso"}
-        </Link>
+        {/* Right Section: Search & CTA */}
+        <div className="hidden md:flex relative z-10 items-center gap-4 lg:gap-6">
+          <button className="text-gray-700 hover:text-[#1a826e] transition-colors cursor-pointer" aria-label="Buscar">
+            <Search className="w-5 h-5" />
+          </button>
+          
+          <Link
+            href={user ? "/admin" : "/login"}
+            className="flex items-center gap-3 bg-[#1a826e] text-white text-[13px] lg:text-sm font-bold pl-5 pr-1.5 py-1.5 rounded-full hover:bg-[#219d85] transition-all shadow-sm group"
+          >
+            {user ? "Panel" : "Acceso"}
+            <div className="bg-white text-[#1a826e] rounded-full p-1.5 flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
+        </div>
 
         {/* Mobile Hamburger */}
         <button
           onClick={toggleMenu}
-          className="md:hidden flex flex-col gap-1.5 cursor-pointer bg-transparent border-0 p-1"
+          className="relative z-10 md:hidden flex items-center justify-center p-2 text-gray-800"
           aria-label="Abrir menú"
         >
-          <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-          <span className={`block w-6 h-0.5 bg-white transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
-        {/* Mobile Menu */}
-        <div className={`${isOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-primary-brand border-t border-white/10 flex-col p-5 gap-4 md:hidden z-50`}>
+      </nav>
+
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <div className="absolute top-20 left-4 right-4 bg-white rounded-2xl shadow-xl p-5 flex flex-col gap-4 md:hidden border border-gray-100 pointer-events-auto">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -145,22 +156,32 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`block text-center font-bold text-xl ${isActive ? "text-secondary-brand" : "text-white hover:text-secondary-brand/80"
-                  }`}
+                className={`flex justify-between items-center font-bold text-lg p-2 rounded-lg ${
+                  isActive ? "text-[#1a826e] bg-[#f2faf8]" : "text-gray-800 hover:bg-gray-50"
+                }`}
               >
                 {link.name}
+                {link.hasDropdown && <ChevronDown className="w-5 h-5" />}
               </Link>
             );
           })}
+          <hr className="border-gray-100 my-2" />
+          <div className="flex items-center justify-between p-2">
+            <span className="font-bold text-gray-800">Buscar</span>
+            <Search className="w-5 h-5 text-gray-600" />
+          </div>
           <Link
             href={user ? "/admin" : "/login"}
             onClick={() => setIsOpen(false)}
-            className="bg-secondary-brand text-white text-center font-bold px-6 py-3 rounded-full mt-4 hover:bg-secondary-brand-light transition-all"
+            className="flex items-center justify-between bg-[#1a826e] text-white font-bold px-5 py-3 rounded-xl mt-2 hover:bg-[#219d85] transition-all group"
           >
             {user ? "Panel Admin" : "Acceso Admin"}
+            <div className="bg-white/20 rounded-full p-1 group-hover:bg-white group-hover:text-[#1a826e] transition-colors">
+              <ArrowRight className="w-5 h-5" />
+            </div>
           </Link>
         </div>
-      </div>
-    </nav>
+      )}
+    </div>
   );
 }

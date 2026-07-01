@@ -8,10 +8,11 @@
 @theme {
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --color-primary-brand: oklch(37.8% 0.077 168.94);
-  --color-primary-brand-light: oklch(47.8% 0.077 168.94);
-  --color-secondary-brand: oklch(84.1% 0.238 128.85);
-  --color-secondary-brand-light: oklch(90% 0.2 128.85);
+  --font-rubik: var(--font-rubik), sans-serif;
+  --color-primary-brand: #1a826e;
+  --color-primary-brand-light: #219d85;
+  --color-secondary-brand: #70f3be;
+  --color-secondary-brand-light: #94f6cf;
   --color-tertiary-brand: oklch(26.8% 0.011 36.5);
   --color-tertiary-brand-light: oklch(36.8% 0.011 36.5);
   --color-primary-brown: #3e2723;

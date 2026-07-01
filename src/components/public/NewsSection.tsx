@@ -1,17 +1,11 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { motion as m, AnimatePresence as Ap } from "framer-motion";
-import { Calendar, X, Loader2 } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
+import { Calendar, X, Loader2, ArrowRight } from "lucide-react";
 import Image from "next/image";
-
-import "swiper/css";
-import "swiper/css/pagination";
 
 interface NewsArticle {
   id: string;
@@ -28,7 +22,7 @@ const MOCK_NEWS: NewsArticle[] = [
     title: "Gran acopio de Cacao Fino de Aroma",
     excerpt: "Nuestros socios superaron las metas de acopio con una calidad excepcional.",
     content: "La COOPERATIVA AGRARIA CAFETALERA QUITARI LTDA culminó con gran éxito la campaña de acopio de cacao fino de aroma correspondiente a este periodo. Gracias al estricto seguimiento técnico brindado a las fincas asociadas, se ha logrado un grano con un porcentaje de fermentación óptimo de más del 85%, lo que garantiza notas frutales y florales muy cotizadas en los mercados especiales.\n\nEste logro representa una mejora directa en la retribución económica de los asociados, reafirmando el compromiso de Cacquitari de consolidar un modelo agrícola sustentable e inclusivo.",
-    imageUrl: "",
+    imageUrl: "https://images.unsplash.com/photo-1559825481-12a05cc00344?q=80&w=800&auto=format&fit=crop",
     date: "12 de Octubre, 2024",
   },
   {
@@ -36,21 +30,28 @@ const MOCK_NEWS: NewsArticle[] = [
     title: "Capacitación en Abonos Orgánicos",
     excerpt: "Apostando por la agricultura sostenible con biofertilizantes.",
     content: "Con el objetivo de seguir promoviendo una caficultura sostenible y de bajo impacto ambiental, Cacquitari llevó a cabo el Taller Práctico de Manejo y Elaboración de Abonos Orgánicos. La capacitación contó con la participación de más de 45 caficultores de Pangoa.\n\nDurante la jornada se enseñó a formular compostajes a partir de pulpa de café y recursos locales, reduciendo los costos de fertilización química y mejorando la estructura microbiológica del suelo. Estas acciones garantizan la salud de las fincas a largo plazo y la consistencia en el rendimiento por hectárea.",
-    imageUrl: "",
+    imageUrl: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop",
     date: "05 de Noviembre, 2024",
   },
+  {
+    id: "news-3",
+    title: "Renovación de Certificaciones",
+    excerpt: "Mantenemos nuestros estándares de calidad internacional y comercio justo.",
+    content: "Anunciamos con orgullo la renovación de nuestras principales certificaciones orgánicas y de comercio justo (Fairtrade).",
+    imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=800&auto=format&fit=crop",
+    date: "20 de Noviembre, 2024",
+  }
 ];
 
 export default function NewsSection() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [activeArticle, setActiveArticle] = useState<NewsArticle | null>(null);
   const [loading, setLoading] = useState(true);
-  const swiperRef = useRef<SwiperType | null>(null);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const q = query(collection(db, "news"), orderBy("createdAt", "desc"), limit(6));
+        const q = query(collection(db, "news"), orderBy("createdAt", "desc"), limit(3));
         const querySnapshot = await getDocs(q);
         const fetchedNews: NewsArticle[] = [];
 
@@ -70,6 +71,8 @@ export default function NewsSection() {
 
         if (fetchedNews.length === 0) {
           setArticles(MOCK_NEWS);
+        } else if (fetchedNews.length < 3) {
+           setArticles([...fetchedNews, ...MOCK_NEWS.slice(fetchedNews.length, 3)]);
         } else {
           setArticles(fetchedNews);
         }
@@ -85,99 +88,80 @@ export default function NewsSection() {
   }, []);
 
   return (
-    <section id="noticias" className="pt-0 pb-8 relative bg-transparent overflow-hidden">
-      <style>{`
-        .swiper-button-prev:after,
-        .swiper-rtl .swiper-button-next:after {
-            content: '' !important;
-        }
-        .swiper-button-next:after,
-        .swiper-rtl .swiper-button-prev:after {
-            content: '' !important;
-        }
-        .swiper-slide.swiper-slide-active {
-            --tw-border-opacity: 1 !important;
-            border-color: var(--color-secondary-brand) !important;
-        }
-        .swiper-slide.swiper-slide-active h3 {
-            color: var(--color-secondary-brand) !important;
-        }
-        .swiper-pagination {
-            position: relative;
-            margin-top: 0.5rem;
-        }
-        .swiper-pagination-bullet-active {
-            background-color: var(--color-secondary-brand) !important;
-        }
-      `}</style>
+    <section id="noticias" className="pt-16 pb-24 relative overflow-hidden bg-[#1a231a]">
+      {/* Background Image - Contained within section */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/fondofoda.jpeg"
+          alt="Fondo de Noticias"
+          fill
+          quality={100}
+          className="object-cover object-center opacity-50"
+        />
+      </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center flex-col lg:flex-row lg:justify-between gap-2 lg:gap-8">
-          
-          <div className="w-full flex justify-between flex-col lg:w-2/5">
-            <div className="block lg:text-left text-center">
-              <h2 className="text-4xl font-bold text-gray-900 leading-[3.25rem] mb-5">
-                Nuestras últimas <span className="text-secondary-brand">noticias</span>
-              </h2>
-              <p className="text-gray-500 mb-4 max-lg:max-w-xl max-lg:mx-auto">
-                Bienvenidos a nuestra sección de noticias, donde el conocimiento y la actualidad se encuentran. Explora nuestros logros, comunicados y tendencias en la cooperativa.
-              </p>
-            </div>
-            
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header Section */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold text-white leading-[1.2] lg:w-1/2 tracking-tight">
+            Nuestras últimas <br className="hidden lg:block"/>
+            <span className="text-[#70f3be]">noticias</span>
+          </h2>
+          <p className="text-white/80 lg:w-1/3 leading-relaxed text-sm md:text-base font-medium">
+            Bienvenidos a nuestra sección de noticias, donde el conocimiento y la actualidad se encuentran. Explora nuestros logros, comunicados y tendencias en la cooperativa.
+          </p>
+        </div>
 
+        {/* Content Section */}
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <Loader2 className="animate-spin text-stone-900 mr-2" size={32} />
+            <span className="text-stone-500">Cargando publicaciones...</span>
           </div>
-
-          <div className="w-full lg:w-3/5 overflow-visible">
-            {loading ? (
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="animate-spin text-secondary-brand mr-2" size={32} />
-                <span className="text-stone-500">Cargando publicaciones...</span>
-              </div>
-            ) : (
-              <Swiper
-                modules={[Pagination]}
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                slidesPerView={1}
-                spaceBetween={20}
-                loop={articles.length > 2}
-                pagination={{ clickable: true }}
-                breakpoints={{
-                  568: { slidesPerView: 2, spaceBetween: 28 },
-                  768: { slidesPerView: 2, spaceBetween: 28 },
-                  1024: { slidesPerView: 2, spaceBetween: 32 },
-                }}
-                className="mySwiper w-full h-full pb-10"
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {articles.map((art) => (
+              <div 
+                key={art.id} 
+                onClick={() => setActiveArticle(art)}
+                className="bg-[#f7f8f7] rounded-[2rem] p-4 sm:p-5 flex flex-col h-full group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-transparent hover:border-stone-200"
               >
-                {articles.map((art) => (
-                  <SwiperSlide key={art.id} className="group">
-                    <div className="flex items-center mb-6 h-56 w-full rounded-2xl overflow-hidden shadow-sm relative bg-stone-100">
-                      {art.imageUrl ? <Image src={art.imageUrl} alt={art.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" /> : <div className="w-full h-full bg-stone-200"></div>}
-                    </div>
-                    <div className="flex items-center text-xs text-stone-400 space-x-2 mb-3">
-                      <Calendar size={14} className="text-secondary-brand/70" />
-                      <span>{art.date}</span>
-                    </div>
-                    <h3 className="text-xl text-gray-900 font-medium leading-8 mb-4 group-hover:text-secondary-brand transition-colors line-clamp-2">
+                {/* Card Top Text Area */}
+                <div className="px-2 pt-4 pb-8 flex-1 flex flex-col">
+                  <div className="flex justify-between items-start gap-4 mb-4">
+                    <h3 className="text-lg md:text-xl font-bold text-stone-900 leading-tight line-clamp-2">
                       {art.title}
                     </h3>
-                    <p className="text-gray-500 leading-6 transition-all duration-500 mb-6 line-clamp-3">
-                      {art.excerpt}
-                    </p>
-                    <button 
-                      onClick={() => setActiveArticle(art)}
-                      className="cursor-pointer flex items-center gap-2 text-lg text-secondary-brand font-semibold hover:text-secondary-brand-light transition-colors"
-                    >
-                      Leer más
-                      <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.25 6L13.25 6M9.5 10.5L13.4697 6.53033C13.7197 6.28033 13.8447 6.15533 13.8447 6C13.8447 5.84467 13.7197 5.71967 13.4697 5.46967L9.5 1.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
+                    <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center flex-shrink-0 group-hover:bg-[#1a826e] transition-colors duration-300">
+                      <ArrowRight size={16} />
+                    </div>
+                  </div>
+                  <p className="text-stone-600 text-sm leading-relaxed line-clamp-3">
+                    {art.excerpt}
+                  </p>
+                </div>
+                
+                {/* Card Bottom Image */}
+                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-auto shadow-sm">
+                  {art.imageUrl ? (
+                    <Image 
+                      src={art.imageUrl} 
+                      alt={art.title} 
+                      fill 
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-stone-200 flex items-center justify-center text-stone-400 text-sm">
+                      Sin imagen
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
+        )}
       </div>
 
       {/* Article Detail Modal */}
@@ -220,7 +204,7 @@ export default function NewsSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 z-10">
                   <div className="space-y-1.5">
                     <div className="flex items-center text-xs text-stone-300 space-x-2">
-                      <Calendar size={12} className="text-secondary-brand" />
+                      <Calendar size={12} className="text-[#1a826e]" />
                       <span>{activeArticle.date}</span>
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white leading-tight">
@@ -232,7 +216,7 @@ export default function NewsSection() {
 
               {/* Body Content */}
               <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
-                <p className="text-sm font-semibold text-stone-500 border-l-2 border-secondary-brand pl-3 italic">
+                <p className="text-sm font-semibold text-stone-500 border-l-2 border-[#1a826e] pl-3 italic">
                   {activeArticle.excerpt}
                 </p>
                 <div className="text-stone-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">

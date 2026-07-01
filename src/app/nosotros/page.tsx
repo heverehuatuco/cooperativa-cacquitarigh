@@ -11,7 +11,7 @@ export default function NosotrosPage() {
       <Navbar />
 
       {/* Contenido Principal con fondo unificado y patrón sutil */}
-      <main className="flex-grow bg-stone-50 relative pt-24">
+      <main className="flex-grow bg-stone-50 relative">
         {/* Subtle background pattern (dots) */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(#d5b9b2_1px,transparent_1px)] opacity-[0.15] [background-size:24px_24px] pointer-events-none" />
         

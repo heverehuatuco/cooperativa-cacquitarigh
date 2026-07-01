@@ -472,37 +472,7 @@ export default function SettingsManager() {
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Logo */}
-            <div className="space-y-3">
-              <label className="text-xs font-bold text-stone-700 uppercase block">
-                Logotipo Principal
-              </label>
-              {formData.logoUrl && !logoFile && (
-                <div className="mb-3 h-20 w-48 bg-stone-100 rounded-xl overflow-hidden border border-stone-200 relative">
-                  <NextImage src={formData.logoUrl} alt="Logo actual" fill sizes="150px" className="object-contain p-2" />
-                </div>
-              )}
-              <div className="flex flex-col space-y-2">
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={logoInputRef}
-                  onChange={handleLogoChange}
-                  className="hidden"
-                  id="logo-image-upload"
-                />
-                <label
-                  htmlFor="logo-image-upload"
-                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto"
-                >
-                  <Upload size={14} />
-                  <span>Subir Logotipo</span>
-                </label>
-                <span className="text-xs text-stone-500 truncate max-w-xs">
-                  {logoFile ? logoFile.name : formData.logoUrl ? "Mantener actual" : "Solo texto (APASAJEM)"}
-                </span>
-              </div>
-            </div>
+
 
 
             {/* Hero Card Image 1 */}

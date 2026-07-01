@@ -12,22 +12,7 @@ import Image from "next/image";
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user, role, loading, logout } = useAuth();
   const router = useRouter();
-  const [logoUrl, setLogoUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchLogo = async () => {
-      try {
-        const docRef = doc(db, "settings", "company_info");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists() && docSnap.data().logoUrl) {
-          setLogoUrl(docSnap.data().logoUrl);
-        }
-      } catch (err) {
-        console.error("Error al cargar logo:", err);
-      }
-    };
-    fetchLogo();
-  }, []);
 
   useEffect(() => {
     if (!loading && (!user || !role)) {
@@ -58,11 +43,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Top Mobile Bar */}
       <div className="lg:hidden bg-stone-900 text-white px-4 py-3 flex items-center justify-between border-b border-stone-800">
         <div className="flex items-center space-x-2">
-          {logoUrl ? (
-            <Image src={logoUrl} alt="Logo Cacquitari" width={24} height={24} className="object-contain drop-shadow-sm" />
-          ) : (
-            <Shield className="text-tertiary-brand" size={20} />
-          )}
+          <Image src="/logocacquitari.webp" alt="Logo Cacquitari" width={24} height={24} className="object-contain drop-shadow-sm" />
           <span className="font-bold text-sm tracking-wider">CACQUITARI ADMIN</span>
         </div>
         <button
@@ -80,11 +61,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <header className="hidden lg:flex bg-white h-16 border-b border-stone-200 shadow-xs px-4 sm:px-6">
           <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              {logoUrl ? (
-                <Image src={logoUrl} alt="Logo Cacquitari" width={28} height={28} className="object-contain drop-shadow-sm" />
-              ) : (
-                <LayoutDashboard className="text-stone-400" size={20} />
-              )}
+              <Image src="/logocacquitari.webp" alt="Logo Cacquitari" width={28} height={28} className="object-contain drop-shadow-sm" />
               <h1 className="font-bold text-stone-700">Panel de Control General</h1>
             </div>
             
