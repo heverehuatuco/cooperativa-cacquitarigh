@@ -161,13 +161,13 @@ export default function NewsManager() {
           articles.map((art) =>
             art.id === editingArticle.id
               ? {
-                  ...art,
-                  title: title.trim(),
-                  excerpt: excerpt.trim(),
-                  content: content.trim(),
-                  imageUrl: downloadUrl,
-                  storagePath,
-                }
+                ...art,
+                title: title.trim(),
+                excerpt: excerpt.trim(),
+                content: content.trim(),
+                imageUrl: downloadUrl,
+                storagePath,
+              }
               : art
           )
         );
@@ -335,25 +335,25 @@ export default function NewsManager() {
               )}
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-stone-700 uppercase">Título de la Noticia *</label>
+                <label className="text-xs font-bold text-stone-700 uppercase">Título*</label>
                 <input
                   type="text"
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Ej: Culminó con éxito el acopio de cacao especial"
+
                   className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-850"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-stone-700 uppercase">Resumen / Extracto *</label>
+                <label className="text-xs font-bold text-stone-700 uppercase">Resumen*</label>
                 <input
                   type="text"
                   required
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
-                  placeholder="Breve descripción que se muestra en la vista previa (max 2 líneas)"
+
                   className="w-full px-4 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-850"
                 />
               </div>
@@ -365,7 +365,7 @@ export default function NewsManager() {
                   rows={8}
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder="Escribe el cuerpo completo del artículo..."
+
                   className="w-full px-4 py-3 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-850 resize-none"
                 />
               </div>

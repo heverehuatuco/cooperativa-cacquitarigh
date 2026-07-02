@@ -16,6 +16,8 @@ interface CompanyInfo {
   address2: string;
   tiktok: string;
   facebook: string;
+  instagram: string;
+  youtube: string;
   youtube: string;
 }
 
@@ -28,6 +30,8 @@ const DEFAULT_INFO: CompanyInfo = {
   address2: "",
   tiktok: "https://www.tiktok.com",
   facebook: "https://www.facebook.com",
+  instagram: "https://www.instagram.com",
+  youtube: "https://www.youtube.com",
   youtube: "https://www.youtube.com",
 };
 

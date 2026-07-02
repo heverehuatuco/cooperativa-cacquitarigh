@@ -165,7 +165,7 @@ export default function ProductsSection() {
                 <span className="text-stone-500">Cargando productos...</span>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-6 gap-y-10">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-6 sm:gap-y-10">
                 {dbProducts
                   .filter(item => activeCategory === "Todos" || item.category.toLowerCase().includes(activeCategory.toLowerCase()))
                   .map((item, index) => {
@@ -179,7 +179,7 @@ export default function ProductsSection() {
                       >
                         <Link href={`/productos/${item.id}`} className="group cursor-pointer flex flex-col h-full bg-[#1a826e] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#1a826e]/40 hover:-translate-y-1 transition-all duration-300">
                           {/* Image Card */}
-                          <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-4 flex items-center justify-center p-6 transition-colors duration-500`}>
+                          <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-2 sm:mb-4 flex items-center justify-center p-3 sm:p-6 transition-colors duration-500`}>
                             {/* Inner shadow/glow for the image container */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#1a826e]/5 to-transparent pointer-events-none"></div>
                             
@@ -201,7 +201,7 @@ export default function ProductsSection() {
                             <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>
                               {item.category}
                             </span>
-                            <h4 className={`text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
+                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
                               {item.name}
                             </h4>
                             <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">
@@ -224,7 +224,7 @@ export default function ProductsSection() {
                         transition={{ duration: 0.5, delay: 0.1 }}
                       >
                         <Link href={`/productos/mock-1`} className="flex flex-col h-full">
-                          <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-4 flex items-center justify-center p-6`}>
+                          <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-2 sm:mb-4 flex items-center justify-center p-3 sm:p-6`}>
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#1a826e]/5 to-transparent pointer-events-none"></div>
                             <div className="w-full h-full flex flex-col items-center justify-center text-[#1a826e]/50 relative z-10">
                               <Coffee size={32} className="mb-2" />
@@ -233,7 +233,7 @@ export default function ProductsSection() {
                           </div>
                           <div className="flex flex-col space-y-2 px-3 pb-3">
                             <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>Café</span>
-                            <h4 className={`text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
+                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
                               Café Tostado Premium (Demo)
                             </h4>
                             <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">
@@ -252,7 +252,7 @@ export default function ProductsSection() {
                         transition={{ duration: 0.5, delay: 0.2 }}
                       >
                         <Link href={`/productos/mock-2`} className="flex flex-col h-full">
-                          <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-4 flex items-center justify-center p-6`}>
+                          <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-2 sm:mb-4 flex items-center justify-center p-3 sm:p-6`}>
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#1a826e]/5 to-transparent pointer-events-none"></div>
                             <div className="w-full h-full flex flex-col items-center justify-center text-[#1a826e]/50 relative z-10">
                               <Bean size={32} className="mb-2" />
@@ -261,7 +261,7 @@ export default function ProductsSection() {
                           </div>
                           <div className="flex flex-col space-y-2 px-3 pb-3">
                             <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>Cacao</span>
-                            <h4 className={`text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
+                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
                               Pasta de Cacao 100% (Demo)
                             </h4>
                             <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">

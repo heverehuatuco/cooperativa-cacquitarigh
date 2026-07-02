@@ -442,7 +442,7 @@ export default function SettingsManager() {
   }
 
   return (
-    <div className="bg-white rounded-3xl border border-stone-200/80 shadow-xs p-6 space-y-6 max-w-3xl">
+    <div className="bg-white rounded-3xl border border-stone-200/80 shadow-xs p-6 space-y-6 w-full">
       <div className="flex items-center justify-between border-b border-stone-100 pb-4">
         <div className="flex items-center space-x-2.5">
           <Settings className="text-primary-brand" size={22} />
@@ -471,7 +471,7 @@ export default function SettingsManager() {
             Imágenes del Sitio
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-6">
 
 
 
@@ -479,13 +479,13 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 1 (Izquierda)</label>
               {formData.heroCardImage1 && !heroCardFile1 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                <div className="mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                   <NextImage src={formData.heroCardImage1} alt="Hero Card 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
                 <input type="file" accept="image/*" ref={heroCardInputRef1} onChange={handleHeroCardChange1} className="hidden" id="herocard-image-upload-1" />
-                <label htmlFor="herocard-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                <label htmlFor="herocard-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 1</span>
                 </label>
                 <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile1 ? heroCardFile1.name : formData.heroCardImage1 ? "Mantener actual" : "Ninguna seleccionada"}</span>
@@ -496,13 +496,13 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 2 (Centro)</label>
               {formData.heroCardImage2 && !heroCardFile2 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                <div className="mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                   <NextImage src={formData.heroCardImage2} alt="Hero Card 2" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
                 <input type="file" accept="image/*" ref={heroCardInputRef2} onChange={handleHeroCardChange2} className="hidden" id="herocard-image-upload-2" />
-                <label htmlFor="herocard-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                <label htmlFor="herocard-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 2</span>
                 </label>
                 <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile2 ? heroCardFile2.name : formData.heroCardImage2 ? "Mantener actual" : "Ninguna seleccionada"}</span>
@@ -513,13 +513,13 @@ export default function SettingsManager() {
             <div className="space-y-3">
               <label className="text-xs font-bold text-stone-700 uppercase block">Tarjeta Hero 3 (Derecha)</label>
               {formData.heroCardImage3 && !heroCardFile3 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                <div className="mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                   <NextImage src={formData.heroCardImage3} alt="Hero Card 3" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2">
                 <input type="file" accept="image/*" ref={heroCardInputRef3} onChange={handleHeroCardChange3} className="hidden" id="herocard-image-upload-3" />
-                <label htmlFor="herocard-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                <label htmlFor="herocard-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 3</span>
                 </label>
                 <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile3 ? heroCardFile3.name : formData.heroCardImage3 ? "Mantener actual" : "Ninguna seleccionada"}</span>
@@ -532,7 +532,7 @@ export default function SettingsManager() {
                 Imagen de Quiénes Somos (Fondo)
               </label>
               {formData.aboutImageUrl1 && !aboutFile1 && (
-                <div className="mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                <div className="mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                   <NextImage src={formData.aboutImageUrl1} alt="Nosotros actual 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
@@ -547,7 +547,7 @@ export default function SettingsManager() {
                 />
                 <label
                   htmlFor="about-image-upload-1"
-                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto"
+                  className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full"
                 >
                   <Upload size={14} />
                   <span>Cambiar Imagen Fondo</span>
@@ -567,49 +567,35 @@ export default function SettingsManager() {
           <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2">
             Certificaciones
           </h3>
-          <p className="text-xs text-stone-500">Sube hasta 4 imágenes de certificaciones y sus títulos para el carrusel animado.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
             {/* Cert 1 */}
             <div className="space-y-3">
-              <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 1</label>
-              <div className="space-y-1">
-                <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
-                <input type="text" name="certTitle1" value={formData.certTitle1 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Unlock Your Creative Flow" />
-              </div>
               {formData.certImage1 && !certFile1 && (
-                <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                <div className="mt-2 mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                   <NextImage src={formData.certImage1} alt="Certificación 1" fill sizes="150px" className="w-full h-full object-cover" />
                 </div>
               )}
               <div className="flex flex-col space-y-2 mt-2">
                 <input type="file" accept="image/*" ref={certInputRef1} onChange={handleCertChange1} className="hidden" id="cert-image-upload-1" />
-                <label htmlFor="cert-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                <label htmlFor="cert-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 1</span>
                 </label>
-                <span className="text-xs text-stone-500 truncate max-w-xs">{certFile1 ? certFile1.name : formData.certImage1 ? "Mantener actual" : "Ninguna seleccionada"}</span>
               </div>
             </div>
 
             {/* Cert 2 */}
             {visibleCertsCount >= 2 && (
               <div className="space-y-3">
-                <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 2</label>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
-                  <input type="text" name="certTitle2" value={formData.certTitle2 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Design Your Digital Future" />
-                </div>
                 {formData.certImage2 && !certFile2 && (
-                  <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <div className="mt-2 mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                     <NextImage src={formData.certImage2} alt="Certificación 2" fill sizes="150px" className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex flex-col space-y-2 mt-2">
                   <input type="file" accept="image/*" ref={certInputRef2} onChange={handleCertChange2} className="hidden" id="cert-image-upload-2" />
-                  <label htmlFor="cert-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <label htmlFor="cert-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                     <Upload size={14} /><span>Cambiar Imagen 2</span>
                   </label>
-                  <span className="text-xs text-stone-500 truncate max-w-xs">{certFile2 ? certFile2.name : formData.certImage2 ? "Mantener actual" : "Ninguna seleccionada"}</span>
                 </div>
               </div>
             )}
@@ -617,22 +603,16 @@ export default function SettingsManager() {
             {/* Cert 3 */}
             {visibleCertsCount >= 3 && (
               <div className="space-y-3">
-                <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 3</label>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
-                  <input type="text" name="certTitle3" value={formData.certTitle3 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Build with Passion" />
-                </div>
                 {formData.certImage3 && !certFile3 && (
-                  <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <div className="mt-2 mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                     <NextImage src={formData.certImage3} alt="Certificación 3" fill sizes="150px" className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex flex-col space-y-2 mt-2">
                   <input type="file" accept="image/*" ref={certInputRef3} onChange={handleCertChange3} className="hidden" id="cert-image-upload-3" />
-                  <label htmlFor="cert-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <label htmlFor="cert-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                     <Upload size={14} /><span>Cambiar Imagen 3</span>
                   </label>
-                  <span className="text-xs text-stone-500 truncate max-w-xs">{certFile3 ? certFile3.name : formData.certImage3 ? "Mantener actual" : "Ninguna seleccionada"}</span>
                 </div>
               </div>
             )}
@@ -640,22 +620,16 @@ export default function SettingsManager() {
             {/* Cert 4 */}
             {visibleCertsCount >= 4 && (
               <div className="space-y-3">
-                <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 4</label>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
-                  <input type="text" name="certTitle4" value={formData.certTitle4 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Think Big" />
-                </div>
                 {formData.certImage4 && !certFile4 && (
-                  <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <div className="mt-2 mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                     <NextImage src={formData.certImage4} alt="Certificación 4" fill sizes="150px" className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex flex-col space-y-2 mt-2">
                   <input type="file" accept="image/*" ref={certInputRef4} onChange={handleCertChange4} className="hidden" id="cert-image-upload-4" />
-                  <label htmlFor="cert-image-upload-4" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <label htmlFor="cert-image-upload-4" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                     <Upload size={14} /><span>Cambiar Imagen 4</span>
                   </label>
-                  <span className="text-xs text-stone-500 truncate max-w-xs">{certFile4 ? certFile4.name : formData.certImage4 ? "Mantener actual" : "Ninguna seleccionada"}</span>
                 </div>
               </div>
             )}
@@ -663,22 +637,16 @@ export default function SettingsManager() {
             {/* Cert 5 */}
             {visibleCertsCount >= 5 && (
               <div className="space-y-3">
-                <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 5</label>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
-                  <input type="text" name="certTitle5" value={formData.certTitle5 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Nueva Certificación" />
-                </div>
                 {formData.certImage5 && !certFile5 && (
-                  <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <div className="mt-2 mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                     <NextImage src={formData.certImage5} alt="Certificación 5" fill sizes="150px" className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex flex-col space-y-2 mt-2">
                   <input type="file" accept="image/*" ref={certInputRef5} onChange={handleCertChange5} className="hidden" id="cert-image-upload-5" />
-                  <label htmlFor="cert-image-upload-5" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <label htmlFor="cert-image-upload-5" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                     <Upload size={14} /><span>Cambiar Imagen 5</span>
                   </label>
-                  <span className="text-xs text-stone-500 truncate max-w-xs">{certFile5 ? certFile5.name : formData.certImage5 ? "Mantener actual" : "Ninguna seleccionada"}</span>
                 </div>
               </div>
             )}
@@ -686,22 +654,16 @@ export default function SettingsManager() {
             {/* Cert 6 */}
             {visibleCertsCount >= 6 && (
               <div className="space-y-3">
-                <label className="text-xs font-bold text-stone-700 uppercase block">Certificación 6</label>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-semibold text-stone-500 uppercase">Título (Hover)</label>
-                  <input type="text" name="certTitle6" value={formData.certTitle6 || ""} onChange={handleChange} className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-lg text-sm" placeholder="Ej: Sostenibilidad" />
-                </div>
                 {formData.certImage6 && !certFile6 && (
-                  <div className="mt-2 mb-3 h-20 w-full rounded-xl overflow-hidden border border-stone-200 relative">
+                  <div className="mt-2 mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
                     <NextImage src={formData.certImage6} alt="Certificación 6" fill sizes="150px" className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex flex-col space-y-2 mt-2">
                   <input type="file" accept="image/*" ref={certInputRef6} onChange={handleCertChange6} className="hidden" id="cert-image-upload-6" />
-                  <label htmlFor="cert-image-upload-6" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full sm:w-auto">
+                  <label htmlFor="cert-image-upload-6" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                     <Upload size={14} /><span>Cambiar Imagen 6</span>
                   </label>
-                  <span className="text-xs text-stone-500 truncate max-w-xs">{certFile6 ? certFile6.name : formData.certImage6 ? "Mantener actual" : "Ninguna seleccionada"}</span>
                 </div>
               </div>
             )}
@@ -726,86 +688,76 @@ export default function SettingsManager() {
             Datos de Contacto
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">WhatsApp Principal</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">WhatsApp Principal</label>
               <input
                 type="text"
                 name="whatsapp"
                 value={formData.whatsapp}
                 onChange={handleChange}
                 placeholder="Ej: 51915233460"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
-              <span className="text-[10px] text-stone-500 block">
-                Incluye el código de país. Ej: 51 para Perú seguido del número.
-              </span>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">WhatsApp Secundario</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">WhatsApp Secundario</label>
               <input
                 type="text"
                 name="whatsapp2"
                 value={formData.whatsapp2 || ""}
                 onChange={handleChange}
                 placeholder="Ej: 51987654321"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
-              <span className="text-[10px] text-stone-500 block">
-                Opcional.
-              </span>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Correo Principal</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Correo Principal</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="contacto@empresa.com"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Correo Secundario</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Correo Secundario</label>
               <input
                 type="email"
                 name="email2"
                 value={formData.email2 || ""}
                 onChange={handleChange}
                 placeholder="Opcional"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Dirección Principal</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Dirección Principal</label>
               <input
                 type="text"
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
                 placeholder="Ej: Av. Principal 123, Satipo"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Dirección Secundaria</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Dirección Secundaria</label>
               <input
                 type="text"
                 name="address2"
                 value={formData.address2 || ""}
                 onChange={handleChange}
                 placeholder="Opcional"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
             </div>
           </div>
@@ -817,30 +769,54 @@ export default function SettingsManager() {
             Redes Sociales
           </h3>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Enlace de Facebook</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Enlace de Facebook</label>
               <input
                 type="url"
                 name="facebook"
                 value={formData.facebook}
                 onChange={handleChange}
                 placeholder="https://facebook.com/pagina-oficial"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-stone-700 uppercase">Enlace de TikTok</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Enlace de TikTok</label>
               <input
                 type="url"
                 name="tiktok"
                 value={formData.tiktok}
                 onChange={handleChange}
                 placeholder="https://tiktok.com/@usuario"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
               />
             </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Enlace de Instagram</label>
+              <input
+                type="url"
+                name="instagram"
+                value={formData.instagram || ""}
+                onChange={handleChange}
+                placeholder="https://instagram.com/usuario"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Enlace de YouTube</label>
+              <input
+                type="url"
+                name="youtube"
+                value={formData.youtube || ""}
+                onChange={handleChange}
+                placeholder="https://youtube.com/@canal"
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-xs"
+              />
+            </div>
+
 
           </div>
         </div>

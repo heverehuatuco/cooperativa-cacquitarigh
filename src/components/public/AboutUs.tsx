@@ -9,6 +9,7 @@ import Image from "next/image";
 
 export default function AboutUs() {
   const [aboutImageUrl1, setAboutImageUrl1] = useState("");
+  const [certifications, setCertifications] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -18,6 +19,15 @@ export default function AboutUs() {
         if (docSnap.exists()) {
           const data = docSnap.data();
           if (data.aboutImageUrl1) setAboutImageUrl1(data.aboutImageUrl1);
+
+          const certs = [];
+          if (data.certImage1) certs.push(data.certImage1);
+          if (data.certImage2) certs.push(data.certImage2);
+          if (data.certImage3) certs.push(data.certImage3);
+          if (data.certImage4) certs.push(data.certImage4);
+          if (data.certImage5) certs.push(data.certImage5);
+          if (data.certImage6) certs.push(data.certImage6);
+          setCertifications(certs);
         }
       } catch (err) {
         console.error("Error al cargar imágenes de nosotros:", err);
@@ -76,7 +86,7 @@ export default function AboutUs() {
     <>
       {/* --- HERO SECTION --- */}
       <section id="nosotros-hero" className="relative pt-32 pb-16 min-h-[85vh] flex flex-col justify-end bg-stone-900">
-        
+
         {/* Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -90,21 +100,16 @@ export default function AboutUs() {
           <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/90 via-black/40 to-black/60" />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 flex-grow flex flex-col justify-end">
-          
-          {/* TOP ROW: Title and Text */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-10">
-            
-            {/* LEFT: Title */}
-            <div className="w-full lg:w-[55%]">
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
-                Cooperativa Agraria Cafetalera Quitari Ltda.
-              </h2>
-            </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 lg:mt-32 mb-16 flex flex-col lg:flex-row items-center justify-between gap-12 flex-grow">
 
-            {/* RIGHT: Intro Text & Button */}
-            <div className="w-full lg:w-[45%] lg:pl-10 flex flex-col items-start">
-              <p className="text-white/90 text-base lg:text-lg font-medium leading-relaxed mb-6">
+          {/* LEFT: Text, Button and Glassmorphism */}
+          <div className="w-full lg:w-[55%] flex flex-col items-start gap-8">
+            <h2 className="text-5xl sm:text-6xl lg:text-[5rem] font-extrabold text-white tracking-tight leading-[1.05]">
+              Cooperativa Agraria Cafetalera Quitari Ltda.
+            </h2>
+
+            <div className="flex flex-col items-start">
+              <p className="text-white/90 text-base lg:text-lg font-medium leading-relaxed mb-6 max-w-xl">
                 Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. Hoy agrupamos a más de 200 jóvenes productores implementando tecnologías y alianzas de comercio justo.
               </p>
               <a href="#nosotros-historia" className="bg-[#1a826e] hover:bg-[#219d85] text-white font-bold py-3 px-7 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group text-sm">
@@ -114,31 +119,29 @@ export default function AboutUs() {
                 </div>
               </a>
             </div>
+
+            {/* Glassmorphism Quote Card */}
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-3xl max-w-lg shadow-2xl mt-4">
+              <p className="text-white text-base md:text-lg font-medium italic leading-relaxed">
+                "Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible."
+              </p>
+              <p className="text-white font-bold text-sm mt-4 tracking-wide">- Samuel Kevin, Gerente General</p>
+            </div>
           </div>
 
-          {/* BOTTOM ROW: Large Image Card with Floating Badge */}
+          {/* RIGHT: Image */}
           <motion.div
-            className="relative w-full h-[40vh] sm:h-[50vh] lg:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/10"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            className="relative w-full lg:w-[45%] h-[50vh] sm:h-[60vh] lg:h-[650px] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 mt-10 lg:mt-0"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Image */}
             {aboutImageUrl1 ? (
-              <Image src={aboutImageUrl1} alt="Gerente General" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center" />
+              <Image src={aboutImageUrl1} alt="Gerente General" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-center" />
             ) : (
               <div className="w-full h-full bg-stone-700 flex items-center justify-center text-stone-400">Fondo</div>
             )}
-
-            {/* Floating Glassmorphism Quote Card (Bottom Left) */}
-            <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-white/20 backdrop-blur-xl border border-white/30 p-5 md:p-6 rounded-3xl max-w-xs md:max-w-md shadow-2xl">
-              <div>
-                <p className="text-white text-sm md:text-base font-semibold italic leading-snug">
-                  "Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible."
-                </p>
-                <p className="text-white/80 text-xs md:text-sm mt-2 font-bold tracking-wide">- Samuel Kevin, Gerente General</p>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
           </motion.div>
 
         </div>
@@ -147,7 +150,7 @@ export default function AboutUs() {
       {/* --- HISTORIA SECTION (Text Cards) --- */}
       <section id="nosotros-historia" className="relative py-24 bg-white font-rubik">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Header */}
           <div className="mb-14 max-w-2xl">
             <h2 className="text-[2.5rem] md:text-5xl font-extrabold text-stone-900 tracking-tight mb-2 leading-tight">
@@ -160,12 +163,12 @@ export default function AboutUs() {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            
+
             {/* Left Column */}
             <div className="flex flex-col gap-8">
-              
+
               {/* Card 1 */}
-              <motion.div 
+              <motion.div
                 className="bg-[#F8F9FA] rounded-[2rem] p-10 flex flex-col h-full border border-stone-100"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +179,7 @@ export default function AboutUs() {
                   <h4 className="text-xl font-extrabold text-stone-900 mb-1 tracking-tight">Samuel Kevin Taype</h4>
                   <p className="text-[15px] italic text-stone-500 font-medium">Gerente General</p>
                 </div>
-                
+
                 <span className="text-5xl text-stone-900 font-sans leading-none h-6 block mb-5 italic font-black tracking-tighter">"</span>
                 <p className="text-stone-600 text-[15px] md:text-base leading-relaxed mb-10 font-medium">
                   Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible.
@@ -189,7 +192,7 @@ export default function AboutUs() {
               </motion.div>
 
               {/* Card 2 */}
-              <motion.div 
+              <motion.div
                 className="bg-[#F8F9FA] rounded-[2rem] p-10 flex flex-col h-full border border-stone-100"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -200,7 +203,7 @@ export default function AboutUs() {
                   <h4 className="text-xl font-extrabold text-stone-900 mb-1 tracking-tight">Crecimiento y Alianzas</h4>
                   <p className="text-[15px] italic text-stone-500 font-medium">Desarrollo Cooperativo</p>
                 </div>
-                
+
                 <span className="text-5xl text-stone-900 font-sans leading-none h-6 block mb-5 italic font-black tracking-tighter">"</span>
                 <p className="text-stone-600 text-[15px] md:text-base leading-relaxed mb-10 font-medium">
                   Hoy agrupamos a más de 200 jóvenes productores. Hemos implementado tecnologías de la información y alianzas especializadas de comercio justo.
@@ -216,9 +219,9 @@ export default function AboutUs() {
 
             {/* Right Column */}
             <div className="flex flex-col gap-8 h-full">
-              
+
               {/* Card 3 (Tall) */}
-              <motion.div 
+              <motion.div
                 className="bg-[#F8F9FA] rounded-[2rem] p-10 border border-stone-100 flex flex-col h-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -229,11 +232,11 @@ export default function AboutUs() {
                   <h4 className="text-xl font-extrabold text-stone-900 mb-1 tracking-tight">Nuestros Inicios</h4>
                   <p className="text-[15px] italic text-stone-500 font-medium">San Martín de Pangoa, Satipo</p>
                 </div>
-                
+
                 <span className="text-5xl text-stone-900 font-sans leading-none h-6 block mb-5 italic font-black tracking-tighter">"</span>
                 <div className="flex-grow mb-10">
                   <p className="text-stone-600 text-[15px] md:text-base leading-relaxed mb-6 font-medium">
-                    Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. 
+                    Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín.
                   </p>
                   <p className="text-stone-600 text-[15px] md:text-base leading-relaxed mb-6 font-medium">
                     Liderada por nuestro Gerente General, la cooperativa nació con una visión clara de impulsar el desarrollo regional a través de la excelencia en el café.
@@ -241,6 +244,20 @@ export default function AboutUs() {
                   <p className="text-stone-600 text-[15px] md:text-base leading-relaxed font-medium">
                     En su corta historia (2024) obtuvimos la certificación de café orgánico y en 2025 logramos exportar nuestro primer contenedor a Europa.
                   </p>
+
+                  {/* Certificaciones */}
+                  {certifications.length > 0 && (
+                    <div className="mt-8 pt-6 border-t border-stone-200/60">
+                      <p className="text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-4">Certificaciones Internacionales</p>
+                      <div className="flex flex-wrap gap-4 items-center">
+                        {certifications.map((cert, idx) => (
+                          <div key={idx} className="relative w-40 h-40 sm:w-48 sm:h-48 hover:scale-105 transition-all duration-300">
+                            <Image src={cert} alt={`Certificación ${idx + 1}`} fill sizes="192px" className="object-contain" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-3 mt-auto pt-2">
@@ -269,13 +286,13 @@ export default function AboutUs() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           <div className="text-center mb-16 flex flex-col items-center">
             <div className="bg-white/70 backdrop-blur-md px-10 py-4 rounded-full shadow-xl border border-white/50 inline-block">
               <h3 className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight drop-shadow-sm">Análisis FODA</h3>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 xl:gap-8 max-w-7xl mx-auto">
             {foda.map((item, index) => (
               <motion.div

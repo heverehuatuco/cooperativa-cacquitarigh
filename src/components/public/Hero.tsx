@@ -20,7 +20,6 @@ interface FloatingItem {
 
 export default function Hero() {
   const [cardImages, setCardImages] = useState({
-    img1: "",
     img2: "",
     img3: ""
   });
@@ -35,8 +34,6 @@ export default function Hero() {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setCardImages({
-            // Force /fondohero.jpg for the background, ignoring database for now
-            img1: "/fondohero.jpg",
             img2: data.heroCardImage2 || "https://images.unsplash.com/photo-1611162458324-aae1eb4129a4?q=80&w=800&auto=format&fit=crop",
             img3: data.heroCardImage3 || "https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=400&auto=format&fit=crop"
           });
@@ -67,18 +64,14 @@ export default function Hero() {
     <section className="relative w-full min-h-[100vh] flex items-center pt-24 pb-16 overflow-hidden bg-[#1a231a]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        {!isLoading && cardImages.img1 ? (
-          <Image
-            src={cardImages.img1}
-            alt="Cacquitari Farm"
-            fill
-            className="object-cover"
-            priority
-          />
-        ) : (
-          <div className="w-full h-full bg-stone-900 animate-pulse"></div>
-        )}
-        
+        <Image
+          src="/fondohero.webp"
+          alt="Cacquitari Farm"
+          fill
+          className="object-cover"
+          priority
+        />
+
         {/* Floating Rain Effect */}
         {floatingItems.map((item) => (
           <motion.div
@@ -95,11 +88,11 @@ export default function Hero() {
             style={{ left: item.left }}
           >
             <div style={{ width: item.size, height: item.size, position: 'relative' }}>
-              <Image 
-                src={item.isCoffee ? "/cafeilustracion.webp" : "/cacaoilustracion.webp"} 
-                alt="" 
-                fill 
-                className="object-contain" 
+              <Image
+                src={item.isCoffee ? "/cafeilustracion.webp" : "/cacaoilustracion.webp"}
+                alt=""
+                fill
+                className="object-contain"
               />
             </div>
           </motion.div>
@@ -111,21 +104,21 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-0 flex flex-col lg:flex-row items-center justify-between gap-12">
-        
+
         {/* Left Content */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="w-full lg:w-[55%] flex flex-col items-start"
         >
           <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black text-white leading-[1.05] tracking-tight drop-shadow-lg" style={{ fontFamily: 'Arial, sans-serif' }}>
-            Cooperativa <br className="hidden lg:block"/>Agraria Cafetalera Cacquitari Ltda
+            Cooperativa <br className="hidden lg:block" />Agraria Cafetalera Cacquitari Ltda
           </h1>
           <p className="mt-6 text-white/90 text-base md:text-lg lg:text-xl max-w-xl font-medium leading-relaxed drop-shadow-md">
-            Cultivamos con pasión, procesamos con altos estándares y llevamos el sabor más puro del VRAEM para que lo disfrutes en cada taza.
+            Nos dedicamos con pasión al acopio de café y cacao de la más alta calidad, transformándolos en productos finales listos para deleitar tu paladar en cada taza.
           </p>
-          
+
           <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
             <Link
               href="/productos"
@@ -140,16 +133,16 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Cards */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full lg:w-[45%] flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 lg:gap-6 relative mt-10 lg:mt-32"
         >
-          {/* Left Image Card with Play Button */}
+          {/* Left Image Card */}
           <div className="relative w-full max-w-[280px] sm:w-[260px] h-[220px] sm:h-[280px] rounded-[2rem] overflow-hidden shadow-2xl group cursor-pointer z-10 sm:translate-y-8">
             {!isLoading && cardImages.img2 ? (
-              <Image 
+              <Image
                 src={cardImages.img2}
                 alt="Proceso"
                 fill
@@ -158,12 +151,7 @@ export default function Hero() {
             ) : (
               <div className="w-full h-full bg-stone-300 animate-pulse"></div>
             )}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 transition-transform group-hover:scale-110 shadow-lg">
-                <Play className="w-6 h-6 text-white ml-1 fill-white drop-shadow-sm" />
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-black/10 transition-colors"></div>
           </div>
 
           {/* Right Dark Glass Card */}
@@ -171,7 +159,7 @@ export default function Hero() {
             <div className="flex items-start gap-4 mb-4">
               <div className="w-14 h-14 rounded-full overflow-hidden relative flex-shrink-0 border-2 border-white/20">
                 {!isLoading && cardImages.img3 ? (
-                  <Image 
+                  <Image
                     src={cardImages.img3}
                     alt="Icono"
                     fill
@@ -195,9 +183,9 @@ export default function Hero() {
 
       {/* Impactful Layered Wave Divider */}
       <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none">
-        <svg 
-          viewBox="0 0 1440 320" 
-          preserveAspectRatio="none" 
+        <svg
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
           className="relative block w-full h-[100px] sm:h-[150px] lg:h-[250px]"
         >
           <path fill="#ffffff" fillOpacity="0.4" d="M0,128 C400,256 700,320 1100,256 C1300,224 1400,64 1440,0 L1440,320 L0,320 Z"></path>

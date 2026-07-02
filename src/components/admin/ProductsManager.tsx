@@ -156,14 +156,14 @@ export default function ProductsManager() {
           products.map((p) =>
             p.id === editingProduct.id
               ? {
-                  ...p,
-                  name: name.trim(),
-                  category: category,
-                  description: description.trim(),
-                  available: available,
-                  imageUrl: downloadUrl,
-                  storagePath,
-                }
+                ...p,
+                name: name.trim(),
+                category: category,
+                description: description.trim(),
+                available: available,
+                imageUrl: downloadUrl,
+                storagePath,
+              }
               : p
           )
         );
@@ -300,11 +300,10 @@ export default function ProductsManager() {
                 <button
                   onClick={() => toggleAvailability(prod)}
                   disabled={actionLoading === prod.id}
-                  className={`inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border transition-colors cursor-pointer disabled:opacity-70 ${
-                    prod.available
+                  className={`inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border transition-colors cursor-pointer disabled:opacity-70 ${prod.available
                       ? "bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100"
                       : "bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
-                  }`}
+                    }`}
                 >
                   {prod.available ? <CheckSquare size={14} /> : <Square size={14} />}
                   <span>{prod.available ? "Disponible" : "Agotado"}</span>
@@ -372,7 +371,7 @@ export default function ProductsManager() {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Ej: Café Pergamino Caturra"
+
                     className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-850"
                   />
                 </div>
@@ -391,12 +390,11 @@ export default function ProductsManager() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-stone-700 uppercase">Descripción / Detalles</label>
+                <label className="text-xs font-bold text-stone-700 uppercase">Descripción</label>
                 <textarea
                   rows={4}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Especificaciones, rendimiento físico, humedad, etc."
                   className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-850 resize-none"
                 />
               </div>

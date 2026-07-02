@@ -39,7 +39,7 @@ export default function LoginPage() {
     try {
       let emailToLogin = username.trim();
       const cleanUsername = username.trim().toLowerCase();
-      
+
       if (cleanUsername === "heverehuatuco" || cleanUsername === "admin" || cleanUsername === "huatuco") {
         emailToLogin = "heverehuatuco@gmail.com";
       } else if (!emailToLogin.includes("@")) {
@@ -50,9 +50,9 @@ export default function LoginPage() {
     } catch (error: any) {
       console.error("Error en login:", error);
       if (error.code === "auth/user-not-found" || error.code === "auth/invalid-credential" || error.code === "auth/wrong-password") {
-         setErrorMessage("Usuario o contraseña incorrectos.");
+        setErrorMessage("Usuario o contraseña incorrectos.");
       } else {
-         setErrorMessage("Error al iniciar sesión. Verifica tu conexión.");
+        setErrorMessage("Error al iniciar sesión. Verifica tu conexión.");
       }
     } finally {
       setAuthLoading(false);

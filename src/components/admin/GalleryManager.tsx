@@ -189,8 +189,8 @@ export default function GalleryManager() {
           className="p-6 bg-stone-50 rounded-2xl border border-stone-200/80 space-y-4 max-w-2xl"
         >
           <h3 className="font-bold text-stone-900 text-lg flex items-center space-x-2">
-              <span>Nueva Imagen</span>
-            </h3>
+            <span>Nueva Imagen</span>
+          </h3>
 
           {uploadError && (
             <div className="p-3 bg-red-50 border border-red-200 text-red-800 rounded-xl text-xs flex items-center space-x-2">
@@ -207,7 +207,7 @@ export default function GalleryManager() {
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Ej: Secando granos de café"
+
                 className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
               />
             </div>
@@ -221,7 +221,6 @@ export default function GalleryManager() {
               >
                 <option value="cafe">Café</option>
                 <option value="cacao">Cacao</option>
-                <option value="instalaciones">Instalaciones / Campo</option>
                 <option value="otros">Otros</option>
               </select>
             </div>
@@ -233,7 +232,7 @@ export default function GalleryManager() {
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Ej: Grano pergamino expuesto al sol natural en camas africanas."
+
               className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
             />
           </div>
@@ -316,12 +315,10 @@ export default function GalleryManager() {
                   {item.category === "cafe"
                     ? "Café"
                     : item.category === "cacao"
-                    ? "Cacao"
-                    : item.category === "instalaciones"
-                    ? "Campo"
-                    : "Otros"}
+                      ? "Cacao"
+                      : "Otros"}
                 </span>
-                
+
                 {/* Delete button float */}
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
                   <button
