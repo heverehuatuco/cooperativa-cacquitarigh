@@ -74,7 +74,7 @@ export default function ContactSection() {
     setSuccess(false);
 
     try {
-      if (!formData.name || !formData.email || !formData.message || !formData.subject) {
+      if (!formData.name || !formData.email || !formData.message) {
         throw new Error("Por favor completa todos los campos obligatorios (*).");
       }
 
@@ -126,22 +126,48 @@ export default function ContactSection() {
             <div className="space-y-6 lg:space-y-10">
 
               {/* Location Block */}
-              <div className="group flex items-center gap-5 p-5 rounded-3xl bg-blue-50/60 border border-blue-100/80 hover:bg-blue-100/50 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={32} height={32} className="object-contain drop-shadow-sm" />
+              {info.address2 ? (
+                <a
+                  href={info.address2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-5 p-5 rounded-3xl bg-blue-50/60 border border-blue-100/80 hover:bg-blue-100/50 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                      <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={32} height={32} className="object-contain drop-shadow-sm" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-blue-600 transition-colors">¿Listo para visitarnos?</h4>
+                    <p className="text-[15px] text-stone-600 leading-relaxed">
+                      {info.address}
+                    </p>
+                  </div>
+                </a>
+              ) : (
+                <div className="group flex items-center gap-5 p-5 rounded-3xl bg-blue-50/60 border border-blue-100/80 hover:bg-blue-100/50 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                      <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={32} height={32} className="object-contain drop-shadow-sm" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-blue-600 transition-colors">¿Listo para visitarnos?</h4>
+                    <p className="text-[15px] text-stone-600 leading-relaxed">
+                      {info.address}
+                    </p>
                   </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-blue-600 transition-colors">¿Listo para visitarnos?</h4>
-                  <p className="text-[15px] text-stone-600 leading-relaxed">
-                    {info.address}
-                  </p>
-                </div>
-              </div>
+              )}
 
               {/* Phone Block */}
-              <div className="group flex items-center gap-5 p-5 rounded-3xl bg-green-50/60 border border-green-100/80 hover:bg-green-100/50 hover:shadow-xl hover:shadow-green-500/10 hover:-translate-y-1 transition-all duration-300">
+              <a
+                href={`https://wa.me/${info.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-5 p-5 rounded-3xl bg-green-50/60 border border-green-100/80 hover:bg-green-100/50 hover:shadow-xl hover:shadow-green-500/10 hover:-translate-y-1 transition-all duration-300"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
                     <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={36} height={36} className="object-contain drop-shadow-sm" />
@@ -154,10 +180,13 @@ export default function ContactSection() {
                     {info.whatsapp2 && <span>Soporte: <span className="font-semibold text-stone-800">+{info.whatsapp2}</span></span>}
                   </p>
                 </div>
-              </div>
+              </a>
 
               {/* Email Block */}
-              <div className="group flex items-center gap-5 p-5 rounded-3xl bg-red-50/60 border border-red-100/80 hover:bg-red-100/50 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 transition-all duration-300">
+              <a
+                href={`mailto:${info.email}`}
+                className="group flex items-center gap-5 p-5 rounded-3xl bg-red-50/60 border border-red-100/80 hover:bg-red-100/50 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 transition-all duration-300"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
                     <Image src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width={32} height={32} className="object-contain drop-shadow-sm" />
@@ -169,7 +198,7 @@ export default function ContactSection() {
                     {info.email}
                   </p>
                 </div>
-              </div>
+              </a>
 
             </div>
           </motion.div>
@@ -294,7 +323,7 @@ export default function ContactSection() {
 
                 {/* Privacy Policy text */}
                 <p className="text-[12px] text-stone-500 leading-relaxed mt-5">
-                  Entiendo que mis datos serán guardados de forma segura de acuerdo con la <a href="#" className="text-stone-700 underline hover:text-secondary-brand transition-colors">política de privacidad</a>.
+                  Entiendo que mis datos serán guardados de forma segura.
                 </p>
 
               </form>

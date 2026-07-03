@@ -55,9 +55,10 @@ const DEFAULT_INFO: CompanyInfo = {
   email2: "",
   address: "San Jerónimo, Matzuriniari, Satipo, Junín, Perú",
   address2: "",
-  tiktok: "https://www.tiktok.com",
-  facebook: "https://www.facebook.com",
-
+  tiktok: "",
+  facebook: "",
+  instagram: "",
+  youtube: "",
 };
 
 export default function SettingsManager() {
@@ -365,6 +366,8 @@ export default function SettingsManager() {
         address2: (formData.address2 || "").trim(),
         tiktok: (formData.tiktok || "").trim(),
         facebook: formData.facebook || "",
+        instagram: (formData.instagram || "").trim(),
+        youtube: (formData.youtube || "").trim(),
 
         heroCardImage1: currentHeroCardUrl1,
         heroCardStoragePath1: currentHeroCardPath1,
@@ -488,7 +491,7 @@ export default function SettingsManager() {
                 <label htmlFor="herocard-image-upload-1" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 1</span>
                 </label>
-                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile1 ? heroCardFile1.name : formData.heroCardImage1 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile1 ? heroCardFile1.name : formData.heroCardImage1 ? "" : "Ninguna seleccionada"}</span>
               </div>
             </div>
 
@@ -505,7 +508,7 @@ export default function SettingsManager() {
                 <label htmlFor="herocard-image-upload-2" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 2</span>
                 </label>
-                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile2 ? heroCardFile2.name : formData.heroCardImage2 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile2 ? heroCardFile2.name : formData.heroCardImage2 ? "" : "Ninguna seleccionada"}</span>
               </div>
             </div>
 
@@ -522,7 +525,7 @@ export default function SettingsManager() {
                 <label htmlFor="herocard-image-upload-3" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
                   <Upload size={14} /><span>Cambiar Imagen 3</span>
                 </label>
-                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile3 ? heroCardFile3.name : formData.heroCardImage3 ? "Mantener actual" : "Ninguna seleccionada"}</span>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroCardFile3 ? heroCardFile3.name : formData.heroCardImage3 ? "" : "Ninguna seleccionada"}</span>
               </div>
             </div>
 
@@ -553,7 +556,7 @@ export default function SettingsManager() {
                   <span>Cambiar Imagen Fondo</span>
                 </label>
                 <span className="text-xs text-stone-500 truncate max-w-xs">
-                  {aboutFile1 ? aboutFile1.name : formData.aboutImageUrl1 ? "Mantener actual" : "Usar imagen por defecto"}
+                  {aboutFile1 ? aboutFile1.name : formData.aboutImageUrl1 ? "" : "Usar imagen por defecto"}
                 </span>
               </div>
             </div>
@@ -750,7 +753,7 @@ export default function SettingsManager() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-stone-700 uppercase">Dirección Secundaria</label>
+              <label className="text-[10px] font-bold text-stone-700 uppercase">Link de Maps</label>
               <input
                 type="text"
                 name="address2"

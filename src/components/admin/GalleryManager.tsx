@@ -311,7 +311,7 @@ export default function GalleryManager() {
               {/* Photo */}
               <div className="aspect-4/3 relative bg-stone-200">
                 <NextImage src={item.imageUrl} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
-                <span className="absolute top-3 left-3 text-[9px] font-bold tracking-widest uppercase bg-stone-900/80 text-tertiary-brand px-2.5 py-1 rounded-full backdrop-blur-xs z-10">
+                <span className="absolute top-3 left-3 text-[9px] font-bold tracking-widest uppercase bg-stone-900/80 text-white px-2.5 py-1 rounded-full backdrop-blur-xs z-10">
                   {item.category === "cafe"
                     ? "Café"
                     : item.category === "cacao"

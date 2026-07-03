@@ -104,7 +104,7 @@ export default function LoginPage() {
             <Image src="/logocacquitari.webp" alt="Cacquitari Logo" fill className="object-contain" priority />
           </div>
           <h2 className="text-white font-extrabold text-xl tracking-wide uppercase mt-1 relative z-10">Cacquitari</h2>
-          <p className="text-primary-brand-light text-xs font-medium mt-1 relative z-10 tracking-widest uppercase">Sistema de Gestión</p>
+          <p className="text-white text-xs font-medium mt-1 relative z-10 tracking-widest uppercase">Sistema de Gestión</p>
         </div>
 
         {/* Card Body (White) */}

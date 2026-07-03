@@ -48,3 +48,24 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Animación de resplandor para el logo */
+.animate-shine-text {
+  background: linear-gradient(
+    110deg,
+    #1a826e 35%,
+    #ffffff 50%,
+    #1a826e 65%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: -200% center;
+  }
+}

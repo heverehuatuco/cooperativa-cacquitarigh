@@ -62,9 +62,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <Image src="/logocacquitari.webp" alt="Logo Cacquitari" width={28} height={28} className="object-contain drop-shadow-sm" />
-              <h1 className="font-bold text-stone-700">Panel de Control General</h1>
+              <h1 className="font-bold text-stone-700">Panel de Control</h1>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="text-right">
                 <p className="text-sm font-bold text-stone-800 leading-none">

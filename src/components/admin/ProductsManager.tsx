@@ -287,7 +287,7 @@ export default function ProductsManager() {
                   <div className="flex items-center space-x-2">
                     <h3 className="font-bold text-stone-900 text-sm sm:text-base leading-none">{prod.name}</h3>
                     <span className="text-[9px] font-bold tracking-widest uppercase bg-stone-100 text-stone-650 px-2 py-0.5 rounded">
-                      {prod.category === "cafe" ? "Café" : "Cacao"}
+                      {prod.category === "cafe" ? "Café" : prod.category === "cacao" ? "Cacao" : "Derivados"}
                     </span>
                   </div>
                   <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed">{prod.description}</p>
@@ -296,19 +296,6 @@ export default function ProductsManager() {
 
               {/* Actions & Availability */}
               <div className="flex items-center space-x-4 shrink-0 self-end sm:self-auto">
-                {/* Availability Toggle */}
-                <button
-                  onClick={() => toggleAvailability(prod)}
-                  disabled={actionLoading === prod.id}
-                  className={`inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border transition-colors cursor-pointer disabled:opacity-70 ${prod.available
-                      ? "bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100"
-                      : "bg-red-50 border-red-200 text-red-700 hover:bg-red-100"
-                    }`}
-                >
-                  {prod.available ? <CheckSquare size={14} /> : <Square size={14} />}
-                  <span>{prod.available ? "Disponible" : "Agotado"}</span>
-                </button>
-
                 <div className="flex items-center space-x-1.5">
                   <button
                     onClick={() => openEditForm(prod)}
@@ -385,6 +372,7 @@ export default function ProductsManager() {
                   >
                     <option value="cafe">Café</option>
                     <option value="cacao">Cacao</option>
+                    <option value="derivados">Derivados</option>
                   </select>
                 </div>
               </div>
@@ -392,29 +380,16 @@ export default function ProductsManager() {
               <div className="space-y-1">
                 <label className="text-xs font-bold text-stone-700 uppercase">Descripción</label>
                 <textarea
-                  rows={4}
+                  rows={2}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-850 resize-none"
                 />
               </div>
 
-              <div className="flex items-center space-x-2 pt-1">
-                <input
-                  type="checkbox"
-                  id="prod-available"
-                  checked={available}
-                  onChange={(e) => setAvailable(e.target.checked)}
-                  className="h-4 w-4 text-primary-brand focus:ring-primary-brand/20 border-stone-300 rounded"
-                />
-                <label htmlFor="prod-available" className="text-sm font-bold text-stone-750 cursor-pointer">
-                  Producto disponible para cotizar
-                </label>
-              </div>
-
               <div className="space-y-1.5 pt-1">
                 <label className="text-xs font-bold text-stone-700 uppercase block">
-                  Imagen del Producto {editingProduct ? "(Opcional)" : "*"}
+                  Imagen del Producto *
                 </label>
                 <div className="flex items-center space-x-3">
                   <input
@@ -433,7 +408,7 @@ export default function ProductsManager() {
                     <span>Seleccionar Archivo</span>
                   </label>
                   <span className="text-xs text-stone-500 truncate max-w-xs">
-                    {imageFile ? imageFile.name : editingProduct ? "Mantener actual" : "Ningún archivo"}
+                    {imageFile ? imageFile.name : "Ningún archivo"}
                   </span>
                 </div>
               </div>

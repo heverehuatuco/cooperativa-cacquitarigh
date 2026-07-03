@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Loader2, Coffee, Bean, Package } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 interface Product {
   id: string;
@@ -18,9 +19,17 @@ interface Product {
 }
 
 export default function ProductsSection() {
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams.get("search") || "";
+
   const [dbProducts, setDbProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>("Todos");
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
+
+  useEffect(() => {
+    setSearchTerm(searchParams.get("search") || "");
+  }, [searchParams]);
 
   const getCategoryColor = (cat: string) => {
     const c = cat.toLowerCase();
@@ -71,6 +80,11 @@ export default function ProductsSection() {
           <h2 className="text-4xl sm:text-5xl font-black text-stone-900 tracking-tight">
             Productos Quitari
           </h2>
+          {searchTerm && (
+            <p className="mt-4 text-stone-600 font-medium">
+              Resultados de búsqueda para: <span className="font-bold text-[#1a826e]">"{searchTerm}"</span>
+            </p>
+          )}
         </motion.div>
 
 
@@ -168,6 +182,7 @@ export default function ProductsSection() {
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-6 sm:gap-y-10">
                 {dbProducts
                   .filter(item => activeCategory === "Todos" || item.category.toLowerCase().includes(activeCategory.toLowerCase()))
+                  .filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase()))
                   .map((item, index) => {
                     const colors = getCategoryColor(item.category);
                     return (

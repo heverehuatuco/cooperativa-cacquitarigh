@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Navbar from "@/components/public/Navbar";
 import ProductsSection from "@/components/public/ProductsSection";
 import Footer from "@/components/public/Footer";
@@ -17,7 +17,9 @@ export default function ProductosPage() {
         
         <div className="relative z-10">
           {/* Sección de Productos */}
-          <ProductsSection />
+          <Suspense fallback={<div className="flex justify-center items-center py-20"><span className="text-stone-500">Cargando catálogo...</span></div>}>
+            <ProductsSection />
+          </Suspense>
         </div>
       </main>
 

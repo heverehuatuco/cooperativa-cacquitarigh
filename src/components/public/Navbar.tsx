@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -23,7 +23,10 @@ interface FloatingItem {
 export default function Navbar() {
   const { user } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [floatingItems, setFloatingItems] = useState<FloatingItem[]>([]);
 
   useEffect(() => {
@@ -47,6 +50,16 @@ export default function Navbar() {
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/productos?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsOpen(false);
+      setIsSearchOpen(false);
+      setSearchQuery("");
+    }
+  };
 
   return (
     <div className="fixed top-4 left-0 w-full z-50 px-4 md:px-8 flex justify-center pointer-events-none">
@@ -93,8 +106,8 @@ export default function Navbar() {
                 />
               </div>
             </div>
-            <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>
-              Cacquitari
+            <span className="text-xl md:text-2xl font-black tracking-tight animate-shine-text">
+              CAC QUITARI
             </span>
           </div>
         </Link>
@@ -120,9 +133,18 @@ export default function Navbar() {
 
         {/* Right Section: Search & CTA */}
         <div className="hidden md:flex relative z-10 items-center gap-4 lg:gap-6">
-          <button className="text-gray-700 hover:text-[#1a826e] transition-colors cursor-pointer" aria-label="Buscar">
-            <Search className="w-5 h-5" />
-          </button>
+          <form onSubmit={handleSearch} className="flex items-center bg-gray-100/80 hover:bg-gray-100 focus-within:bg-white border border-transparent focus-within:border-[#1a826e]/30 focus-within:ring-2 focus-within:ring-[#1a826e]/10 rounded-full px-3 py-1.5 transition-all">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar..."
+              className="bg-transparent border-none outline-none text-sm w-28 lg:w-40 xl:w-48 text-gray-800 placeholder-gray-400"
+            />
+            <button type="submit" className="text-gray-400 hover:text-[#1a826e] ml-1" aria-label="Buscar">
+              <Search className="w-4 h-4" />
+            </button>
+          </form>
           
           <Link
             href={user ? "/admin" : "/login"}
@@ -166,10 +188,18 @@ export default function Navbar() {
             );
           })}
           <hr className="border-gray-100 my-2" />
-          <div className="flex items-center justify-between p-2">
-            <span className="font-bold text-gray-800">Buscar</span>
-            <Search className="w-5 h-5 text-gray-600" />
-          </div>
+          <form onSubmit={handleSearch} className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar productos..."
+              className="bg-transparent border-none outline-none w-full text-gray-800 placeholder-gray-400 font-medium"
+            />
+            <button type="submit" className="text-gray-500 hover:text-[#1a826e]">
+              <Search className="w-5 h-5" />
+            </button>
+          </form>
           <Link
             href={user ? "/admin" : "/login"}
             onClick={() => setIsOpen(false)}
