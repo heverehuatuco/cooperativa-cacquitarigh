@@ -31,11 +31,11 @@ export default function Navbar() {
 
   useEffect(() => {
     setFloatingItems(
-      Array.from({ length: 15 }).map((_, i) => ({
+      Array.from({ length: 35 }).map((_, i) => ({
         id: i,
         left: `${Math.random() * 90 + 5}%`,
-        duration: 10 + Math.random() * 20,
-        delay: Math.random() * 5,
+        duration: 8 + Math.random() * 12,
+        delay: Math.random() * 10,
         size: 30 + Math.random() * 50,
         isCoffee: Math.random() > 0.5,
         rotation: Math.random() * 360,

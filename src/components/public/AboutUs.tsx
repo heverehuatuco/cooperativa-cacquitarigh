@@ -277,7 +277,7 @@ export default function AboutUs() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="/fondofoda.jpeg"
+            src="/fondoseccionchocolate.jpg"
             alt="Fondo Análisis FODA"
             fill
             quality={100}

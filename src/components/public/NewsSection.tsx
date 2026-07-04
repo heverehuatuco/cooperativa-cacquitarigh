@@ -88,27 +88,29 @@ export default function NewsSection() {
   }, []);
 
   return (
-    <section id="noticias" className="pt-16 pb-24 relative overflow-hidden bg-[#1a231a]">
-      {/* Background Image - Contained within section */}
+    <section id="noticias" className="pt-16 pb-24 relative overflow-hidden bg-white">
+      {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/fondofoda.jpeg"
           alt="Fondo de Noticias"
           fill
           quality={100}
-          className="object-cover object-center opacity-50"
+          className="object-cover object-center"
         />
+        {/* Gradient Overlay: starts in white, fades to image color */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-[#1a231a]/70"></div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold text-white leading-[1.2] lg:w-1/2 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold text-stone-900 leading-[1.2] lg:w-1/2 tracking-tight">
             Nuestras últimas <br className="hidden lg:block"/>
-            <span className="text-[#70f3be]">noticias</span>
+            <span className="text-[#1a826e]">noticias</span>
           </h2>
-          <p className="text-white/80 lg:w-1/3 leading-relaxed text-sm md:text-base font-medium">
+          <p className="text-stone-600 lg:w-1/3 leading-relaxed text-sm md:text-base font-medium">
             Bienvenidos a nuestra sección de noticias, donde el conocimiento y la actualidad se encuentran. Explora nuestros logros, comunicados y tendencias en la cooperativa.
           </p>
         </div>
