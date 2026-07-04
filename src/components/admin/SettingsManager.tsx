@@ -16,6 +16,8 @@ interface CompanyInfo {
   address2: string;
   tiktok: string;
   facebook: string;
+  instagram: string;
+  youtube: string;
 
   heroCardImage1?: string;
   heroCardStoragePath1?: string;
