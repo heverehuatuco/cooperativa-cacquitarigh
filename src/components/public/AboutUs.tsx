@@ -342,7 +342,7 @@ export default function AboutUs() {
 
                 {/* Decorative background icon */}
                 <div className={`absolute -bottom-8 -right-8 opacity-[0.03] transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-700 ${item.textColor} pointer-events-none`}>
-                   {React.cloneElement(item.icon as React.ReactElement, { size: 180 })}
+                   {React.cloneElement(item.icon as React.ReactElement<any>, { size: 180 })}
                 </div>
               </motion.div>
             ))}
