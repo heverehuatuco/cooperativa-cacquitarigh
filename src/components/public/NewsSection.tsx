@@ -72,7 +72,7 @@ export default function NewsSection() {
         if (fetchedNews.length === 0) {
           setArticles(MOCK_NEWS);
         } else if (fetchedNews.length < 3) {
-           setArticles([...fetchedNews, ...MOCK_NEWS.slice(fetchedNews.length, 3)]);
+          setArticles([...fetchedNews, ...MOCK_NEWS.slice(fetchedNews.length, 3)]);
         } else {
           setArticles(fetchedNews);
         }
@@ -103,11 +103,11 @@ export default function NewsSection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold text-stone-900 leading-[1.2] lg:w-1/2 tracking-tight">
-            Nuestras últimas <br className="hidden lg:block"/>
+            Nuestras últimas <br className="hidden lg:block" />
             <span className="text-[#1a826e]">noticias</span>
           </h2>
           <p className="text-stone-600 lg:w-1/3 leading-relaxed text-sm md:text-base font-medium">
@@ -124,8 +124,8 @@ export default function NewsSection() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {articles.map((art) => (
-              <div 
-                key={art.id} 
+              <div
+                key={art.id}
                 onClick={() => setActiveArticle(art)}
                 className="bg-[#f7f8f7] rounded-[2rem] p-4 sm:p-5 flex flex-col h-full group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-transparent hover:border-stone-200"
               >
@@ -143,16 +143,16 @@ export default function NewsSection() {
                     {art.excerpt}
                   </p>
                 </div>
-                
+
                 {/* Card Bottom Image */}
                 <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-auto shadow-sm">
                   {art.imageUrl ? (
-                    <Image 
-                      src={art.imageUrl} 
-                      alt={art.title} 
-                      fill 
+                    <Image
+                      src={art.imageUrl}
+                      alt={art.title}
+                      fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full bg-stone-200 flex items-center justify-center text-stone-400 text-sm">
@@ -193,17 +193,17 @@ export default function NewsSection() {
               className="bg-white rounded-3xl overflow-hidden max-w-2xl w-full max-h-[85vh] border border-stone-200 flex flex-col shadow-2xl relative z-50"
             >
               {/* Cover */}
-                <div className="h-64 w-full relative bg-stone-200 shrink-0">
-                  {activeArticle.imageUrl && (
-                    <Image
-                      src={activeArticle.imageUrl}
-                      alt={activeArticle.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 800px"
-                      className="object-cover"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 z-10">
+              <div className="h-64 w-full relative bg-stone-200 shrink-0">
+                {activeArticle.imageUrl && (
+                  <Image
+                    src={activeArticle.imageUrl}
+                    alt={activeArticle.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    className="object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 z-10">
                   <div className="space-y-1.5">
                     <div className="flex items-center text-xs text-stone-300 space-x-2">
                       <Calendar size={12} className="text-[#1a826e]" />

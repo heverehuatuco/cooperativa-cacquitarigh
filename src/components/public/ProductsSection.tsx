@@ -31,8 +31,10 @@ export default function ProductsSection() {
     setSearchTerm(searchParams.get("search") || "");
   }, [searchParams]);
 
+  const normalizeText = (text: string) => text ? text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
+
   const getCategoryColor = (cat: string) => {
-    const c = cat.toLowerCase();
+    const c = normalizeText(cat);
     if (c.includes("café") || c.includes("cafe")) return { bg: "bg-green-50", text: "text-green-700", border: "border-green-200", badge: "bg-green-100 text-green-800" };
     if (c.includes("cacao")) return { bg: "bg-orange-50", text: "text-orange-700", border: "border-orange-200", badge: "bg-orange-100 text-orange-800" };
     if (c.includes("derivados")) return { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-200", badge: "bg-purple-100 text-purple-800" };
@@ -65,7 +67,8 @@ export default function ProductsSection() {
 
 
   return (
-    <section id="productos" className="relative pt-2 lg:pt-8 pb-2 lg:pb-4 bg-transparent">
+    <>
+      <section id="productos" className="relative pt-2 lg:pt-8 pb-2 lg:pb-4 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -181,8 +184,8 @@ export default function ProductsSection() {
             ) : (
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-6 sm:gap-y-10">
                 {dbProducts
-                  .filter(item => activeCategory === "Todos" || item.category.toLowerCase().includes(activeCategory.toLowerCase()))
-                  .filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+                  .filter(item => activeCategory === "Todos" || normalizeText(item.category).includes(normalizeText(activeCategory)))
+                  .filter(item => normalizeText(item.name).includes(normalizeText(searchTerm)) || normalizeText(item.description).includes(normalizeText(searchTerm)))
                   .map((item, index) => {
                     const colors = getCategoryColor(item.category);
                     return (
@@ -212,16 +215,23 @@ export default function ProductsSection() {
                           </div>
 
                           {/* Product Info */}
-                          <div className="flex flex-col space-y-2 px-3 pb-3">
+                          <div className="flex flex-col space-y-2 px-3 pb-3 flex-grow">
                             <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>
                               {item.category}
                             </span>
                             <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
                               {item.name}
                             </h4>
-                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">
+                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mb-2">
                               {item.description}
                             </p>
+                            <div className="mt-auto pt-2">
+                              <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
+                                <div className="px-8 text-sm py-2 text-white rounded-full font-medium bg-gray-900/80 backdrop-blur w-full text-center">
+                                  Ver detalles
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </Link>
                       </motion.div>
@@ -246,14 +256,21 @@ export default function ProductsSection() {
                               <span className="text-sm font-medium">Foto Demo</span>
                             </div>
                           </div>
-                          <div className="flex flex-col space-y-2 px-3 pb-3">
+                          <div className="flex flex-col space-y-2 px-3 pb-3 flex-grow">
                             <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>Café</span>
                             <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
                               Café Tostado Premium (Demo)
                             </h4>
-                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">
+                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mb-2">
                               Haz clic aquí para ver cómo luce la página de detalles individual.
                             </p>
+                            <div className="mt-auto pt-2">
+                              <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
+                                <div className="px-8 text-sm py-2 text-white rounded-full font-medium bg-gray-900/80 backdrop-blur w-full text-center">
+                                  Ver detalles
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </Link>
                       </motion.div>
@@ -274,14 +291,21 @@ export default function ProductsSection() {
                               <span className="text-sm font-medium">Foto Demo</span>
                             </div>
                           </div>
-                          <div className="flex flex-col space-y-2 px-3 pb-3">
+                          <div className="flex flex-col space-y-2 px-3 pb-3 flex-grow">
                             <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>Cacao</span>
                             <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
                               Pasta de Cacao 100% (Demo)
                             </h4>
-                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">
+                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mb-2">
                               Haz clic aquí para ver cómo luce la página de detalles individual.
                             </p>
+                            <div className="mt-auto pt-2">
+                              <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
+                                <div className="px-8 text-sm py-2 text-white rounded-full font-medium bg-gray-900/80 backdrop-blur w-full text-center">
+                                  Ver detalles
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </Link>
                       </motion.div>
@@ -294,5 +318,6 @@ export default function ProductsSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

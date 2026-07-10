@@ -21,7 +21,7 @@ const rubik = Rubik({
 export const metadata: Metadata = {
   title: "Cooperativa Cacquitari",
   description:
-    "Cooperativa Agraria Cacquitari. Productos agrícolas de excelencia y comercio justo.",
+    "Cooperativa Agraria Cafetalera QUITARI. Productos agrícolas de excelencia y comercio justo.",
   keywords: [
     "Cacquitari",
     "cooperativa",

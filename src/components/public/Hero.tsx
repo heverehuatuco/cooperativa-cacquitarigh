@@ -113,7 +113,7 @@ export default function Hero() {
           className="w-full lg:w-[55%] flex flex-col items-start"
         >
           <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black text-white leading-[1.05] tracking-tight drop-shadow-lg" style={{ fontFamily: 'Arial, sans-serif' }}>
-            Cooperativa <br className="hidden lg:block" />Agraria Cafetalera Cacquitari Ltda
+            Cooperativa <br className="hidden lg:block" />Agraria Cafetalera QUITARI Ltda
           </h1>
           <p className="mt-6 text-white/90 text-base md:text-lg lg:text-xl max-w-xl font-medium leading-relaxed drop-shadow-md">
             Nos dedicamos con pasión al acopio de café y cacao de la más alta calidad, transformándolos en productos finales listos para deleitar tu paladar en cada taza.

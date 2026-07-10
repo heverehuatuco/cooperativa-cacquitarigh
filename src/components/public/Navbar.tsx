@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Menu, X, Search, ArrowRight, ChevronDown } from "lucide-react";
+import { Menu, X, Search, ArrowRight, Leaf, Coffee, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -44,9 +44,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Nosotros", href: "/nosotros", hasDropdown: true },
-    { name: "Productos", href: "/productos" },
-    { name: "Contacto", href: "/contacto" },
+    { name: "Nosotros", href: "/nosotros", icon: Leaf },
+    { name: "Productos", href: "/productos", icon: Coffee },
+    { name: "Contacto", href: "/contacto", icon: MessageSquare },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -91,8 +91,30 @@ export default function Navbar() {
           </motion.div>
         ))}
         
-        {/* Logo Section */}
-        <Link href="/" className="relative z-10 flex items-center gap-3">
+        {/* Desktop Links (Left) */}
+        <div className="hidden md:flex flex-1 relative z-10 items-center justify-start gap-6 lg:gap-10">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`group flex items-center gap-2 text-[13px] lg:text-sm font-bold tracking-wide uppercase transition-colors ${
+                  isActive ? "text-[#1a826e]" : "text-gray-800 hover:text-[#1a826e]"
+                }`}
+              >
+                <div className={`p-1.5 rounded-lg transition-colors ${isActive ? 'bg-[#1a826e]/15 text-[#1a826e]' : 'bg-gray-100 text-gray-500 group-hover:bg-[#1a826e]/10 group-hover:text-[#1a826e]'}`}>
+                  <Icon className="w-4 h-4" />
+                </div>
+                {link.name}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Logo Section (Center) */}
+        <Link href="/" className="relative z-10 flex items-center gap-3 md:absolute md:left-1/2 md:-translate-x-1/2">
           <div className="flex items-center gap-2 md:gap-3">
             <div className="relative h-10 w-10 md:h-12 md:w-12 flex-shrink-0 bg-transparent rounded-full overflow-hidden flex items-center justify-center">
               <div className="relative w-full h-full">
@@ -112,36 +134,17 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex relative z-10 items-center gap-6 lg:gap-10">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`flex items-center gap-1 text-[13px] lg:text-sm font-bold tracking-wide uppercase transition-colors ${
-                  isActive ? "text-[#1a826e]" : "text-gray-800 hover:text-[#1a826e]"
-                }`}
-              >
-                {link.name}
-                {link.hasDropdown && <ChevronDown className="w-4 h-4 ml-0.5 text-gray-500" />}
-              </Link>
-            );
-          })}
-        </div>
-
         {/* Right Section: Search & CTA */}
-        <div className="hidden md:flex relative z-10 items-center gap-4 lg:gap-6">
-          <form onSubmit={handleSearch} className="flex items-center bg-gray-100/80 hover:bg-gray-100 focus-within:bg-white border border-transparent focus-within:border-[#1a826e]/30 focus-within:ring-2 focus-within:ring-[#1a826e]/10 rounded-full px-3 py-1.5 transition-all">
+        <div className="hidden md:flex flex-1 relative z-10 items-center justify-end gap-4 lg:gap-6">
+          <form onSubmit={handleSearch} className="flex items-center bg-white border-2 border-gray-200 hover:border-[#1a826e]/50 focus-within:border-[#1a826e] focus-within:shadow-[0_0_0_4px_rgba(26,130,110,0.1)] rounded-full pl-4 pr-1.5 py-1.5 transition-all duration-300">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar..."
-              className="bg-transparent border-none outline-none text-sm w-28 lg:w-40 xl:w-48 text-gray-800 placeholder-gray-400"
+              placeholder="Buscar productos..."
+              className="bg-transparent border-none outline-none text-sm w-32 lg:w-48 xl:w-56 text-gray-800 placeholder-gray-400 font-medium"
             />
-            <button type="submit" className="text-gray-400 hover:text-[#1a826e] ml-1" aria-label="Buscar">
+            <button type="submit" className="bg-[#1a826e] text-white p-1.5 rounded-full hover:bg-[#219d85] transition-colors ml-1 shadow-md" aria-label="Buscar">
               <Search className="w-4 h-4" />
             </button>
           </form>
@@ -173,22 +176,25 @@ export default function Navbar() {
         <div className="absolute top-20 left-4 right-4 bg-white rounded-2xl shadow-xl p-5 flex flex-col gap-4 md:hidden border border-gray-100 pointer-events-auto">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
+            const Icon = link.icon;
             return (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`flex justify-between items-center font-bold text-lg p-2 rounded-lg ${
+                className={`group flex items-center gap-3 font-bold text-lg p-2 rounded-lg ${
                   isActive ? "text-[#1a826e] bg-[#f2faf8]" : "text-gray-800 hover:bg-gray-50"
                 }`}
               >
+                <div className={`p-2 rounded-xl transition-colors ${isActive ? 'bg-[#1a826e]/15 text-[#1a826e]' : 'bg-white shadow-sm border border-gray-100 text-gray-500 group-hover:text-[#1a826e]'}`}>
+                  <Icon className="w-5 h-5" />
+                </div>
                 {link.name}
-                {link.hasDropdown && <ChevronDown className="w-5 h-5" />}
               </Link>
             );
           })}
           <hr className="border-gray-100 my-2" />
-          <form onSubmit={handleSearch} className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
+          <form onSubmit={handleSearch} className="flex items-center bg-white border-2 border-gray-200 focus-within:border-[#1a826e] focus-within:shadow-[0_0_0_4px_rgba(26,130,110,0.1)] rounded-xl pl-4 pr-2 py-2 transition-all">
             <input
               type="text"
               value={searchQuery}
@@ -196,7 +202,7 @@ export default function Navbar() {
               placeholder="Buscar productos..."
               className="bg-transparent border-none outline-none w-full text-gray-800 placeholder-gray-400 font-medium"
             />
-            <button type="submit" className="text-gray-500 hover:text-[#1a826e]">
+            <button type="submit" className="bg-[#1a826e] text-white p-2 rounded-lg hover:bg-[#219d85] transition-colors ml-2 shadow-md">
               <Search className="w-5 h-5" />
             </button>
           </form>
