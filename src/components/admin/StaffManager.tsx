@@ -22,6 +22,7 @@ export default function StaffManager() {
   // Form states
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [newRole, setNewRole] = useState("staff");
 
   // UI state feedback
   const [submitting, setSubmitting] = useState(false);
@@ -47,9 +48,7 @@ export default function StaffManager() {
   };
 
   useEffect(() => {
-    if (role === "admin") {
-      fetchUsers();
-    }
+    fetchUsers();
   }, [role]);
 
   const handleCreateUser = async (e: React.FormEvent) => {
@@ -85,7 +84,7 @@ export default function StaffManager() {
         body: JSON.stringify({
           username: username.trim(),
           password,
-          role: "staff",
+          role: newRole,
         }),
       });
 
@@ -138,7 +137,7 @@ export default function StaffManager() {
     return (
       <div className="p-6 bg-red-50 text-red-800 rounded-3xl border border-red-200 text-sm flex items-center space-x-2">
         <AlertCircle className="text-red-500 shrink-0" size={18} />
-        <span>Acceso Denegado: Solo el SuperAdministrador tiene permisos para gestionar personal.</span>
+        <span>Acceso Denegado: Solo el Administrador tiene permisos para gestionar personal.</span>
       </div>
     );
   }
@@ -194,6 +193,20 @@ export default function StaffManager() {
                 placeholder="Mínimo 6 caracteres"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
               />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-stone-700 uppercase tracking-wider block">
+                Rol *
+              </label>
+              <select
+                value={newRole}
+                onChange={(e) => setNewRole(e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-brand/20 focus:border-primary-brand text-sm text-stone-800"
+              >
+                <option value="staff">Personal (Staff)</option>
+                <option value="admin">Administrador (Admin)</option>
+              </select>
             </div>
 
             <button

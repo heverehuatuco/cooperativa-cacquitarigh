@@ -24,7 +24,7 @@ export default function AdminPage() {
     { id: "settings", label: "Información de Empresa", icon: <Settings size={18} /> },
   ];
 
-  // Si es SuperAdmin, agregamos la gestión de personal
+  // Si es Administrador, agregamos la gestión de personal
   if (role === "admin") {
     menuItems.push({ id: "staff", label: "Gestión de Personal", icon: <Users size={18} /> });
   }

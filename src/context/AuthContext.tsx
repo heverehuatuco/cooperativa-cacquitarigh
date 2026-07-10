@@ -41,9 +41,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const userDocRef = doc(db, "users", firebaseUser.uid);
             const userDoc = await getDoc(userDocRef);
             
-            if (userDoc.exists() && userDoc.data()?.role === "staff") {
-              setUser(firebaseUser);
-              setRole("staff");
+            if (userDoc.exists()) {
+              const userRole = userDoc.data()?.role;
+              if (userRole === "staff" || userRole === "admin") {
+                setUser(firebaseUser);
+                setRole(userRole);
+              } else {
+                await signOut(auth);
+                setUser(null);
+                setRole(null);
+              }
             } else {
               // No autorizado - forzar el cierre de sesión
               await signOut(auth);
