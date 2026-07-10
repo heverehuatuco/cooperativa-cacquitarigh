@@ -19,11 +19,11 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Cooperativa Cacquitari",
+  title: "Cooperativa Cac Quitari",
   description:
     "Cooperativa Agraria Cafetalera QUITARI. Productos agrícolas de excelencia y comercio justo.",
   keywords: [
-    "Cacquitari",
+    "Cac Quitari",
     "cooperativa",
     "café",
     "cacao",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "comercio justo",
     "agricultura sostenible",
   ],
-  authors: [{ name: "Cooperativa Cacquitari" }],
+  authors: [{ name: "Cooperativa Cac Quitari" }],
 };
 
 export default function RootLayout({
