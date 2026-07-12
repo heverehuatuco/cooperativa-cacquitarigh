@@ -18,6 +18,7 @@ interface CompanyInfo {
   facebook: string;
   instagram: string;
   youtube: string;
+  locationImage?: string;
 }
 
 const DEFAULT_INFO: CompanyInfo = {
@@ -99,232 +100,203 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="relative pt-12 pb-6 lg:pt-16 lg:pb-8 bg-transparent font-sans">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
-
-          {/* Left Column - Text & Contact Info */}
+    <section id="contacto" className="relative pt-12 pb-12 lg:pt-20 lg:pb-20 bg-stone-50 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          
+          {/* Left Column - Form & Title */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:pr-10"
+            className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center"
           >
-
-
-            {/* Title */}
-            <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-black text-stone-900 mb-8 lg:mb-12 leading-[1.15] tracking-tight">
-              ¿Necesitas ayuda? <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-primary-brand to-secondary-brand bg-clip-text text-transparent">¡Contáctanos!</span>
-            </h2>
-
-            {/* Vertical Contact Info Blocks */}
-            <div className="space-y-6 lg:space-y-10">
-
-              {/* Location Block */}
-              {info.address2 ? (
-                <a
-                  href={info.address2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-5 p-5 rounded-3xl bg-blue-50/60 border border-blue-100/80 hover:bg-blue-100/50 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                      <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={32} height={32} className="object-contain drop-shadow-sm" />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-blue-600 transition-colors">¿Listo para visitarnos?</h4>
-                    <p className="text-[15px] text-stone-600 leading-relaxed">
-                      {info.address}
-                    </p>
-                  </div>
-                </a>
-              ) : (
-                <div className="group flex items-center gap-5 p-5 rounded-3xl bg-blue-50/60 border border-blue-100/80 hover:bg-blue-100/50 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                      <Image src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="Google Maps" width={32} height={32} className="object-contain drop-shadow-sm" />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-blue-600 transition-colors">¿Listo para visitarnos?</h4>
-                    <p className="text-[15px] text-stone-600 leading-relaxed">
-                      {info.address}
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {/* Phone Block */}
-              <a
-                href={`https://wa.me/${info.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-5 p-5 rounded-3xl bg-green-50/60 border border-green-100/80 hover:bg-green-100/50 hover:shadow-xl hover:shadow-green-500/10 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={36} height={36} className="object-contain drop-shadow-sm" />
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-green-600 transition-colors">¡No dudes en comunicarte!</h4>
-                  <p className="text-[15px] text-stone-600 leading-relaxed">
-                    WhatsApp: <span className="font-semibold text-stone-800">+{info.whatsapp}</span><br />
-                    {info.whatsapp2 && <span>Soporte: <span className="font-semibold text-stone-800">+{info.whatsapp2}</span></span>}
-                  </p>
-                </div>
-              </a>
-
-              {/* Email Block */}
-              <a
-                href={`mailto:${info.email}`}
-                className="group flex items-center gap-5 p-5 rounded-3xl bg-red-50/60 border border-red-100/80 hover:bg-red-100/50 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center relative group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width={32} height={32} className="object-contain drop-shadow-sm" />
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-stone-900 text-base lg:text-lg mb-1 group-hover:text-red-600 transition-colors">¿Cómo podemos asistirte?</h4>
-                  <p className="text-[15px] font-medium text-stone-700 leading-relaxed">
-                    {info.email}
-                  </p>
-                </div>
-              </a>
-
+            <div className="mb-10 text-center lg:text-left">
+              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-black text-stone-900 mb-4 leading-[1.1] tracking-tight">
+                ¿Necesitas ayuda? <br className="hidden lg:block" />
+                <span className="bg-gradient-to-r from-primary-brand to-secondary-brand bg-clip-text text-transparent">Contáctanos</span>
+              </h2>
+              <p className="text-stone-500 text-[15px] leading-relaxed max-w-md mx-auto lg:mx-0">
+                Nos encantaría escuchar tus ideas, consultas o pedidos. Déjanos un mensaje y te responderemos lo más pronto posible.
+              </p>
             </div>
-          </motion.div>
 
-          {/* Right Column - Form Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full lg:max-w-[500px] lg:ml-auto"
-          >
-            <div className="relative bg-gradient-to-br from-white to-stone-50/50 p-8 sm:p-10 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-white overflow-hidden">
-              {/* Decorative blobs */}
-              <div className="absolute -top-12 -right-12 w-40 h-40 bg-secondary-brand/20 rounded-full blur-3xl pointer-events-none"></div>
-              <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-primary-brand/10 rounded-full blur-3xl pointer-events-none"></div>
-
-              <div className="mb-8 relative z-10">
-                <h3 className="text-3xl font-black bg-gradient-to-r from-primary-brand to-secondary-brand bg-clip-text text-transparent mb-2">¡Escríbenos!</h3>
-                <p className="text-stone-500 text-sm">Nos encantaría escuchar tus ideas o consultas.</p>
+            <form onSubmit={handleSubmit} className="space-y-5 bg-white p-8 rounded-3xl shadow-xl shadow-stone-200/50 border border-stone-100">
+              {/* Name */}
+              <div className="space-y-2 relative">
+                <label htmlFor="name" className="text-[13px] font-bold text-stone-700 block">
+                  Nombre Completo
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Ej. Carlos Huatuco"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3.5 pr-12 rounded-2xl border border-stone-200 bg-stone-50 focus:bg-white focus:border-secondary-brand focus:ring-4 focus:ring-secondary-brand/10 text-[15px] text-stone-800 transition-all placeholder:text-stone-400"
+                  />
+                  <User className="w-5 h-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2" />
+                </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-
-                {/* Name */}
-                <div className="space-y-2 relative">
-                  <label htmlFor="name" className="text-[13px] font-medium text-stone-600 block">
-                    Nombre Completo
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      placeholder="Ej. Carlos Huatuco"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3.5 pr-12 rounded-xl border-0 bg-stone-100/80 focus:bg-white focus:ring-2 focus:ring-secondary-brand/60 text-[15px] text-stone-800 transition-all shadow-inner placeholder:text-stone-400"
-                    />
-                    <User className="w-5 h-5 text-secondary-brand/60 absolute right-4 top-1/2 -translate-y-1/2" />
-                  </div>
+              {/* Email */}
+              <div className="space-y-2 relative">
+                <label htmlFor="email" className="text-[13px] font-bold text-stone-700 block">
+                  Correo Electrónico
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="tu@correo.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3.5 pr-12 rounded-2xl border border-stone-200 bg-stone-50 focus:bg-white focus:border-secondary-brand focus:ring-4 focus:ring-secondary-brand/10 text-[15px] text-stone-800 transition-all placeholder:text-stone-400"
+                  />
+                  <Mail className="w-5 h-5 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2" />
                 </div>
+              </div>
 
-                {/* Email */}
-                <div className="space-y-2 relative">
-                  <label htmlFor="email" className="text-[13px] font-medium text-stone-600 block">
-                    Correo Electrónico
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="huatuco2001@gmail.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3.5 pr-12 rounded-xl border-0 bg-stone-100/80 focus:bg-white focus:ring-2 focus:ring-secondary-brand/60 text-[15px] text-stone-800 transition-all shadow-inner placeholder:text-stone-400"
-                    />
-                    <Mail className="w-5 h-5 text-secondary-brand/60 absolute right-4 top-1/2 -translate-y-1/2" />
-                  </div>
+              {/* Message */}
+              <div className="space-y-2 relative">
+                <label htmlFor="message" className="text-[13px] font-bold text-stone-700 block">
+                  Mensaje
+                </label>
+                <div className="relative">
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={4}
+                    placeholder="¿En qué te podemos ayudar?"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3.5 pr-12 rounded-2xl border border-stone-200 bg-stone-50 focus:bg-white focus:border-secondary-brand focus:ring-4 focus:ring-secondary-brand/10 text-[15px] text-stone-800 resize-none transition-all placeholder:text-stone-400"
+                  />
                 </div>
+              </div>
 
-                {/* Message */}
-                <div className="space-y-2 relative">
-                  <label htmlFor="message" className="text-[13px] font-medium text-stone-600 block">
-                    Mensaje
-                  </label>
-                  <div className="relative">
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={4}
-                      placeholder="¿En qué te podemos ayudar?"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3.5 pr-12 rounded-xl border-0 bg-stone-100/80 focus:bg-white focus:ring-2 focus:ring-secondary-brand/60 text-[15px] text-stone-800 resize-none transition-all shadow-inner placeholder:text-stone-400"
-                    />
-                  </div>
-                </div>
+              {/* Status Alert Panels */}
+              <AnimatePresence>
+                {success && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    className="p-4 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100 flex items-start space-x-2 text-[13px]"
+                  >
+                    <CheckCircle2 className="shrink-0 mt-0.5" size={16} />
+                    <span>¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.</span>
+                  </motion.div>
+                )}
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    className="p-4 bg-red-50 text-red-700 rounded-xl border border-red-100 flex items-start space-x-2 text-[13px]"
+                  >
+                    <AlertCircle className="shrink-0 mt-0.5" size={16} />
+                    <span>{error}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                {/* Status Alert Panels */}
-                <AnimatePresence>
-                  {success && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      className="p-4 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100 flex items-start space-x-2 text-[13px]"
-                    >
-                      <CheckCircle2 className="shrink-0 mt-0.5" size={16} />
-                      <span>¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.</span>
-                    </motion.div>
-                  )}
-                  {error && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      className="p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 flex items-start space-x-2 text-[13px]"
-                    >
-                      <AlertCircle className="shrink-0 mt-0.5" size={16} />
-                      <span>{error}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full inline-flex justify-center items-center space-x-2 bg-gradient-to-r from-primary-brand to-secondary-brand hover:from-primary-brand hover:to-primary-brand text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-primary-brand/30 hover:shadow-primary-brand/50 hover:-translate-y-1 disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none cursor-pointer mt-4"
-                >
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full rainbow relative z-0 bg-gray-800 overflow-hidden p-[2px] flex items-center justify-center rounded-full hover:scale-[1.02] transition duration-300 active:scale-100 mt-2 disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none shadow-xl"
+              >
+                <div className="w-full flex items-center justify-center space-x-2 text-white font-bold py-3.5 px-6 rounded-full bg-gray-900">
                   {submitting ? (
                     <Loader2 className="animate-spin" size={20} />
                   ) : (
                     <span className="text-[16px] tracking-wide">Enviar Mensaje</span>
                   )}
-                </button>
+                </div>
+              </button>
 
-                {/* Privacy Policy text */}
-                <p className="text-[12px] text-stone-500 leading-relaxed mt-5">
-                  Entiendo que mis datos serán guardados de forma segura.
-                </p>
+              <p className="text-[12px] text-stone-400 leading-relaxed mt-4 text-center">
+                Entiendo que mis datos serán guardados de forma segura.
+              </p>
+            </form>
+          </motion.div>
 
-              </form>
+          {/* Right Column - Image & Info Container */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-7 order-1 lg:order-2 w-full h-full min-h-[450px] lg:min-h-[680px] relative rounded-[2.5rem] overflow-hidden shadow-2xl group"
+          >
+            {info.locationImage ? (
+              <Image 
+                src={info.locationImage} 
+                alt="Nuestro Local" 
+                fill 
+                className="object-cover group-hover:scale-105 transition-transform duration-1000" 
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-stone-200 to-stone-300"></div>
+            )}
+            
+            {/* Gradient Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
+
+            {/* Content inside Image */}
+            <div className="absolute inset-0 p-4 sm:p-8 flex flex-col justify-end">
+              
+              <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-[2rem] p-6 sm:p-8 space-y-6 shadow-2xl">
+                
+                {/* Location */}
+                <a href={info.address2 || "#"} target="_blank" rel="noopener noreferrer" className="flex items-start gap-5 group/item">
+                  <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary-brand group-hover/item:border-primary-brand transition-colors duration-300">
+                    <MapPin className="text-white w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Visítanos</h4>
+                    <p className="text-white font-medium text-[15px] leading-relaxed group-hover/item:text-primary-brand-light transition-colors">
+                      {info.address}
+                    </p>
+                  </div>
+                </a>
+
+                {/* Phone */}
+                <a href={`https://wa.me/${info.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-5 group/item">
+                  <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary-brand group-hover/item:border-primary-brand transition-colors duration-300">
+                    <Phone className="text-white w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Llámanos</h4>
+                    <p className="text-white font-medium text-[15px] group-hover/item:text-primary-brand-light transition-colors">
+                      +{info.whatsapp}
+                      {info.whatsapp2 && <span className="block text-white/70 text-sm mt-0.5">Soporte: +{info.whatsapp2}</span>}
+                    </p>
+                  </div>
+                </a>
+
+                {/* Email */}
+                <a href={`mailto:${info.email}`} className="flex items-start gap-5 group/item">
+                  <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary-brand group-hover/item:border-primary-brand transition-colors duration-300">
+                    <Mail className="text-white w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Escríbenos</h4>
+                    <p className="text-white font-medium text-[15px] group-hover/item:text-primary-brand-light transition-colors">
+                      {info.email}
+                    </p>
+                  </div>
+                </a>
+
+              </div>
             </div>
           </motion.div>
 

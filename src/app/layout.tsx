@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Roboto_Mono, Rubik } from "next/font/google";
+import { Outfit, Roboto_Mono, Rubik, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
@@ -16,6 +16,17 @@ const robotoMono = Roboto_Mono({
 const rubik = Rubik({
   variable: "--font-rubik",
   subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -42,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${outfit.variable} ${robotoMono.variable} ${rubik.variable} h-full scroll-smooth antialiased`}
+      className={`${outfit.variable} ${robotoMono.variable} ${rubik.variable} ${inter.variable} ${poppins.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900 font-sans">
         <AuthProvider>{children}</AuthProvider>

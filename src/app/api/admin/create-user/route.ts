@@ -23,11 +23,25 @@ export async function POST(req: NextRequest) {
 
     const token = authHeader.split("Bearer ")[1];
     
-    // 3. Verificar el token y comprobar si el emisor es el SuperAdmin
+    // 3. Verificar el token y comprobar si el emisor tiene permisos (SuperAdmin o rol 'admin')
     const decodedToken = await adminAuth.verifyIdToken(token);
     const callerEmail = decodedToken.email?.toLowerCase().trim();
+    const callerUid = decodedToken.uid;
 
-    if (callerEmail !== "heverehuatuco@gmail.com") {
+    let isAuthorized = false;
+
+    // A. Es el administrador principal original
+    if (callerEmail === "heverehuatuco@gmail.com") {
+      isAuthorized = true;
+    } else {
+      // B. O tiene el rol 'admin' en la base de datos de Firestore
+      const userDoc = await adminDb.collection("users").doc(callerUid).get();
+      if (userDoc.exists && userDoc.data()?.role === "admin") {
+        isAuthorized = true;
+      }
+    }
+
+    if (!isAuthorized) {
       return NextResponse.json(
         { error: "Acceso denegado: Solo el administrador principal puede realizar esta acción" },
         { status: 403 }

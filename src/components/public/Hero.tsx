@@ -61,16 +61,9 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-[100vh] flex items-center pt-24 pb-16 overflow-hidden bg-[#1a231a]">
-      {/* Background Image */}
+    <section className="relative w-full min-h-[100vh] flex items-center pt-24 pb-16 overflow-hidden bg-gradient-to-br from-[#0f4d41] via-[#1a826e] to-[#0a332b] font-inter">
+      {/* Background Effect */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/fondohero.webp"
-          alt="Cacquitari Farm"
-          fill
-          className="object-cover"
-          priority
-        />
 
         {/* Floating Rain Effect */}
         {floatingItems.map((item) => (
@@ -98,9 +91,6 @@ export default function Hero() {
           </motion.div>
         ))}
 
-        {/* Overlay gradient to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-[2]"></div>
-        <div className="absolute inset-0 bg-black/40 md:hidden z-[2]"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-0 flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -112,21 +102,23 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="w-full lg:w-[55%] flex flex-col items-start"
         >
-          <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black text-white leading-[1.05] tracking-tight drop-shadow-lg" style={{ fontFamily: 'Arial, sans-serif' }}>
-            Cooperativa <br className="hidden lg:block" />Agraria Cafetalera QUITARI Ltda
+          <h1 className="text-6xl sm:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tight font-outfit text-glow-sweep">
+            Cooperativa <br className="hidden lg:block" />Agraria Cafetalera Quitari Ltda
           </h1>
           <p className="mt-6 text-white/90 text-base md:text-lg lg:text-xl max-w-xl font-medium leading-relaxed drop-shadow-md">
-            Nos dedicamos con pasión al acopio de café y cacao de la más alta calidad, transformándolos en productos finales listos para deleitar tu paladar en cada taza.
+            Nos dedicamos con pasión al acopio de café y cacao de la más alta calidad en el distrito de Pangoa-VRAEM, transformándolos en productos finales listos para deleitar tu paladar en cada taza.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
             <Link
               href="/productos"
-              className="flex items-center gap-4 bg-[#1a826e] text-white text-sm lg:text-base font-bold pl-6 pr-2 py-2 rounded-full hover:bg-[#219d85] transition-all shadow-xl group"
+              className="rainbow relative z-0 bg-white/15 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 group shadow-xl"
             >
-              Nuestros Productos
-              <div className="bg-white text-[#1a826e] rounded-full p-2.5 flex items-center justify-center transition-transform group-hover:translate-x-1">
-                <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
+              <div className="flex items-center gap-4 pl-6 pr-2 py-2 text-white rounded-full font-bold bg-gray-900/80 backdrop-blur w-full text-center text-sm lg:text-base">
+                Nuestros Productos
+                <div className="bg-white text-gray-900 rounded-full p-2.5 flex items-center justify-center transition-transform group-hover:translate-x-1">
+                  <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
+                </div>
               </div>
             </Link>
           </div>
@@ -181,16 +173,19 @@ export default function Hero() {
 
       </div>
 
-      {/* Impactful Layered Wave Divider */}
+      {/* Refined Rounded Zigzag / Wave Divider - Responsive */}
       <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none">
         <svg
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          className="relative block w-full h-[100px] sm:h-[150px] lg:h-[250px]"
+          width="100%"
+          height="30"
+          className="relative block w-full h-[30px]"
         >
-          <path fill="#ffffff" fillOpacity="0.4" d="M0,128 C400,256 700,320 1100,256 C1300,224 1400,64 1440,0 L1440,320 L0,320 Z"></path>
-          <path fill="#ffffff" fillOpacity="0.7" d="M0,192 C400,288 700,320 1100,288 C1300,256 1400,128 1440,64 L1440,320 L0,320 Z"></path>
-          <path fill="#ffffff" d="M0,256 C400,320 700,320 1100,320 C1300,320 1400,192 1440,128 L1440,320 L0,320 Z"></path>
+          <defs>
+            <pattern id="zigzag" width="36" height="30" patternUnits="userSpaceOnUse">
+              <path d="M 0,15 Q 9,-5 18,15 T 36,15 L 36,30 L 0,30 Z" fill="#fafaf9" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="30" fill="url(#zigzag)" />
         </svg>
       </div>
     </section>

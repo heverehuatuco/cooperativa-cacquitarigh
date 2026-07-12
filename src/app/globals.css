@@ -6,15 +6,47 @@
 }
 
 @theme {
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-rubik: var(--font-rubik), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-outfit: var(--font-outfit), sans-serif;
+  --font-poppins: var(--font-poppins), sans-serif;
   --color-primary-brand: #1a826e;
   --color-primary-brand-light: #219d85;
   --color-secondary-brand: #70f3be;
   --color-secondary-brand-light: #94f6cf;
   --color-tertiary-brand: oklch(26.8% 0.011 36.5);
   --color-tertiary-brand-light: oklch(36.8% 0.011 36.5);
+}
+
+@keyframes shine-sweep {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.text-glow-sweep {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.8) 30%,
+    rgba(255, 255, 255, 1) 45%,
+    #70f3be 50%,
+    rgba(255, 255, 255, 1) 55%,
+    rgba(255, 255, 255, 0.8) 70%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine-sweep 4s linear infinite;
+  filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.3));
+}
+
+@theme {
   --color-primary-brown: #3e2723;
   --color-primary-brown-light: #5d4037;
   --color-warm-cream: #faf7f2;

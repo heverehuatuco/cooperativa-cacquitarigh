@@ -112,10 +112,12 @@ export default function AboutUs() {
               <p className="text-white/90 text-base lg:text-lg font-medium leading-relaxed mb-6 max-w-xl">
                 Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. Hoy agrupamos a más de 200 jóvenes productores implementando tecnologías y alianzas de comercio justo.
               </p>
-              <a href="#nosotros-historia" className="bg-[#1a826e] hover:bg-[#219d85] text-white font-bold py-3 px-7 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group text-sm">
-                Conoce Nuestra Historia
-                <div className="bg-white/20 rounded-full p-1 group-hover:bg-white group-hover:text-[#1a826e] transition-colors">
-                  <ArrowUpRight className="w-4 h-4 rotate-45" />
+              <a href="#nosotros-historia" className="rainbow relative z-0 bg-white/15 overflow-hidden p-0.5 inline-flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 group shadow-lg">
+                <div className="flex items-center gap-2 px-7 py-3 text-white rounded-full font-bold bg-gray-900/80 backdrop-blur w-full text-center text-sm">
+                  Conoce Nuestra Historia
+                  <div className="bg-white/20 rounded-full p-1 group-hover:bg-white group-hover:text-gray-900 transition-colors">
+                    <ArrowUpRight className="w-4 h-4 rotate-45" />
+                  </div>
                 </div>
               </a>
             </div>

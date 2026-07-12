@@ -29,6 +29,8 @@ interface CompanyInfo {
   logoStoragePath?: string;
   aboutImageUrl1?: string;
   aboutStoragePath1?: string;
+  locationImage?: string;
+  locationStoragePath?: string;
 
   certImage1?: string;
   certStoragePath1?: string;
@@ -77,6 +79,7 @@ export default function SettingsManager() {
   const heroCardInputRef3 = React.useRef<HTMLInputElement>(null);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [aboutFile1, setAboutFile1] = useState<File | null>(null);
+  const [locationFile, setLocationFile] = useState<File | null>(null);
 
   const [certFile1, setCertFile1] = useState<File | null>(null);
   const [certFile2, setCertFile2] = useState<File | null>(null);
@@ -87,6 +90,7 @@ export default function SettingsManager() {
   const [progress, setProgress] = useState<number | null>(null);
   const logoInputRef = React.useRef<HTMLInputElement>(null);
   const aboutInputRef1 = React.useRef<HTMLInputElement>(null);
+  const locationInputRef = React.useRef<HTMLInputElement>(null);
 
   const certInputRef1 = React.useRef<HTMLInputElement>(null);
   const certInputRef2 = React.useRef<HTMLInputElement>(null);
@@ -143,6 +147,12 @@ export default function SettingsManager() {
     }
   };
 
+  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setLocationFile(e.target.files[0]);
+    }
+  };
+
 
 
   const handleCertChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,6 +204,8 @@ export default function SettingsManager() {
       let currentLogoPath = formData.logoStoragePath || "";
       let currentAboutUrl1 = formData.aboutImageUrl1 || "";
       let currentAboutPath1 = formData.aboutStoragePath1 || "";
+      let currentLocationUrl = formData.locationImage || "";
+      let currentLocationPath = formData.locationStoragePath || "";
 
       let currentCertUrl1 = formData.certImage1 || "";
       let currentCertPath1 = formData.certStoragePath1 || "";
@@ -278,6 +290,25 @@ export default function SettingsManager() {
             async () => {
               currentAboutUrl1 = await getDownloadURL(aboutUploadTask1.snapshot.ref);
               currentAboutPath1 = aboutPath1;
+              resolve();
+            }
+          );
+        });
+      }
+
+      if (locationFile) {
+        const locationPath = `settings/location_${Date.now()}_${locationFile.name}`;
+        const locationRef = ref(storage, locationPath);
+        const locationUploadTask = uploadBytesResumable(locationRef, locationFile);
+
+        await new Promise<void>((resolve, reject) => {
+          locationUploadTask.on(
+            "state_changed",
+            null,
+            (err) => reject(err),
+            async () => {
+              currentLocationUrl = await getDownloadURL(locationUploadTask.snapshot.ref);
+              currentLocationPath = locationPath;
               resolve();
             }
           );
@@ -381,6 +412,8 @@ export default function SettingsManager() {
         logoStoragePath: currentLogoPath,
         aboutImageUrl1: currentAboutUrl1,
         aboutStoragePath1: currentAboutPath1,
+        locationImage: currentLocationUrl,
+        locationStoragePath: currentLocationPath,
 
         certImage1: currentCertUrl1,
         certStoragePath1: currentCertPath1,
@@ -415,6 +448,8 @@ export default function SettingsManager() {
       setAboutFile1(null);
       if (logoInputRef.current) logoInputRef.current.value = "";
       if (aboutInputRef1.current) aboutInputRef1.current.value = "";
+      setLocationFile(null);
+      if (locationInputRef.current) locationInputRef.current.value = "";
 
       setCertFile1(null);
       setCertFile2(null);
@@ -563,7 +598,24 @@ export default function SettingsManager() {
               </div>
             </div>
 
-
+            {/* Location Image */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">
+                Imagen del Local (Contacto)
+              </label>
+              {formData.locationImage && !locationFile && (
+                <div className="mb-3 aspect-square w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.locationImage} alt="Local" fill sizes="150px" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={locationInputRef} onChange={handleLocationChange} className="hidden" id="location-image-upload" />
+                <label htmlFor="location-image-upload" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
+                  <Upload size={14} /><span>Cambiar Imagen Local</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{locationFile ? locationFile.name : formData.locationImage ? "" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
           </div>
         </div>
 

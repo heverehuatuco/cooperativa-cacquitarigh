@@ -72,7 +72,7 @@ export default function Footer() {
 
   return (
     <div className="w-full px-4 md:px-8 py-6 md:py-8 mt-auto z-20 flex justify-center">
-      <footer className="relative w-full max-w-7xl bg-white rounded-[2.5rem] px-6 py-6 md:px-10 md:py-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100 overflow-hidden">
+      <footer className="relative w-full max-w-7xl bg-[#1a826e] rounded-[2.5rem] px-6 py-6 md:px-10 md:py-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-[#115e4f] overflow-hidden">
         
         {/* Floating Rain Effect */}
         {floatingItems.map((item) => (
@@ -114,11 +114,11 @@ export default function Footer() {
                 />
               </div>
             </div>
-            <span className="text-xl md:text-2xl font-black tracking-tight animate-shine-text text-gray-900">
+            <span className="text-xl md:text-2xl font-black tracking-tight text-white">
               CAC QUITARI
             </span>
           </Link>
-          <p className="text-gray-500 text-[13px] md:text-sm font-medium tracking-wide text-center lg:text-left mt-1">
+          <p className="text-white/80 text-[13px] md:text-sm font-medium tracking-wide text-center lg:text-left mt-1">
             © {currentYear} CAC QUITARI. Todos los derechos reservados.
           </p>
         </div>
@@ -126,12 +126,12 @@ export default function Footer() {
         {/* Right: Certifications */}
         {certs.length > 0 && (
           <div className="relative z-10 flex flex-col items-center lg:items-end gap-3">
-            <h3 className="text-[#1a826e] font-extrabold text-sm tracking-widest uppercase">
+            <h3 className="text-white font-extrabold text-sm tracking-widest uppercase">
               Certificaciones Internacionales:
             </h3>
             <div className="flex flex-wrap items-center justify-center lg:justify-end gap-3">
               {certs.map((cert, index) => (
-                <div key={index} className="relative h-14 w-14 md:h-16 md:w-16 bg-white border border-gray-100 rounded-2xl p-2 flex items-center justify-center shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-[#1a826e]/30 transition-all duration-300">
+                <div key={index} className="relative h-14 w-14 md:h-16 md:w-16 bg-white border border-white/20 rounded-2xl p-2 flex items-center justify-center shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-white/50 transition-all duration-300">
                   <div className="relative w-full h-full">
                     <Image 
                       src={cert} 
