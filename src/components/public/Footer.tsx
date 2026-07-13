@@ -72,7 +72,7 @@ export default function Footer() {
 
   return (
     <div className="w-full px-4 md:px-8 py-6 md:py-8 mt-auto z-20 flex justify-center">
-      <footer className="relative w-full max-w-7xl bg-[#1a826e] rounded-[2.5rem] px-6 py-6 md:px-10 md:py-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-[#115e4f] overflow-hidden">
+      <footer className="relative w-full max-w-7xl bg-[linear-gradient(90deg,#102721,#1e3b23)] rounded-[2.5rem] px-6 py-6 md:px-10 md:py-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_0_40px_rgba(42,84,32,0.3)] border border-white/10 hover:border-white/20 transition-colors duration-500 overflow-hidden group">
         
         {/* Floating Rain Effect */}
         {floatingItems.map((item) => (
@@ -114,7 +114,7 @@ export default function Footer() {
                 />
               </div>
             </div>
-            <span className="text-xl md:text-2xl font-black tracking-tight text-white">
+            <span className="text-xl md:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#77ab63] group-hover:to-[#75a331] transition-colors duration-500">
               CAC QUITARI
             </span>
           </Link>
@@ -126,12 +126,12 @@ export default function Footer() {
         {/* Right: Certifications */}
         {certs.length > 0 && (
           <div className="relative z-10 flex flex-col items-center lg:items-end gap-3">
-            <h3 className="text-white font-extrabold text-sm tracking-widest uppercase">
+            <h3 className="text-[#75a331] font-extrabold text-sm tracking-widest uppercase">
               Certificaciones Internacionales:
             </h3>
             <div className="flex flex-wrap items-center justify-center lg:justify-end gap-3">
               {certs.map((cert, index) => (
-                <div key={index} className="relative h-14 w-14 md:h-16 md:w-16 bg-white border border-white/20 rounded-2xl p-2 flex items-center justify-center shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-white/50 transition-all duration-300">
+                <div key={index} className="relative h-14 w-14 md:h-16 md:w-16 bg-white border border-transparent rounded-2xl p-2 flex items-center justify-center shadow-lg hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(117,163,49,0.6)] hover:border-[#75a331] transition-all duration-300">
                   <div className="relative w-full h-full">
                     <Image 
                       src={cert} 

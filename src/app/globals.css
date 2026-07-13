@@ -12,12 +12,12 @@
   --font-inter: var(--font-inter), sans-serif;
   --font-outfit: var(--font-outfit), sans-serif;
   --font-poppins: var(--font-poppins), sans-serif;
-  --color-primary-brand: #1a826e;
-  --color-primary-brand-light: #219d85;
-  --color-secondary-brand: #70f3be;
+  --color-primary-brand: #2a5420;
+  --color-primary-brand-light: #77ab63;
+  --color-secondary-brand: #75a331;
   --color-secondary-brand-light: #94f6cf;
-  --color-tertiary-brand: oklch(26.8% 0.011 36.5);
-  --color-tertiary-brand-light: oklch(36.8% 0.011 36.5);
+  --color-tertiary-brand: #102721;
+  --color-tertiary-brand-light: #1f3724;
 }
 
 @keyframes shine-sweep {
@@ -34,7 +34,7 @@
     110deg,
     rgba(255, 255, 255, 0.8) 30%,
     rgba(255, 255, 255, 1) 45%,
-    #70f3be 50%,
+    #75a331 50%,
     rgba(255, 255, 255, 1) 55%,
     rgba(255, 255, 255, 0.8) 70%
   );
@@ -85,9 +85,9 @@ body {
 .animate-shine-text {
   background: linear-gradient(
     110deg,
-    #1a826e 35%,
+    #2a5420 35%,
     #ffffff 50%,
-    #1a826e 65%
+    #2a5420 65%
   );
   background-size: 200% auto;
   color: transparent;

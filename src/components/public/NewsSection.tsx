@@ -88,29 +88,52 @@ export default function NewsSection() {
   }, []);
 
   return (
-    <section id="noticias" className="pt-16 pb-24 relative overflow-hidden bg-white">
-      {/* Background Image with Gradient Overlay */}
+    <section id="noticias" className="pt-24 pb-32 relative overflow-hidden bg-[linear-gradient(90deg,#2a5420,#102721)] font-inter">
+      {/* Hexagon Background Effect */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Image
-          src="/fondofoda.jpeg"
-          alt="Fondo de Noticias"
-          fill
-          quality={100}
-          className="object-cover object-center"
-        />
-        {/* Gradient Overlay: starts in white, fades to image color */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-[#1a231a]/70"></div>
+        {/* Hexágonos redondeados posicionados a la derecha */}
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] opacity-80">
+          <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+            <defs>
+              <linearGradient id="hexGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#285120" />
+                <stop offset="100%" stopColor="#77ab63" />
+              </linearGradient>
+              <linearGradient id="hexGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#285120" />
+                <stop offset="100%" stopColor="#3d602f" />
+              </linearGradient>
+            </defs>
+            {/* Outer Hexagon */}
+            <polygon 
+              points="50,5 93.3,30 93.3,70 50,95 6.7,70 6.7,30" 
+              fill="url(#hexGrad1)" stroke="url(#hexGrad1)" strokeWidth="8" strokeLinejoin="round" 
+            />
+            {/* Middle Hexagon */}
+            <polygon 
+              points="50,5 93.3,30 93.3,70 50,95 6.7,70 6.7,30" 
+              fill="url(#hexGrad2)" stroke="url(#hexGrad2)" strokeWidth="8" strokeLinejoin="round" 
+              transform="translate(50 50) scale(0.76) translate(-50 -50)"
+            />
+            {/* Inner Hexagon (Hollowed out) */}
+            <polygon 
+              points="50,5 93.3,30 93.3,70 50,95 6.7,70 6.7,30" 
+              fill="#122c1e" stroke="#122c1e" strokeWidth="8" strokeLinejoin="round" 
+              transform="translate(50 50) scale(0.52) translate(-50 -50)"
+            />
+          </svg>
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold text-stone-900 leading-[1.2] lg:w-1/2 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold text-white leading-[1.2] lg:w-1/2 tracking-tight">
             Nuestras últimas <br className="hidden lg:block" />
-            <span className="text-[#1a826e]">noticias</span>
+            <span className="text-[#75a331]">noticias</span>
           </h2>
-          <p className="text-stone-600 lg:w-1/3 leading-relaxed text-sm md:text-base font-medium">
+          <p className="text-white/80 lg:w-1/3 leading-relaxed text-sm md:text-base font-medium">
             Bienvenidos a nuestra sección de noticias, donde el conocimiento y la actualidad se encuentran. Explora nuestros logros, comunicados y tendencias en la cooperativa.
           </p>
         </div>
@@ -135,7 +158,7 @@ export default function NewsSection() {
                     <h3 className="text-lg md:text-xl font-bold text-stone-900 leading-tight line-clamp-2">
                       {art.title}
                     </h3>
-                    <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center flex-shrink-0 group-hover:bg-[#1a826e] transition-colors duration-300">
+                    <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center flex-shrink-0 group-hover:bg-[#2a5420] transition-colors duration-300">
                       <ArrowRight size={16} />
                     </div>
                   </div>
@@ -206,7 +229,7 @@ export default function NewsSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 z-10">
                   <div className="space-y-1.5">
                     <div className="flex items-center text-xs text-stone-300 space-x-2">
-                      <Calendar size={12} className="text-[#1a826e]" />
+                      <Calendar size={12} className="text-[#2a5420]" />
                       <span>{activeArticle.date}</span>
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white leading-tight">
@@ -218,7 +241,7 @@ export default function NewsSection() {
 
               {/* Body Content */}
               <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
-                <p className="text-sm font-semibold text-stone-500 border-l-2 border-[#1a826e] pl-3 italic">
+                <p className="text-sm font-semibold text-stone-500 border-l-2 border-[#75a331] pl-3 italic">
                   {activeArticle.excerpt}
                 </p>
                 <div className="text-stone-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">

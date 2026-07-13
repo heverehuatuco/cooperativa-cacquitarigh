@@ -113,7 +113,7 @@ export default function ProductDetailPage() {
       <div className="flex flex-col min-h-screen bg-stone-50">
         <Navbar />
         <div className="flex-grow flex items-center justify-center pt-24">
-          <Loader2 className="animate-spin text-[#1a826e]" size={48} />
+          <Loader2 className="animate-spin text-[#2a5420]" size={48} />
         </div>
         <Footer />
       </div>
@@ -126,7 +126,7 @@ export default function ProductDetailPage() {
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center pt-24 space-y-4">
           <h2 className="text-2xl font-bold text-stone-800">Producto no encontrado</h2>
-          <button onClick={() => router.push("/productos")} className="text-[#1a826e] underline">Volver a Productos</button>
+          <button onClick={() => router.push("/productos")} className="text-[#2a5420] underline">Volver a Productos</button>
         </div>
         <Footer />
       </div>
@@ -137,12 +137,12 @@ export default function ProductDetailPage() {
     <div className="flex flex-col min-h-screen font-sans">
       <Navbar />
       
-      <main className="flex-grow bg-[#faf9f6] relative pt-28 pb-20">
+      <main className="flex-grow bg-[#75a331] relative pt-28 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           {/* Back button */}
           <div className="mb-8">
-            <Link href="/productos" className="inline-flex items-center text-stone-500 hover:text-[#1a826e] transition-colors text-sm font-medium">
+            <Link href="/productos" className="inline-flex items-center text-stone-500 hover:text-[#2a5420] transition-colors text-sm font-medium">
               <ArrowLeft size={16} className="mr-2" />
               Volver a Productos
             </Link>
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
             <div className="lg:col-span-3">
               <div className="bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-stone-100/50 sticky top-28">
                 <h3 className="font-bold text-lg text-stone-900 mb-6 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-[#1a826e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-[#2a5420]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                   </svg>
                   Categorías
@@ -168,8 +168,8 @@ export default function ProductDetailPage() {
                       </div>
                       Café
                     </h4>
-                    <Link href="/productos#galeria-productos" className="text-sm text-stone-500 hover:text-[#1a826e] flex items-center gap-1 transition-colors pl-[52px]">
-                      <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[#1a826e]">→</span>
+                    <Link href="/productos#galeria-productos" className="text-sm text-stone-500 hover:text-[#2a5420] flex items-center gap-1 transition-colors pl-[52px]">
+                      <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[#2a5420]">→</span>
                       Ver todos los cafés
                     </Link>
                   </div>
@@ -182,8 +182,8 @@ export default function ProductDetailPage() {
                       </div>
                       Cacao
                     </h4>
-                    <Link href="/productos#galeria-productos" className="text-sm text-stone-500 hover:text-[#1a826e] flex items-center gap-1 transition-colors pl-[52px]">
-                      <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[#1a826e]">→</span>
+                    <Link href="/productos#galeria-productos" className="text-sm text-stone-500 hover:text-[#2a5420] flex items-center gap-1 transition-colors pl-[52px]">
+                      <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[#2a5420]">→</span>
                       Ver todos los cacaos
                     </Link>
                   </div>
@@ -196,8 +196,8 @@ export default function ProductDetailPage() {
                       </div>
                       Derivados
                     </h4>
-                    <Link href="/productos#galeria-productos" className="text-sm text-stone-500 hover:text-[#1a826e] flex items-center gap-1 transition-colors pl-[52px]">
-                      <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[#1a826e]">→</span>
+                    <Link href="/productos#galeria-productos" className="text-sm text-stone-500 hover:text-[#2a5420] flex items-center gap-1 transition-colors pl-[52px]">
+                      <span className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[#2a5420]">→</span>
                       Ver derivados
                     </Link>
                   </div>
@@ -274,7 +274,7 @@ export default function ProductDetailPage() {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {relatedProducts.map(rel => (
-                      <Link href={`/productos/${rel.id}`} key={rel.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl hover:shadow-[#1a826e]/10 hover:border-[#1a826e]/30 transition-all duration-300">
+                      <Link href={`/productos/${rel.id}`} key={rel.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl hover:shadow-[#2a5420]/10 hover:border-[#2a5420]/30 transition-all duration-300">
                         <div className="aspect-[4/5] bg-[#f9f8f5] relative p-4 flex justify-center items-center">
                           {rel.imageUrl ? (
                             <Image
@@ -287,7 +287,7 @@ export default function ProductDetailPage() {
                             <div className="w-full h-full bg-stone-200 rounded animate-pulse"></div>
                           )}
                         </div>
-                        <div className="p-4 bg-[#136152] group-hover:bg-[#1a826e] transition-colors mt-auto">
+                        <div className="p-4 bg-[#136152] group-hover:bg-[#2a5420] transition-colors mt-auto">
                           <h4 className="font-bold text-white text-center text-sm truncate">
                             {rel.name}
                           </h4>

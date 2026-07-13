@@ -155,11 +155,11 @@ export default function AboutUs() {
 
           {/* Header */}
           <div className="mb-16 max-w-3xl">
-            <h2 className="text-sm font-bold text-[#1a826e] uppercase tracking-widest mb-3">
+            <h2 className="text-sm font-bold text-[#2a5420] uppercase tracking-widest mb-3">
               Nuestro Origen
             </h2>
             <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight leading-tight mb-6">
-              Conoce Nuestra <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a826e] to-[#219d85]">Historia</span> y Visión
+              Conoce Nuestra <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2a5420] to-[#77ab63]">Historia</span> y Visión
             </h3>
             <p className="text-stone-600 text-lg md:text-xl font-medium max-w-2xl">
               Desde nuestros inicios en San Martín de Pangoa hasta convertirnos en una cooperativa con calidad de exportación.
@@ -184,7 +184,7 @@ export default function AboutUs() {
                 
                 <div className="relative z-10 mb-8">
                   <h4 className="text-2xl font-extrabold text-stone-900 mb-1 tracking-tight">Samuel Kevin Taype</h4>
-                  <p className="text-xs font-bold text-[#1a826e] uppercase tracking-widest">Gerente General</p>
+                  <p className="text-xs font-bold text-[#2a5420] uppercase tracking-widest">Gerente General</p>
                 </div>
 
                 <div className="relative z-10 mb-10 flex-grow">
@@ -195,7 +195,7 @@ export default function AboutUs() {
                 </div>
 
                 <div className="relative z-10 flex items-center gap-4 pt-6 border-t border-stone-100">
-                  <div className="bg-emerald-50 text-[#1a826e] p-3.5 rounded-2xl">
+                  <div className="bg-emerald-50 text-[#2a5420] p-3.5 rounded-2xl">
                      <ShieldCheck className="w-7 h-7" />
                   </div>
                   <div>

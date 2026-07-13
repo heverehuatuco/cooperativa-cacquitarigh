@@ -61,9 +61,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-[100vh] flex items-center pt-24 pb-16 overflow-hidden bg-gradient-to-br from-[#0f4d41] via-[#1a826e] to-[#0a332b] font-inter">
+    <section className="relative w-full min-h-[100vh] flex items-center pt-24 pb-16 overflow-hidden bg-[linear-gradient(90deg,#2a5420,#102721)] font-inter">
       {/* Background Effect */}
       <div className="absolute inset-0 z-0">
+
 
         {/* Floating Rain Effect */}
         {floatingItems.map((item) => (
@@ -100,12 +101,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:w-[55%] flex flex-col items-start"
+          className="w-full lg:w-[50%] flex flex-col items-start relative pt-12 pl-6 pr-16 md:pt-20 md:pl-16 md:pr-4 pb-12 z-20"
         >
-          <h1 className="text-6xl sm:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tight font-outfit text-glow-sweep">
+          {/* Glowing L-Frame */}
+          <div className="absolute top-0 left-0 w-[120%] h-[1px] bg-gradient-to-r from-white/40 to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 left-0 w-[1px] h-[150%] bg-gradient-to-b from-white/40 to-transparent pointer-events-none"></div>
+          <h1 className="text-6xl sm:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tight font-outfit text-glow-sweep -ml-1">
             Cooperativa <br className="hidden lg:block" />Agraria Cafetalera Quitari Ltda
           </h1>
-          <p className="mt-6 text-white/90 text-base md:text-lg lg:text-xl max-w-xl font-medium leading-relaxed drop-shadow-md">
+          <p className="mt-8 text-white/90 text-base md:text-lg lg:text-xl max-w-xl font-medium leading-relaxed drop-shadow-md">
             Nos dedicamos con pasión al acopio de café y cacao de la más alta calidad en el distrito de Pangoa-VRAEM, transformándolos en productos finales listos para deleitar tu paladar en cada taza.
           </p>
 
@@ -124,50 +128,31 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Cards */}
+        {/* Right Image Circle */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full lg:w-[45%] flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 lg:gap-6 relative mt-10 lg:mt-32"
+          className="w-full lg:w-[50%] flex items-center justify-center lg:justify-end relative mt-24 lg:mt-0 z-0"
         >
-          {/* Left Image Card */}
-          <div className="relative w-full max-w-[280px] sm:w-[260px] h-[220px] sm:h-[280px] rounded-[2rem] overflow-hidden shadow-2xl group cursor-pointer z-10 sm:translate-y-8">
-            {!isLoading && cardImages.img2 ? (
+          <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[620px] lg:h-[620px] rounded-full p-[6px] lg:p-[12px] bg-[#75a331] z-10 shadow-2xl flex-shrink-0 lg:mr-10">
+            {/* Concentric Background Circles (perfectly centered behind image) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[1300px] md:h-[1300px] rounded-full bg-[linear-gradient(90deg,#285120,#77ab63)] pointer-events-none -z-20"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[480px] sm:h-[480px] md:w-[900px] md:h-[900px] rounded-full bg-[linear-gradient(90deg,#285120,#3d602f)] pointer-events-none -z-10"></div>
+            
+            <div className="relative w-full h-full rounded-full border-[8px] lg:border-[16px] border-white overflow-hidden bg-[#2c4e33]">
+              {!isLoading && cardImages.img2 ? (
               <Image
                 src={cardImages.img2}
                 alt="Proceso"
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 hover:scale-110"
               />
-            ) : (
-              <div className="w-full h-full bg-stone-300 animate-pulse"></div>
-            )}
-            <div className="absolute inset-0 bg-black/10 transition-colors"></div>
-          </div>
-
-          {/* Right Dark Glass Card */}
-          <div className="w-full max-w-[280px] sm:w-[280px] h-[220px] sm:h-[280px] glass-panel-dark rounded-[2rem] p-6 sm:p-8 flex flex-col justify-center shadow-2xl relative z-20 sm:-translate-x-8">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full overflow-hidden relative flex-shrink-0 border-2 border-white/20">
-                {!isLoading && cardImages.img3 ? (
-                  <Image
-                    src={cardImages.img3}
-                    alt="Icono"
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-stone-600 animate-pulse"></div>
-                )}
-              </div>
-              <h3 className="text-white font-bold text-sm lg:text-base leading-tight mt-1">
-                Calidad certificada en cada cosecha
-              </h3>
+              ) : (
+                <div className="w-full h-full bg-[#406846] animate-pulse"></div>
+              )}
+              <div className="absolute inset-0 bg-black/10 transition-colors"></div>
             </div>
-            <p className="text-white/70 text-xs sm:text-sm font-medium leading-relaxed">
-              Nuestro compromiso es llevar los mejores granos de cacao y café desde las tierras del VRAEM hasta tu mesa, asegurando sostenibilidad y comercio justo.
-            </p>
           </div>
         </motion.div>
 

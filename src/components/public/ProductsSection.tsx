@@ -85,7 +85,7 @@ export default function ProductsSection() {
           </h2>
           {searchTerm && (
             <p className="mt-4 text-stone-600 font-medium">
-              Resultados de búsqueda para: <span className="font-bold text-[#1a826e]">"{searchTerm}"</span>
+              Resultados de búsqueda para: <span className="font-bold text-[#2a5420]">"{searchTerm}"</span>
             </p>
           )}
         </motion.div>
@@ -99,7 +99,7 @@ export default function ProductsSection() {
           <div className="lg:col-span-3">
             <div className="bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-stone-100/50 sticky top-28">
               <h3 className="font-bold text-lg text-stone-900 mb-6 flex items-center gap-2">
-                <svg className="w-5 h-5 text-[#1a826e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-[#2a5420]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                 </svg>
                 Categorías
@@ -109,9 +109,9 @@ export default function ProductsSection() {
                 <div className="group">
                   <button 
                     onClick={() => setActiveCategory("Todos")} 
-                    className={`w-full text-left p-4 rounded-2xl transition-all duration-300 ${activeCategory === "Todos" ? "bg-[#f2f7f0] shadow-sm border border-[#1a826e]/20" : "hover:bg-stone-50 border border-transparent"}`}
+                    className={`w-full text-left p-4 rounded-2xl transition-all duration-300 ${activeCategory === "Todos" ? "bg-[#f2f7f0] shadow-sm border border-[#2a5420]/20" : "hover:bg-stone-50 border border-transparent"}`}
                   >
-                    <h4 className={`font-bold flex items-center transition-colors ${activeCategory === "Todos" ? "text-[#1a826e]" : "text-stone-800 hover:text-[#1a826e]"}`}>
+                    <h4 className={`font-bold flex items-center transition-colors ${activeCategory === "Todos" ? "text-[#2a5420]" : "text-stone-800 hover:text-[#2a5420]"}`}>
                       Todos los Productos
                     </h4>
                   </button>
@@ -178,7 +178,7 @@ export default function ProductsSection() {
           <div className="lg:col-span-9">
             {loading ? (
               <div className="flex justify-center items-center py-20">
-                <Loader2 className="animate-spin text-[#1a826e] mr-2" size={32} />
+                <Loader2 className="animate-spin text-[#2a5420] mr-2" size={32} />
                 <span className="text-stone-500">Cargando productos...</span>
               </div>
             ) : (
@@ -195,11 +195,11 @@ export default function ProductsSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
                       >
-                        <Link href={`/productos/${item.id}`} className="group cursor-pointer flex flex-col h-full bg-[#1a826e] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#1a826e]/40 hover:-translate-y-1 transition-all duration-300">
+                        <Link href={`/productos/${item.id}`} className="group cursor-pointer flex flex-col h-full bg-[#2a5420] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#2a5420]/40 hover:-translate-y-1 transition-all duration-300">
                           {/* Image Card */}
                           <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-2 sm:mb-4 flex items-center justify-center p-3 sm:p-6 transition-colors duration-500`}>
                             {/* Inner shadow/glow for the image container */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-[#1a826e]/5 to-transparent pointer-events-none"></div>
+                            <div className="absolute inset-0 bg-gradient-to-tr from-[#2a5420]/5 to-transparent pointer-events-none"></div>
                             
                             {item.imageUrl ? (
                               <Image
@@ -216,10 +216,10 @@ export default function ProductsSection() {
 
                           {/* Product Info */}
                           <div className="flex flex-col space-y-2 px-3 pb-3 flex-grow">
-                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>
+                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#75a331] text-[#0d453a] shadow-sm`}>
                               {item.category}
                             </span>
-                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
+                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#75a331]`}>
                               {item.name}
                             </h4>
                             <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mb-2">
@@ -243,22 +243,22 @@ export default function ProductsSection() {
                   <>
                     {(activeCategory === "Todos" || activeCategory === "Café") && (
                       <motion.div
-                        className="group cursor-pointer flex flex-col h-full bg-[#1a826e] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#1a826e]/40 hover:-translate-y-1 transition-all duration-300"
+                        className="group cursor-pointer flex flex-col h-full bg-[#2a5420] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#2a5420]/40 hover:-translate-y-1 transition-all duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                       >
                         <Link href={`/productos/mock-1`} className="flex flex-col h-full">
                           <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-2 sm:mb-4 flex items-center justify-center p-3 sm:p-6`}>
-                            <div className="absolute inset-0 bg-gradient-to-tr from-[#1a826e]/5 to-transparent pointer-events-none"></div>
-                            <div className="w-full h-full flex flex-col items-center justify-center text-[#1a826e]/50 relative z-10">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-[#2a5420]/5 to-transparent pointer-events-none"></div>
+                            <div className="w-full h-full flex flex-col items-center justify-center text-[#2a5420]/50 relative z-10">
                               <Coffee size={32} className="mb-2" />
                               <span className="text-sm font-medium">Foto Demo</span>
                             </div>
                           </div>
                           <div className="flex flex-col space-y-2 px-3 pb-3 flex-grow">
-                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>Café</span>
-                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
+                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#75a331] text-[#0d453a] shadow-sm`}>Café</span>
+                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#75a331]`}>
                               Café Tostado Premium (Demo)
                             </h4>
                             <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mb-2">
@@ -278,22 +278,22 @@ export default function ProductsSection() {
                     
                     {(activeCategory === "Todos" || activeCategory === "Cacao") && (
                       <motion.div
-                        className="group cursor-pointer flex flex-col h-full bg-[#1a826e] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#1a826e]/40 hover:-translate-y-1 transition-all duration-300"
+                        className="group cursor-pointer flex flex-col h-full bg-[#2a5420] rounded-3xl p-3 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:shadow-[#2a5420]/40 hover:-translate-y-1 transition-all duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                       >
                         <Link href={`/productos/mock-2`} className="flex flex-col h-full">
                           <div className={`w-full aspect-[4/5] bg-[#f2faf8] rounded-2xl overflow-hidden relative mb-2 sm:mb-4 flex items-center justify-center p-3 sm:p-6`}>
-                            <div className="absolute inset-0 bg-gradient-to-tr from-[#1a826e]/5 to-transparent pointer-events-none"></div>
-                            <div className="w-full h-full flex flex-col items-center justify-center text-[#1a826e]/50 relative z-10">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-[#2a5420]/5 to-transparent pointer-events-none"></div>
+                            <div className="w-full h-full flex flex-col items-center justify-center text-[#2a5420]/50 relative z-10">
                               <Bean size={32} className="mb-2" />
                               <span className="text-sm font-medium">Foto Demo</span>
                             </div>
                           </div>
                           <div className="flex flex-col space-y-2 px-3 pb-3 flex-grow">
-                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#70f3be] text-[#0d453a] shadow-sm`}>Cacao</span>
-                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#70f3be]`}>
+                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider self-start bg-[#75a331] text-[#0d453a] shadow-sm`}>Cacao</span>
+                            <h4 className={`text-[14px] sm:text-[17px] font-bold text-white tracking-tight transition-colors line-clamp-1 group-hover:text-[#75a331]`}>
                               Pasta de Cacao 100% (Demo)
                             </h4>
                             <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mb-2">
