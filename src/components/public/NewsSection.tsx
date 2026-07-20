@@ -91,11 +91,11 @@ export default function NewsSection() {
     <section id="noticias" className="pt-24 pb-32 relative overflow-hidden bg-[linear-gradient(90deg,#2a5420,#102721)] font-inter">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 opacity-30 pointer-events-none"
+        className="absolute inset-0 z-0 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "url('/plantacacao.png')",
-          backgroundSize: "1350px",
-          backgroundPosition: "-450px center",
+          backgroundImage: "url('/cafesinfondo.png')",
+          backgroundSize: "auto 110%", // Ocupa todo el alto (110% para que rebase ligeramente y se vea más natural)
+          backgroundPosition: "right center", // Centrado verticalmente a la derecha
           backgroundRepeat: "no-repeat"
         }}
       />
@@ -125,38 +125,52 @@ export default function NewsSection() {
               <div
                 key={art.id}
                 onClick={() => setActiveArticle(art)}
-                className="bg-[#f7f8f7] rounded-[2rem] p-4 sm:p-5 flex flex-col h-full group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-transparent hover:border-stone-200"
+                className="bg-white rounded-3xl overflow-hidden flex flex-col h-full group hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-2 transition-all duration-500 cursor-pointer"
               >
-                {/* Card Top Text Area */}
-                <div className="px-2 pt-4 pb-8 flex-1 flex flex-col">
-                  <div className="flex justify-between items-start gap-4 mb-4">
-                    <h3 className="text-lg md:text-xl font-bold text-stone-900 leading-tight line-clamp-2">
-                      {art.title}
-                    </h3>
-                    <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center flex-shrink-0 group-hover:bg-[#2a5420] transition-colors duration-300">
-                      <ArrowRight size={16} />
-                    </div>
-                  </div>
-                  <p className="text-stone-600 text-sm leading-relaxed line-clamp-3">
-                    {art.excerpt}
-                  </p>
-                </div>
-
-                {/* Card Bottom Image */}
-                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mt-auto shadow-sm">
+                {/* Imagen superior (Edge to edge) */}
+                <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] overflow-hidden bg-stone-100">
                   {art.imageUrl ? (
                     <Image
                       src={art.imageUrl}
                       alt={art.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                   ) : (
-                    <div className="w-full h-full bg-stone-200 flex items-center justify-center text-stone-400 text-sm">
+                    <div className="w-full h-full flex items-center justify-center text-stone-400 text-sm">
                       Sin imagen
                     </div>
                   )}
+                  {/* Overlay sutil al hacer hover */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                </div>
+
+                {/* Área de contenido */}
+                <div className="p-6 sm:p-8 flex-1 flex flex-col bg-white">
+                  {/* Fecha (Contexto crucial para noticias) */}
+                  <div className="flex items-center text-xs font-bold text-[#75a331] uppercase tracking-wider mb-3">
+                    {art.date}
+                  </div>
+                  
+                  {/* Título */}
+                  <h3 className="text-xl font-extrabold text-stone-900 leading-tight mb-3 line-clamp-2 group-hover:text-[#2a5420] transition-colors duration-300">
+                    {art.title}
+                  </h3>
+                  
+                  {/* Extracto */}
+                  <p className="text-stone-600 text-sm leading-relaxed line-clamp-3 mb-6">
+                    {art.excerpt}
+                  </p>
+                  
+                  {/* Footer / Llamado a la acción */}
+                  <div className="mt-auto pt-5 flex items-center justify-center w-full">
+                    <div className="rainbow-green relative w-full z-0 overflow-hidden p-[2px] flex items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-[1.02]">
+                      <div className="flex items-center justify-center py-2.5 text-white font-bold w-full text-center text-sm bg-stone-900 rounded-full relative z-10 transition-colors duration-300 group-hover:bg-[#1a3014]">
+                        Leer artículo
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
