@@ -75,7 +75,9 @@ export default function Navbar() {
 
   return (
     <header className={`fixed top-0 left-0 w-full z-50 pointer-events-auto font-inter transition-all duration-500 ${
-      needsSolidBg ? "bg-[linear-gradient(90deg,#102721,#1e3b23)] shadow-[0_4px_20px_rgba(42,84,32,0.4)]" : "bg-transparent py-2"
+      needsSolidBg 
+        ? "bg-[#0b1a16]/85 backdrop-blur-xl border-b border-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] py-0" 
+        : "bg-gradient-to-b from-[#0b1a16]/80 via-[#0b1a16]/30 to-transparent py-2"
     }`}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[90px] flex items-center justify-between">
         
@@ -99,34 +101,52 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links (Center Pill) */}
-        <div className="hidden md:flex flex-1 items-center justify-start ml-12">
-          <div className="flex items-center gap-8 border border-white/60 rounded-full px-8 py-2.5 backdrop-blur-sm">
+        <div className="hidden md:flex flex-1 items-center justify-start ml-12 gap-5">
+          <div className="flex items-center gap-8 bg-white/5 border border-white/10 hover:border-white/20 transition-colors rounded-full px-8 py-2.5 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-[15px] font-medium transition-all ${
+                  className={`relative text-[13px] uppercase tracking-wider font-bold transition-colors duration-300 group ${
                     isActive 
-                      ? "text-white font-semibold" 
-                      : "text-white/80 hover:text-white"
+                      ? "text-[#8bc03a]" 
+                      : "text-white/70 hover:text-white"
                   }`}
                 >
                   {link.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#8bc03a] rounded-full shadow-[0_0_10px_#8bc03a]" />
+                  )}
                 </Link>
               );
             })}
           </div>
+
+          {/* Search Bar next to menu */}
+          <form onSubmit={handleSearch} className="flex items-center bg-black/20 backdrop-blur-md border border-white/10 hover:border-white/30 rounded-full px-5 py-2.5 w-64 transition-all duration-300 focus-within:border-[#75a331] focus-within:bg-black/40 focus-within:shadow-[0_0_20px_rgba(117,163,49,0.3)] group">
+            <Search className="w-4 h-4 text-white/70 mr-3 group-focus-within:text-[#75a331] transition-colors" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar..."
+              className="bg-transparent border-none outline-none text-[13px] w-full text-white placeholder-white/50 font-medium"
+            />
+          </form>
         </div>
 
         {/* Right Section: CTA */}
         <div className="hidden md:flex items-center justify-end gap-4">
           <Link
             href={user ? "/admin" : "/login"}
-            className="text-white text-[15px] font-medium transition-all hover:text-white/70"
+            className="group relative inline-flex items-center justify-center px-7 py-2.5 text-[14px] font-bold text-white transition-all duration-300 bg-[linear-gradient(110deg,#75a331,#406846)] rounded-full overflow-hidden hover:scale-105 shadow-[0_0_20px_rgba(117,163,49,0.3)] border border-white/10 hover:border-white/30 hover:shadow-[0_0_30px_rgba(117,163,49,0.5)]"
           >
-            {user ? "Panel" : "Acceso"}
+            <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+              <div className="relative h-full w-10 bg-white/20" />
+            </div>
+            <span className="relative z-10 tracking-wide">{user ? "Panel Admin" : "Acceso"}</span>
           </Link>
         </div>
 
@@ -140,19 +160,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Floating Search Bar (Bottom Left) */}
-      <div className="hidden md:block fixed bottom-12 left-6 lg:left-12 z-50">
-        <form onSubmit={handleSearch} className="flex items-center bg-[#102721]/90 backdrop-blur-md border border-white/20 rounded-full px-5 py-2.5 w-64 transition-colors focus-within:border-[#75a331] shadow-[0_8px_30px_rgba(42,84,32,0.4)] group">
-          <Search className="w-4 h-4 text-white/70 mr-3 group-focus-within:text-[#75a331] transition-colors" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="www.cacquitari.com"
-            className="bg-transparent border-none outline-none text-[13px] w-full text-white placeholder-white/50 font-medium"
-          />
-        </form>
-      </div>
+
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (

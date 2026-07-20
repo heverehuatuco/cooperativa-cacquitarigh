@@ -48,29 +48,33 @@ export default function Hero() {
 
     // Generate floating items for the rain effect
     setFloatingItems(
-      Array.from({ length: 15 }).map((_, i) => ({
-        id: i,
-        left: `${Math.random() * 90 + 5}%`,
-        duration: 10 + Math.random() * 20, // 10s to 30s fall time
-        delay: Math.random() * 5, // 0 to 5s initial delay
-        size: 30 + Math.random() * 50, // 30px to 80px size
-        isCoffee: Math.random() > 0.5,
-        rotation: Math.random() * 360,
-      }))
+      Array.from({ length: 40 }).map((_, i) => {
+        // Use an average of two random numbers to cluster items towards the center (triangular distribution)
+        const centerClusteredPosition = (Math.random() + Math.random()) / 2;
+        return {
+          id: i,
+          left: `${centerClusteredPosition * 90 + 5}%`,
+          duration: 10 + Math.random() * 20, // 10s to 30s fall time
+          delay: Math.random() * 5, // 0 to 5s initial delay
+          size: 30 + Math.random() * 50, // 30px to 80px size
+          isCoffee: Math.random() > 0.5,
+          rotation: Math.random() * 360,
+        };
+      })
     );
   }, []);
 
   return (
     <section className="relative w-full min-h-[100vh] flex items-center pt-24 pb-16 overflow-hidden bg-[linear-gradient(90deg,#2a5420,#102721)] font-inter">
       {/* Background Effect */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-[30] pointer-events-none">
 
 
         {/* Floating Rain Effect */}
         {floatingItems.map((item) => (
           <motion.div
             key={item.id}
-            className="absolute top-0 z-[1] opacity-40 pointer-events-none drop-shadow-2xl"
+            className="absolute top-0 z-[1] opacity-80 pointer-events-none drop-shadow-2xl brightness-110"
             initial={{ y: "-20vh", rotate: item.rotation }}
             animate={{ y: "120vh", rotate: item.rotation + 180 }}
             transition={{
@@ -101,11 +105,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:w-[50%] flex flex-col items-start relative pt-12 pl-6 pr-16 md:pt-20 md:pl-16 md:pr-4 pb-12 z-20"
+          className="w-full lg:w-[50%] flex flex-col items-start relative pt-12 pl-6 pr-16 md:pt-20 md:pl-16 md:pr-4 pb-4 lg:pb-12 z-20"
         >
-          {/* Glowing L-Frame */}
+          {/* Glowing Frame */}
           <div className="absolute top-0 left-0 w-[120%] h-[1px] bg-gradient-to-r from-white/40 to-transparent pointer-events-none"></div>
-          <div className="absolute top-0 left-0 w-[1px] h-[150%] bg-gradient-to-b from-white/40 to-transparent pointer-events-none"></div>
           <h1 className="text-6xl sm:text-7xl lg:text-[6.5rem] font-black leading-[1.05] tracking-tight font-outfit text-glow-sweep -ml-1">
             Cooperativa <br className="hidden lg:block" />Agraria Cafetalera Quitari Ltda
           </h1>
@@ -128,49 +131,69 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Image Circle */}
+        {/* Right Image Presentation (Premium Leaf / Stacked Glass) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full lg:w-[50%] flex items-center justify-center lg:justify-end relative mt-24 lg:mt-0 z-0"
+          className="w-full lg:w-[50%] flex items-center justify-center lg:justify-end relative mt-2 lg:mt-0 z-0"
         >
-          <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[620px] lg:h-[620px] rounded-full p-[6px] lg:p-[12px] bg-[#75a331] z-10 shadow-2xl flex-shrink-0 lg:mr-10">
-            {/* Concentric Background Circles (perfectly centered behind image) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[1300px] md:h-[1300px] rounded-full bg-[linear-gradient(90deg,#285120,#77ab63)] pointer-events-none -z-20"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[480px] sm:h-[480px] md:w-[900px] md:h-[900px] rounded-full bg-[linear-gradient(90deg,#285120,#3d602f)] pointer-events-none -z-10"></div>
+          {/* Ambient Glowing Orbs */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] bg-[#75a331] rounded-full blur-[100px] lg:blur-[140px] opacity-30 pointer-events-none -z-20"></div>
+
+          {/* Contenedor relativo centralizado para mantener el panel de fondo atado a la imagen en móviles */}
+          <div className="relative lg:mr-10">
+            {/* Glassmorphic Background Panel (Offset & Rotated) */}
+            <div className="absolute top-[15px] left-[15px] lg:top-[25px] lg:left-[25px] w-full h-full rounded-[100px_24px_100px_24px] sm:rounded-[130px_30px_130px_30px] lg:rounded-[160px_30px_160px_30px] bg-white/5 backdrop-blur-2xl border border-white/20 -z-10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] rotate-6"></div>
             
-            <div className="relative w-full h-full rounded-full border-[8px] lg:border-[16px] border-white overflow-hidden bg-[#2c4e33]">
-              {!isLoading && cardImages.img2 ? (
-              <Image
-                src={cardImages.img2}
-                alt="Proceso"
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-110"
-              />
-              ) : (
-                <div className="w-full h-full bg-[#406846] animate-pulse"></div>
-              )}
-              <div className="absolute inset-0 bg-black/10 transition-colors"></div>
+            {/* Main Image Container (Leaf Shape) */}
+            <div className="relative w-[280px] h-[360px] sm:w-[380px] sm:h-[460px] lg:w-[480px] lg:h-[580px] rounded-[100px_24px_100px_24px] sm:rounded-[130px_30px_130px_30px] lg:rounded-[160px_30px_160px_30px] p-[8px] lg:p-[12px] bg-white/10 backdrop-blur-md shadow-2xl border border-white/30 group overflow-visible -rotate-3 transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
+              
+              <div className="relative w-full h-full rounded-[92px_16px_92px_16px] sm:rounded-[122px_22px_122px_22px] lg:rounded-[148px_22px_148px_22px] overflow-hidden bg-[#2c4e33] shadow-inner">
+                {!isLoading && cardImages.img2 ? (
+                  <Image
+                    src={cardImages.img2}
+                    alt="Cultivo Cacquitari"
+                    fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[#406846] animate-pulse"></div>
+                )}
+                {/* Subtle lighting overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 mix-blend-overlay pointer-events-none"></div>
+              </div>
+              
             </div>
           </div>
         </motion.div>
 
       </div>
 
-      {/* Refined Rounded Zigzag / Wave Divider - Responsive */}
+      {/* Premium Layered Wave Divider */}
       <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none">
-        <svg
-          width="100%"
-          height="30"
-          className="relative block w-full h-[30px]"
+        <svg 
+          viewBox="0 0 1440 120" 
+          className="relative block w-full h-[60px] md:h-[100px] lg:h-[130px]" 
+          preserveAspectRatio="none"
         >
-          <defs>
-            <pattern id="zigzag" width="36" height="30" patternUnits="userSpaceOnUse">
-              <path d="M 0,15 Q 9,-5 18,15 T 36,15 L 36,30 L 0,30 Z" fill="#fafaf9" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="30" fill="url(#zigzag)" />
+          {/* Capa trasera - más suave */}
+          <path 
+            d="M0,60 C240,120 480,0 720,20 C960,40 1200,100 1440,60 L1440,120 L0,120 Z" 
+            fill="#fafaf9" 
+            opacity="0.25"
+          />
+          {/* Capa media */}
+          <path 
+            d="M0,80 C320,140 420,20 720,60 C1020,100 1120,80 1440,40 L1440,120 L0,120 Z" 
+            fill="#fafaf9" 
+            opacity="0.5"
+          />
+          {/* Capa frontal sólida */}
+          <path 
+            d="M0,100 C280,120 500,60 720,80 C940,100 1160,110 1440,80 L1440,120 L0,120 Z" 
+            fill="#fafaf9"
+          />
         </svg>
       </div>
     </section>
