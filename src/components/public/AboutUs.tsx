@@ -6,6 +6,7 @@ import { Users, TrendingUp, ShieldCheck, Sprout, Network, BookOpen, Leaf, Heart,
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Image from "next/image";
+import EditableText from "@/components/ui/EditableText";
 
 export default function AboutUs() {
   const [aboutImageUrl1, setAboutImageUrl1] = useState("");
@@ -105,16 +106,20 @@ export default function AboutUs() {
           {/* LEFT: Text, Button and Glassmorphism */}
           <div className="w-full lg:w-[55%] flex flex-col items-start gap-8">
             <h2 className="text-5xl sm:text-6xl lg:text-[5rem] font-extrabold text-white tracking-tight leading-[1.05]">
-              Cooperativa Agraria Cafetalera Quitari Ltda.
+              <EditableText textKey="about.title" defaultText="Cooperativa Agraria Cafetalera Quitari Ltda." />
             </h2>
 
             <div className="flex flex-col items-start">
-              <p className="text-white/90 text-base lg:text-lg font-medium leading-relaxed mb-6 max-w-xl">
-                Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. Hoy agrupamos a más de 200 jóvenes productores implementando tecnologías y alianzas de comercio justo.
-              </p>
+              <EditableText 
+                textKey="about.description" 
+                defaultText="Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. Hoy agrupamos a más de 200 jóvenes productores implementando tecnologías y alianzas de comercio justo." 
+                as="p"
+                multiline={true}
+                className="text-white/90 text-base lg:text-lg font-medium leading-relaxed mb-6 max-w-xl"
+              />
               <a href="#nosotros-historia" className="rainbow relative z-0 bg-white/15 overflow-hidden p-0.5 inline-flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 group shadow-lg">
                 <div className="flex items-center gap-2 px-7 py-3 text-white rounded-full font-bold bg-gray-900/80 backdrop-blur w-full text-center text-sm">
-                  Conoce Nuestra Historia
+                  <EditableText textKey="about.button" defaultText="Conoce Nuestra Historia" />
                   <div className="bg-white/20 rounded-full p-1 group-hover:bg-white group-hover:text-gray-900 transition-colors">
                     <ArrowUpRight className="w-4 h-4 rotate-45" />
                   </div>
@@ -124,10 +129,19 @@ export default function AboutUs() {
 
             {/* Glassmorphism Quote Card */}
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-3xl max-w-lg shadow-2xl mt-4">
-              <p className="text-white text-base md:text-lg font-medium italic leading-relaxed">
-                "Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible."
-              </p>
-              <p className="text-white font-bold text-sm mt-4 tracking-wide">- Samuel Kevin, Gerente General</p>
+              <EditableText 
+                textKey="about.quote" 
+                defaultText='"Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible."' 
+                as="p"
+                multiline={true}
+                className="text-white text-base md:text-lg font-medium italic leading-relaxed"
+              />
+              <EditableText 
+                textKey="about.quoteAuthor" 
+                defaultText="- Samuel Kevin, Gerente General" 
+                as="p"
+                className="text-white font-bold text-sm mt-4 tracking-wide"
+              />
             </div>
           </div>
 

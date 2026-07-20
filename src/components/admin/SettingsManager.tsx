@@ -25,6 +25,8 @@ interface CompanyInfo {
   heroCardStoragePath2?: string;
   heroCardImage3?: string;
   heroCardStoragePath3?: string;
+  heroBgImage?: string;
+  heroBgStoragePath?: string;
   logoUrl?: string;
   logoStoragePath?: string;
   aboutImageUrl1?: string;
@@ -74,9 +76,11 @@ export default function SettingsManager() {
   const [heroCardFile1, setHeroCardFile1] = useState<File | null>(null);
   const [heroCardFile2, setHeroCardFile2] = useState<File | null>(null);
   const [heroCardFile3, setHeroCardFile3] = useState<File | null>(null);
+  const [heroBgFile, setHeroBgFile] = useState<File | null>(null);
   const heroCardInputRef1 = React.useRef<HTMLInputElement>(null);
   const heroCardInputRef2 = React.useRef<HTMLInputElement>(null);
   const heroCardInputRef3 = React.useRef<HTMLInputElement>(null);
+  const heroBgInputRef = React.useRef<HTMLInputElement>(null);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [aboutFile1, setAboutFile1] = useState<File | null>(null);
   const [locationFile, setLocationFile] = useState<File | null>(null);
@@ -134,6 +138,7 @@ export default function SettingsManager() {
   const handleHeroCardChange1 = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroCardFile1(e.target.files[0]); };
   const handleHeroCardChange2 = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroCardFile2(e.target.files[0]); };
   const handleHeroCardChange3 = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroCardFile3(e.target.files[0]); };
+  const handleHeroBgChange = (e: React.ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) setHeroBgFile(e.target.files[0]); };
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -200,6 +205,8 @@ export default function SettingsManager() {
       let currentHeroCardPath2 = formData.heroCardStoragePath2 || "";
       let currentHeroCardUrl3 = formData.heroCardImage3 || "";
       let currentHeroCardPath3 = formData.heroCardStoragePath3 || "";
+      let currentHeroBgUrl = formData.heroBgImage || "";
+      let currentHeroBgPath = formData.heroBgStoragePath || "";
       let currentLogoUrl = formData.logoUrl || "";
       let currentLogoPath = formData.logoStoragePath || "";
       let currentAboutUrl1 = formData.aboutImageUrl1 || "";
@@ -253,6 +260,18 @@ export default function SettingsManager() {
           task.on("state_changed", null, reject, async () => {
             currentHeroCardUrl3 = await getDownloadURL(task.snapshot.ref);
             currentHeroCardPath3 = path;
+            resolve();
+          });
+        });
+      }
+      if (heroBgFile) {
+        const path = `settings/heroBg_${Date.now()}_${heroBgFile.name}`;
+        const refObj = ref(storage, path);
+        const task = uploadBytesResumable(refObj, heroBgFile);
+        await new Promise<void>((resolve, reject) => {
+          task.on("state_changed", null, reject, async () => {
+            currentHeroBgUrl = await getDownloadURL(task.snapshot.ref);
+            currentHeroBgPath = path;
             resolve();
           });
         });
@@ -408,6 +427,8 @@ export default function SettingsManager() {
         heroCardStoragePath2: currentHeroCardPath2,
         heroCardImage3: currentHeroCardUrl3,
         heroCardStoragePath3: currentHeroCardPath3,
+        heroBgImage: currentHeroBgUrl,
+        heroBgStoragePath: currentHeroBgPath,
         logoUrl: currentLogoUrl,
         logoStoragePath: currentLogoPath,
         aboutImageUrl1: currentAboutUrl1,
@@ -514,6 +535,23 @@ export default function SettingsManager() {
           <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-6">
 
 
+
+            {/* Hero Background Image */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-stone-700 uppercase block">Fondo del Hero (Principal)</label>
+              {formData.heroBgImage && !heroBgFile && (
+                <div className="mb-3 aspect-video w-full h-auto rounded-xl overflow-hidden border border-stone-200 relative">
+                  <NextImage src={formData.heroBgImage} alt="Hero Background" fill sizes="150px" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex flex-col space-y-2">
+                <input type="file" accept="image/*" ref={heroBgInputRef} onChange={handleHeroBgChange} className="hidden" id="herobg-image-upload" />
+                <label htmlFor="herobg-image-upload" className="inline-flex items-center justify-center space-x-1.5 border border-stone-300 hover:border-stone-400 bg-white text-stone-750 px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-xs w-full">
+                  <Upload size={14} /><span>Cambiar Fondo</span>
+                </label>
+                <span className="text-xs text-stone-500 truncate max-w-xs">{heroBgFile ? heroBgFile.name : formData.heroBgImage ? "" : "Ninguna seleccionada"}</span>
+              </div>
+            </div>
 
             {/* Hero Card Image 1 */}
             <div className="space-y-3">

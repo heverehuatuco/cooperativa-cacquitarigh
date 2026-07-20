@@ -45,6 +45,8 @@ export const metadata: Metadata = {
   authors: [{ name: "COOPERATIVA AGRARIA CAFETALERA QUITARI" }],
 };
 
+import { WebTextProvider } from "@/context/WebTextContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,7 +58,11 @@ export default function RootLayout({
       className={`${outfit.variable} ${robotoMono.variable} ${rubik.variable} ${inter.variable} ${poppins.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900 font-sans">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <WebTextProvider>
+            {children}
+          </WebTextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

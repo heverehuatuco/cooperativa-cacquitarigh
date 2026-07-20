@@ -89,41 +89,16 @@ export default function NewsSection() {
 
   return (
     <section id="noticias" className="pt-24 pb-32 relative overflow-hidden bg-[linear-gradient(90deg,#2a5420,#102721)] font-inter">
-      {/* Hexagon Background Effect */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Hexágonos redondeados posicionados a la derecha */}
-        <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] opacity-80">
-          <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
-            <defs>
-              <linearGradient id="hexGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#285120" />
-                <stop offset="100%" stopColor="#77ab63" />
-              </linearGradient>
-              <linearGradient id="hexGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#285120" />
-                <stop offset="100%" stopColor="#3d602f" />
-              </linearGradient>
-            </defs>
-            {/* Outer Hexagon */}
-            <polygon 
-              points="50,5 93.3,30 93.3,70 50,95 6.7,70 6.7,30" 
-              fill="url(#hexGrad1)" stroke="url(#hexGrad1)" strokeWidth="8" strokeLinejoin="round" 
-            />
-            {/* Middle Hexagon */}
-            <polygon 
-              points="50,5 93.3,30 93.3,70 50,95 6.7,70 6.7,30" 
-              fill="url(#hexGrad2)" stroke="url(#hexGrad2)" strokeWidth="8" strokeLinejoin="round" 
-              transform="translate(50 50) scale(0.76) translate(-50 -50)"
-            />
-            {/* Inner Hexagon (Hollowed out) */}
-            <polygon 
-              points="50,5 93.3,30 93.3,70 50,95 6.7,70 6.7,30" 
-              fill="#122c1e" stroke="#122c1e" strokeWidth="8" strokeLinejoin="round" 
-              transform="translate(50 50) scale(0.52) translate(-50 -50)"
-            />
-          </svg>
-        </div>
-      </div>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 opacity-30 pointer-events-none"
+        style={{
+          backgroundImage: "url('/plantacacao.png')",
+          backgroundSize: "1350px",
+          backgroundPosition: "-450px center",
+          backgroundRepeat: "no-repeat"
+        }}
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 

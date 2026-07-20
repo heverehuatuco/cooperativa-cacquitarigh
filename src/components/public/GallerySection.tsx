@@ -6,6 +6,7 @@ import { db } from "@/lib/firebase";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import EditableText from "@/components/ui/EditableText";
 
 interface GalleryItem {
   id: string;
@@ -77,20 +78,42 @@ export default function GallerySection() {
     fetchGallery();
   }, []);
   return (
-    <section id="galeria" className="relative pt-16 lg:pt-24 pb-20 bg-white">
+    <section id="galeria" className="relative pt-28 lg:pt-32 pb-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
-          className="text-center max-w-4xl mx-auto mb-12"
+          className="text-center max-w-4xl mx-auto mb-16 flex flex-col items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-stone-800 tracking-tight leading-[1.4]">
-            Descubriendo la Belleza e Innovación de la <br className="hidden md:block" />
-            Agricultura Sostenible <span className="text-stone-400 font-medium">A Través de Impactantes Visuales e Imágenes Inspiradoras</span>
+
+          {/* Overtitle / Etiqueta */}
+          <EditableText 
+            textKey="gallery.eyebrow" 
+            defaultText="Nuestra Galería" 
+            className="inline-block py-1.5 px-4 rounded-full bg-[#75a331]/10 text-[#4b6d35] text-sm font-bold tracking-widest uppercase mb-4 shadow-sm border border-[#75a331]/20"
+          />
+
+          {/* Título Principal con Gradiente */}
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-stone-800 tracking-tight leading-[1.2] mb-6 font-outfit">
+            <EditableText textKey="gallery.title.1" defaultText="Descubriendo la Belleza e Innovación de la" /> <br className="hidden md:block" />
+            <EditableText 
+              textKey="gallery.title.2" 
+              defaultText="Agricultura Sostenible" 
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#75a331] via-[#4b6d35] to-[#2a5420]" 
+            />
           </h2>
+
+          {/* Subtítulo descriptivo */}
+          <EditableText 
+            textKey="gallery.description" 
+            defaultText="A través de impactantes visuales e imágenes inspiradoras, te invitamos a conocer el corazón de nuestro trabajo, nuestra tierra y nuestra gente."
+            as="p"
+            multiline={true}
+            className="text-stone-500 text-base md:text-lg max-w-2xl leading-relaxed font-medium"
+          />
         </motion.div>
 
         {loading ? (
