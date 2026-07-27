@@ -176,7 +176,7 @@ export default function AboutUs() {
               Conoce Nuestra <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2a5420] to-[#77ab63]">Historia</span> y Visión
             </h3>
             <p className="text-stone-600 text-lg md:text-xl font-medium max-w-2xl">
-              Desde nuestros inicios en San Martín de Pangoa hasta convertirnos en una cooperativa con calidad de exportación...
+              Desde nuestros inicios en San Martín de Pangoa hasta convertirnos en una cooperativa con calidad de exportación.
             </p>
           </div>
 
