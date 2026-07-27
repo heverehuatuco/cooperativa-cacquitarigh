@@ -110,9 +110,9 @@ export default function AboutUs() {
             </h2>
 
             <div className="flex flex-col items-start">
-              <EditableText 
-                textKey="about.description" 
-                defaultText="Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. Hoy agrupamos a más de 200 jóvenes productores implementando tecnologías y alianzas de comercio justo." 
+              <EditableText
+                textKey="about.description"
+                defaultText="Fundada el 02 de febrero del 2024 por un grupo de jóvenes productores en San Martin de Pangoa, Satipo Junín. Hoy agrupamos a más de 200 jóvenes productores implementando tecnologías y alianzas de comercio justo."
                 as="p"
                 multiline={true}
                 className="text-white/90 text-base lg:text-lg font-medium leading-relaxed mb-6 max-w-xl"
@@ -129,16 +129,16 @@ export default function AboutUs() {
 
             {/* Glassmorphism Quote Card */}
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-3xl max-w-lg shadow-2xl mt-4">
-              <EditableText 
-                textKey="about.quote" 
-                defaultText='"Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible."' 
+              <EditableText
+                textKey="about.quote"
+                defaultText='"Mejorar las condiciones de vida de los productores de Pangoa, produciendo calidad de manera sostenible."'
                 as="p"
                 multiline={true}
                 className="text-white text-base md:text-lg font-medium italic leading-relaxed"
               />
-              <EditableText 
-                textKey="about.quoteAuthor" 
-                defaultText="- Samuel Kevin, Gerente General" 
+              <EditableText
+                textKey="about.quoteAuthor"
+                defaultText="- Samuel Kevin, Gerente General"
                 as="p"
                 className="text-white font-bold text-sm mt-4 tracking-wide"
               />
@@ -176,7 +176,7 @@ export default function AboutUs() {
               Conoce Nuestra <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2a5420] to-[#77ab63]">Historia</span> y Visión
             </h3>
             <p className="text-stone-600 text-lg md:text-xl font-medium max-w-2xl">
-              Desde nuestros inicios en San Martín de Pangoa hasta convertirnos en una cooperativa con calidad de exportación.
+              Desde nuestros inicios en San Martín de Pangoa hasta convertirnos en una cooperativa con calidad de exportación...
             </p>
           </div>
 
@@ -195,7 +195,7 @@ export default function AboutUs() {
                 transition={{ duration: 0.5 }}
               >
                 <div className="absolute -right-10 -top-10 w-40 h-40 bg-emerald-50 rounded-full blur-3xl group-hover:bg-emerald-100 transition-colors duration-500"></div>
-                
+
                 <div className="relative z-10 mb-8">
                   <h4 className="text-2xl font-extrabold text-stone-900 mb-1 tracking-tight">Samuel Kevin Taype</h4>
                   <p className="text-xs font-bold text-[#2a5420] uppercase tracking-widest">Gerente General</p>
@@ -210,7 +210,7 @@ export default function AboutUs() {
 
                 <div className="relative z-10 flex items-center gap-4 pt-6 border-t border-stone-100">
                   <div className="bg-emerald-50 text-[#2a5420] p-3.5 rounded-2xl">
-                     <ShieldCheck className="w-7 h-7" />
+                    <ShieldCheck className="w-7 h-7" />
                   </div>
                   <div>
                     <span className="block font-extrabold text-2xl md:text-3xl text-stone-900 leading-none mb-1">100%</span>
@@ -228,7 +228,7 @@ export default function AboutUs() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <div className="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full blur-3xl group-hover:bg-blue-100 transition-colors duration-500"></div>
-                
+
                 <div className="relative z-10 mb-8">
                   <h4 className="text-2xl font-extrabold text-stone-900 mb-1 tracking-tight">Crecimiento y Alianzas</h4>
                   <p className="text-xs font-bold text-blue-600 uppercase tracking-widest">Desarrollo Cooperativo</p>
@@ -243,7 +243,7 @@ export default function AboutUs() {
 
                 <div className="relative z-10 flex items-center gap-4 pt-6 border-t border-stone-100">
                   <div className="bg-blue-50 text-blue-600 p-3.5 rounded-2xl">
-                     <Users className="w-7 h-7" />
+                    <Users className="w-7 h-7" />
                   </div>
                   <div>
                     <span className="block font-extrabold text-2xl md:text-3xl text-stone-900 leading-none mb-1">200+</span>
@@ -304,7 +304,7 @@ export default function AboutUs() {
 
                 <div className="relative z-10 flex items-center gap-4 mt-auto pt-6 border-t border-stone-700/80">
                   <div className="bg-emerald-500/20 text-emerald-400 p-3.5 rounded-2xl">
-                     <Globe className="w-7 h-7" />
+                    <Globe className="w-7 h-7" />
                   </div>
                   <div>
                     <span className="block font-extrabold text-2xl md:text-3xl text-white leading-none mb-1">2025</span>
@@ -344,9 +344,9 @@ export default function AboutUs() {
                 <div className={`relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${item.lightBg} ${item.textColor}`}>
                   {item.icon}
                 </div>
-                
+
                 <h4 className="text-2xl font-extrabold text-stone-900 mb-6 tracking-tight relative z-10">{item.type}</h4>
-                
+
                 <ul className="space-y-4 flex-grow relative z-10">
                   {item.items.map((it, idx) => (
                     <li key={idx} className="flex items-start text-[15px] text-stone-600 font-medium leading-relaxed">
@@ -358,7 +358,7 @@ export default function AboutUs() {
 
                 {/* Decorative background icon */}
                 <div className={`absolute -bottom-8 -right-8 opacity-[0.03] transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-700 ${item.textColor} pointer-events-none`}>
-                   {React.cloneElement(item.icon as React.ReactElement<any>, { size: 180 })}
+                  {React.cloneElement(item.icon as React.ReactElement<any>, { size: 180 })}
                 </div>
               </motion.div>
             ))}
